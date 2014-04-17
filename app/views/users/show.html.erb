@@ -6,3 +6,5 @@
 	<% end %>
 	<%= 'No devices found' if @user.devices.empty? %>
 </ul>
+
+<%= link_to "Add new device", new_user_mac_address_path(@user) %>

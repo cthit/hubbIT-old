@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:show, :index]
-  resources :mac_addresses, :sessions
+  resources :users, only: [:show, :index] do
+    resources :mac_addresses
+  end
+  resources :sessions
 
   root "users#index"
 
