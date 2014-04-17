@@ -1,10 +1,11 @@
-<h1><%= @user.cid %></h1>
-
-<ul>
+<section class="profile">
+	<h1><%= @user.cid %></h1>
 	<% @user.devices.each do |d| %>
-		<li><%= d.address %></li>
+		<div><%= d.address %></div>
 	<% end %>
-	<%= 'No devices found' if @user.devices.empty? %>
-</ul>
-
-<%= link_to "Add new device", new_user_mac_address_path(@user) %>
+	<% if @user.devices.empty? %>
+		<div>No devices found</div>
+	<% end %>
+	<% #Replace with a real form. And ajax. Ajax is nice. %>
+	<%= link_to "Add new device", new_user_mac_address_path(@user) %>
+</section>
