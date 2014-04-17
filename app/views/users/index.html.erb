@@ -1,6 +1,5 @@
-<h1>Users</h1>
-<ul>
-	<% @user.each do |user| %>
-		<li><%= link_to user.cid, user %></li>
-	<% end %>
-</ul>
+	<section class="list">
+		<% @user.each do |user| %>
+			<div class="item"><%= link_to user.cid, user %></div>
+		<% end %>
+	</section>

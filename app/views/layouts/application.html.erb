@@ -3,12 +3,16 @@
 <head>
   <title>HubbIT</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,400italic" type="text/css">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <header>
+    <h1>Who is in the hubb?</h1>
+  </header>
+  <div id="wrapper">
 <%= yield %>
-
+  </div>
 </body>
 </html>

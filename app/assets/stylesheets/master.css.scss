@@ -1,0 +1,30 @@
+body {
+  background-color: #F1F1F1;
+}
+
+header h1 {
+  text-shadow: 0 0 2px #000;
+  text-align: center;
+}
+
+a {
+  color: #999;
+  text-decoration: none;
+}
+
+.list {
+  box-shadow: 0 0 1px #000;
+  background-color: gray;
+  flex-direction: column;
+  font-family: Ubuntu;
+  display: flex;
+  padding: 2px;
+
+  .item {
+    background-color: #FFF;
+    font-size: 1.1em;
+    padding: 5px;
+    margin: 1px;
+    flex: 1;
+  }
+}
