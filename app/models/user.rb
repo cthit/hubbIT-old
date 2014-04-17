@@ -9,5 +9,6 @@
 #
 
 class User < ActiveRecord::Base
-	has_many :devices, class_name: MACAddress
+	has_many :devices, class_name: MacAddress
+	has_many :sessions
 end
