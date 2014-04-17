@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417175655) do
+ActiveRecord::Schema.define(version: 20140417180955) do
+
+  create_table "mac_addresses", id: false, force: true do |t|
+    t.string   "address"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mac_addresses", ["user_id"], name: "index_mac_addresses_on_user_id"
 
   create_table "users", id: false, force: true do |t|
     t.string   "cid"

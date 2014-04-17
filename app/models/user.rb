@@ -9,4 +9,5 @@
 #
 
 class User < ActiveRecord::Base
+	has_many :devices, class_name: MACAddress
 end
