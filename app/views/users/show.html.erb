@@ -1,0 +1,8 @@
+<h1><%= @user.cid %></h1>
+
+<ul>
+	<% @user.devices.each do |d| %>
+		<li><%= d.address %></li>
+	<% end %>
+	<%= 'No devices found' if @user.devices.empty? %>
+</ul>
