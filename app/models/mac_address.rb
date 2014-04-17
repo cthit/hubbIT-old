@@ -11,5 +11,7 @@
 class MacAddress < ActiveRecord::Base
   belongs_to :user
 
-  self.primary_key = :address
+  self.primary_key = "address"
+
+  validates_presence_of :address
 end

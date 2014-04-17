@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :users, only: [:show, :index] do
-    resources :mac_addresses
+    resources :mac_addresses, except: :show
   end
   resources :sessions
 
