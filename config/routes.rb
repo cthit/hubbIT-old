@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:show, :index] do
-    resources :mac_addresses, except: :show
-  end
+  resources :users, only: [:show, :index, :edit, :update]
   resources :sessions
 
-  root "users#index"
+  root 'users#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

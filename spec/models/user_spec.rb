@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  cid        :string(255)
+#  cid        :string(255)      primary key
 #  total_time :integer
 #  created_at :datetime
 #  updated_at :datetime

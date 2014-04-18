@@ -6,6 +6,8 @@
 	<% if @user.devices.empty? %>
 		<div>No devices found</div>
 	<% end %>
+	<%= 'No devices found' if @user.devices.empty? %>
 	<% #Replace with a real form. And ajax. Ajax is nice. %>
-	<%= link_to "Add new device", new_user_mac_address_path(@user) %>
+	<%= link_to "Add new device", edit_user_path(@user) %>
 </section>
+</ul>
