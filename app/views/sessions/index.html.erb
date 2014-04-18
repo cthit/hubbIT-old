@@ -1,0 +1,6 @@
+<h1>Sessions#index</h1>
+<% @sessions.each do |session| %>
+  <h3>
+    <%= link_to "user: #{session.user_id}, mac: #{session.mac_address}", session.user %>
+  </h3>
+<% end %>
