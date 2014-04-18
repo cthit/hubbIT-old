@@ -3,4 +3,5 @@
   <h3>
     <%= link_to "user: #{session.user_id}, mac: #{session.mac_address}", session.user %>
   </h3>
+  <%= session.start_time %> - <%= session.end_time %>
 <% end %>

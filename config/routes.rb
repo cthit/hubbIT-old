@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   resources :users, only: [:show, :index, :edit, :update]
+
+  put '/sessions(.:format)' => 'sessions#update'
+
   resources :sessions
 
   root 'users#index'
