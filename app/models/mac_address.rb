@@ -11,7 +11,16 @@
 class MacAddress < ActiveRecord::Base
   belongs_to :user
 
+  before_validation :format_mac
+
   self.primary_key = :address
 
-  validates :address, presence: true, length: { minimum: 2 }
+  validates :address, presence: true, format: { with: /\A([0-9A-F]{2}[:-]?){5}([0-9A-F]{2})\z/ }
+
+  private
+    def format_mac
+      if address.changed?
+	self.address = address.upcase.gsub(/[-:]/, '').scan(/.{2}/).join ':'
+      end
+    end
 end

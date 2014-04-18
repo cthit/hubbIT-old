@@ -14,5 +14,5 @@ class User < ActiveRecord::Base
 
 	self.primary_key = :cid
 
-	accepts_nested_attributes_for :devices
+	accepts_nested_attributes_for :devices, allow_destroy: true
 end

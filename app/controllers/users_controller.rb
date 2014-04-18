@@ -27,6 +27,6 @@ class UsersController < ApplicationController
 		end
 
 		def user_params
-			params.require(:user).permit(devices_attributes: [:address, :id])
+			params.require(:user).permit(devices_attributes: [:address, :id, :_destroy])
 		end
 end

@@ -11,5 +11,5 @@ $ ->
   $('form').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    $('.devices').append($(this).data('fields').replace(regexp, time))
+    $('div.devices').append($(this).data('fields').replace(regexp, time))
     event.preventDefault()

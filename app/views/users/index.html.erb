@@ -1,6 +1,5 @@
 	<section class="users">
-		<% @user.each do |user| %>
-			<div class="user">
-				<%= link_to user.cid, user %></div>
+		<% @users.each do |user| %>
+			<div class="user"><%= link_to user.cid, user %></div>
 		<% end %>
 	</section>
