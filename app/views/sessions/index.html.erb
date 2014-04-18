@@ -1,7 +1,9 @@
+<%= link_to "Users", users_path %>
 <h1>Sessions#index</h1>
 <% @sessions.each do |session| %>
   <h3>
-    <%= link_to "user: #{session.user_id}, mac: #{session.mac_address}", session.user %>
+    <%= link_to "user: #{session.user_id}", session.user %>
   </h3>
-  <%= session.start_time %> - <%= session.end_time %>
+  <%= session.start_time.strftime('%F %T') %> - <%= session.end_time.strftime('%F %T') %> (<%= distance_of_time_in_words_to_now session.start_time %>)
+
 <% end %>

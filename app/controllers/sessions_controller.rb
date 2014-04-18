@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_action :set_session, only: [:show, :edit]
 
   def index
-    @sessions = Session.all
+    @sessions = UserSession.active
   end
 
   def update
@@ -11,12 +11,17 @@ class SessionsController < ApplicationController
     puts params
     puts mac.inspect
     if mac
-      @session = Session.active(mac)
+      @user = mac.user
+      @session = Session.active.with_mac(mac)
+      new_time = DateTime.now + 5.minutes
       if @session.any?
-        @session.first.update(end_time: DateTime.now + 5.minutes)
+        @session.first.update(end_time: new_time)
+        @u_session = UserSession.active.with_user(@user)
+        @u_session.last.update(end_time: new_time)
       else
-        @session = mac.user.sessions.create(mac_address: params[:Mac],
-          start_time: DateTime.now, end_time: DateTime.now + 5.minutes)
+        @session = @user.sessions.create(mac_address: params[:Mac],
+          start_time: DateTime.now, end_time: new_time)
+        @user.user_sessions.create(start_time: DateTime.now, end_time: new_time)
       end
     end
     head :no_content

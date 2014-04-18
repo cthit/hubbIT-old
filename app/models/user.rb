@@ -11,6 +11,7 @@
 class User < ActiveRecord::Base
 	has_many :devices, class_name: MacAddress
 	has_many :sessions
+	has_many :user_sessions
 
 	self.primary_key = :cid
 

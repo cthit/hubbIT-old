@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418131346) do
+ActiveRecord::Schema.define(version: 20140418203207) do
 
   create_table "mac_addresses", id: false, force: true do |t|
     t.string   "address"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 20140418131346) do
   end
 
   add_index "sessions", ["user_id"], name: "index_sessions_on_user_id"
+
+  create_table "user_sessions", force: true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_sessions", ["user_id"], name: "index_user_sessions_on_user_id"
 
   create_table "users", id: false, force: true do |t|
     t.string   "cid"
