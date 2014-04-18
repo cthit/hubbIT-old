@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
 
+  before_action :restrict_access, only: :update
   before_action :set_session, only: [:show, :edit]
 
   def index
@@ -47,5 +48,11 @@ class SessionsController < ApplicationController
 
     def set_session
       @session = Session.find(params[:id])
+    end
+
+    def restrict_access
+      authenticate_or_request_with_http_token do |token, options|
+        ApiKey.exists?(access_token: token)
+      end
     end
 end
