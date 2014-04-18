@@ -7,14 +7,15 @@ class SessionsController < ApplicationController
   end
 
   def update
-    mac = MacAddress.find_by(address: params[:mac])
+    mac = MacAddress.find_by(address: params[:Mac])
+    puts params
     puts mac.inspect
     if mac
       @session = Session.active(mac)
       if @session.any?
         @session.first.update(end_time: DateTime.now + 5.minutes)
       else
-        @session = mac.user.sessions.create(mac_address: params[:mac],
+        @session = mac.user.sessions.create(mac_address: params[:Mac],
           start_time: DateTime.now, end_time: DateTime.now + 5.minutes)
       end
     end
