@@ -1,0 +1,11 @@
+<%= form_for @user do |f| %>
+	<div class="devices">
+		<%= link_to_add_fields "Add Devices", f, :devices %>
+		<% @user.devices.each do |devices| %>
+			<%= f.fields_for :devices do |builder| %>
+				<%= render 'device_fields', f: builder %>
+			<% end %>
+		<% end %>
+	</div>
+	<%= f.submit %>
+<% end %>
