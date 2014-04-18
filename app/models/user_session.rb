@@ -2,6 +2,7 @@
 #
 # Table name: user_sessions
 #
+#  id         :integer          not null, primary key
 #  start_time :datetime
 #  end_time   :datetime
 #  user_id    :string(255)

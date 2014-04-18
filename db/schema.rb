@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418203207) do
+ActiveRecord::Schema.define(version: 20140418220008) do
+
+  create_table "hour_entries", force: true do |t|
+    t.string   "cid"
+    t.date     "date"
+    t.integer  "hour"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "mac_addresses", id: false, force: true do |t|
     t.string   "address"

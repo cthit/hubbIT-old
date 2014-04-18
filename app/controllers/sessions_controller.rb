@@ -16,13 +16,23 @@ class SessionsController < ApplicationController
       new_time = DateTime.now + 5.minutes
       if @session.any?
         @session.first.update(end_time: new_time)
-        @u_session = UserSession.active.with_user(@user)
-        @u_session.last.update(end_time: new_time)
       else
         @session = @user.sessions.create(mac_address: params[:Mac],
           start_time: DateTime.now, end_time: new_time)
+      end
+
+      @u_session = UserSession.active.with_user(@user)
+      if @u_session.any?
+        @u_session.last.update(end_time: new_time)
+      else
         @user.user_sessions.create(start_time: DateTime.now, end_time: new_time)
       end
+
+      @hentry = HourEntry.with_user(@user).last
+      if @hentry.nil? || (@hentry.date < Date.today || @hentry.hour < DateTime.now.hour)
+        @user.hour_entries.create(date: Date.today, hour: DateTime.now.hour)
+      end
+
     end
     head :no_content
   end
