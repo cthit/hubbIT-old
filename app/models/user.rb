@@ -9,6 +9,7 @@
 #
 
 class User < ActiveRecord::Base
+	include HTTParty
 	has_many :devices, class_name: MacAddress
 	has_many :sessions
 	has_many :hour_entries, foreign_key: :cid
@@ -16,5 +17,29 @@ class User < ActiveRecord::Base
 
 	self.primary_key = :cid
 
+	base_uri "https://chalmers.it/auth/userInfo.php"
+
 	accepts_nested_attributes_for :devices, allow_destroy: true
+
+	def self.find_by_token(token)
+		send_request query: { token: token }
+	end
+
+	def self.find(cid)
+		super
+	rescue ActiveRecord::RecordNotFound
+		user = send_request query: { cid: cid }
+		user.save!
+		user
+	end
+
+	private
+		def self.send_request(options)
+			resp = get("", options)
+			if resp.success? && resp['cid'].present?
+				self.new cid: resp['cid']
+			else
+				raise resp.response.inspect
+			end
+		end
 end

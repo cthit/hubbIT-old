@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:edit, :show, :update]
+	before_action :restrict_user, only: [:edit, :update]
 
 	def index
 		@users = User.all
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		@user.devices.build
 	end
 
 	def update
@@ -28,5 +30,12 @@ class UsersController < ApplicationController
 
 		def user_params
 			params.require(:user).permit(devices_attributes: [:address, :id, :_destroy])
+		end
+
+		def restrict_user
+			puts @user, current_user
+			unless @user == current_user
+				redirect_to users_path, alert: 'You don\'t have access to this page'
+			end
 		end
 end

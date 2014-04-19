@@ -31,6 +31,9 @@ gem 'spring',        group: :development
 # Annotate models
 gem 'annotate', ">=2.6.0"
 
+# HTTP api wrapper (for auth)
+gem 'httparty'
+
 # Testing gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do

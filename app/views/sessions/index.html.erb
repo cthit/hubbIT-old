@@ -1,5 +1,8 @@
-<%= link_to "Users", users_path %>
-<h1>Sessions#index</h1>
+<% if current_user.devices.empty? %>
+  <div>You don't seem to have any MAC-addresses defined, go to your <%= link_to "user page", edit_user_path(current_user) %> and add some!</div>
+<% end %>
+
+<h1>Active sessions</h1>
 <% @sessions.each do |session| %>
   <h3>
     <%= link_to "user: #{session.user_id}", session.user %>
