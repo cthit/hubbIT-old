@@ -1,4 +1,3 @@
-<%= link_to 'All users', users_path %>
 <section class="profile">
 	<h1><%= @user.cid %></h1>
 	<ul>
@@ -9,6 +8,7 @@
 		<li>No devices found</li>
 	<% end %>
 	</ul>
-	<% #Replace with a real form. And ajax. Ajax is nice. %>
-	<%= link_to "Add new device", edit_user_path(@user) %>
+	<% if @user == current_user %>
+		<%= link_to "Add new device", edit_user_path(@user) %>
+	<% end %>
 </section>

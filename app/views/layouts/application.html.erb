@@ -9,8 +9,10 @@
 </head>
 <body>
   <header>
-    <h1>Who is in the hubb?</h1>
+    <h1><%= link_to 'Who is in the hubb?', sessions_path %></h1>
+    <%= render 'layouts/navbar' %>
   </header>
+  <%= render 'layouts/messages' %>
   <div id="wrapper">
 <%= yield %>
   </div>

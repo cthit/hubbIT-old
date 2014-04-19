@@ -1,0 +1,8 @@
+<% flash.each do |name, msg| %>
+	<% if msg.is_a? String %>
+		<div class="message-<%= name.to_s == 'notice' ? 'notice' : 'warning' %>">
+			<%= content_tag :div, msg %>
+		</div>
+	<% end %>
+<% end %>
+<% flash.clear %>
