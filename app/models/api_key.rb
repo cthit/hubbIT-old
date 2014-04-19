@@ -6,6 +6,7 @@
 #  access_token :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  comment      :string(255)
 #
 
 class ApiKey < ActiveRecord::Base
