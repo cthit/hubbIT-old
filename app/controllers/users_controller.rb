@@ -33,7 +33,6 @@ class UsersController < ApplicationController
 		end
 
 		def restrict_user
-			puts @user, current_user
 			unless @user == current_user
 				redirect_to users_path, alert: 'You don\'t have access to this page'
 			end
