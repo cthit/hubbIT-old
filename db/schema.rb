@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20140418234857) do
     t.datetime "updated_at"
   end
 
-  add_index "mac_addresses", ["user_id"], name: "index_mac_addresses_on_user_id"
+  add_index "mac_addresses", ["user_id"], name: "index_mac_addresses_on_user_id", using: :btree
 
   create_table "sessions", force: true do |t|
     t.datetime "start_time"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20140418234857) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id"
+  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id", using: :btree
 
   create_table "user_sessions", force: true do |t|
     t.datetime "start_time"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20140418234857) do
     t.datetime "updated_at"
   end
 
-  add_index "user_sessions", ["user_id"], name: "index_user_sessions_on_user_id"
+  add_index "user_sessions", ["user_id"], name: "index_user_sessions_on_user_id", using: :btree
 
   create_table "users", id: false, force: true do |t|
     t.string   "cid"
