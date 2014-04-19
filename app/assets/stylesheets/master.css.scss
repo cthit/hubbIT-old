@@ -1,15 +1,37 @@
+$text-color: #999;
 body {
   background-color: #F1F1F1;
   font-family: Ubuntu;
 }
+header {
+  h1 {
+    a {
+      color: #000;
+      &:hover {
+        color: $text-color;
+      }
+    }
+    text-shadow: 0 0 2px #000;
+    text-align: center;
+  }
 
-header h1 {
-  text-shadow: 0 0 2px #000;
-  text-align: center;
+  nav {
+    text-align: center;
+    ul {
+      list-style-type: none;
+      padding: 0;
+      li {
+        display: inline-block;
+        a:hover {
+          color: darken($text-color, 80);
+        }
+      }
+    }
+  }
 }
 
 a {
-  color: #999;
+  color: $text-color;
   text-decoration: none;
 }
 
