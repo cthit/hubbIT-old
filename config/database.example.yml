@@ -10,12 +10,9 @@ default: &default
   timeout: 5000
 
 development:
-   adapter: mysql2
-   pool: 5
-   timeout: 5000
-   database: hubbIT
-   username: hubbIT
-   password: lolboll
+  <<: *default
+  adapter: sqlite3
+  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
