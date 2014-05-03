@@ -7,9 +7,19 @@ $ ->
 		counts = []
 		for i in [0..23]
 			counts.push data[i] || 0
-		max = Math.max.apply(null, counts)
-		max = 5 if max < 5
+
+		sum = counts.reduce (a, b) -> a+b
+		counts = counts.map (a) -> a/sum * 100
+
 		source =
 			labels: [0..23]
 			datasets: [data: counts, fillColor: '#68d157', strokeColor: '#2b881c']
-		new Chart($('#chart')[0].getContext('2d')).Line(source, {barStrokeWidth: 5, scaleOverride: true, scaleStartValue: 0, scaleSteps: max, scaleStepWidth: 1})
+		options =
+			barStrokeWidth: 5
+			scaleOverride: true
+			scaleStartValue: 0
+			scaleSteps: 10
+			scaleLabel: "<%=value%>%"
+			scaleStepWidth: 10
+
+		new Chart($('#chart')[0].getContext('2d')).Line(source, options)
