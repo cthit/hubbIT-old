@@ -35,6 +35,9 @@ gem 'annotate', ">=2.6.0"
 # HTTP api wrapper (for auth)
 gem 'httparty'
 
+# Charts!!!
+gem 'chart-js-rails'
+
 # Testing gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do

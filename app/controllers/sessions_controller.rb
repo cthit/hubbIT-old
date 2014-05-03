@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
   end
 
   def update
-    mac = MacAddress.find_by(address: params[:Mac])
-    puts params
+    mac = MacAddress.find_by(address: params[:Mac].upcase)
+    puts "params: ", params.inspect
     puts mac.inspect
     if mac
       @user = mac.user
