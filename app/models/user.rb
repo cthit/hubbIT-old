@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
 	self.primary_key = :cid
 
-	base_uri "https://chalmers.it/auth/userInfo.php"
+	base_uri "https://account.chalmers.it/userInfo.php"
 
 	accepts_nested_attributes_for :devices, allow_destroy: true
 
