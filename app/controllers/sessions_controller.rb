@@ -9,8 +9,6 @@ class SessionsController < ApplicationController
 
   def update
     mac = MacAddress.find_by(address: params[:Mac].upcase)
-    puts "params: ", params.inspect
-    puts mac.inspect
     if mac
       @user = mac.user
       @session = Session.active.with_mac(mac)
