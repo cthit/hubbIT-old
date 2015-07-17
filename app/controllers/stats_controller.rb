@@ -13,7 +13,7 @@ class StatsController < ApplicationController
     if session.present?
       @last_session = session.end_time - session.start_time
 
-      @total_time = user_sessions.sum('end_time - start_time')
+      @total_time = user_sessions.sum('TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time)')
     end
   end
 
