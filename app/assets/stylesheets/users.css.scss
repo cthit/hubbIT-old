@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+table {
+    margin: 0 auto;
+}
+
 .profile {
   margin: 0 20px;
+}
+
+.mac-address {
+    font-family: monospace;
+    font-size: 1.2em;
 }

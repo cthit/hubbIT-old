@@ -2,7 +2,7 @@
 	<h1><%= @user.cid %></h1>
 	<ul>
 	<% @user.devices.each do |d| %>
-		<li><%= d.address %></li>
+		<li class="mac-address"><%= d.address %></li>
 	<% end %>
 	<% if @user.devices.empty? %>
 		<li>No devices found</li>

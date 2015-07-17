@@ -38,6 +38,9 @@ gem 'httparty'
 # Charts!!!
 gem 'chart-js-rails'
 
+# Material design rails
+gem 'material_design_lite-rails'
+
 # Testing gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do

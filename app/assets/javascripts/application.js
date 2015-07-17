@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require Chart
+//= require material
 //= require turbolinks
 //= require_tree .

@@ -1,5 +1,9 @@
-<section class="users">
-	<% @users.each do |user| %>
-		<div class="user"><%= link_to user.cid, user %></div>
-	<% end %>
-</section>
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+    <tbody>
+        <% @users.each do |user| %>
+            <tr class="user">
+                <td><%= link_to user.cid, user %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
