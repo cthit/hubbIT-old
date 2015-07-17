@@ -3,16 +3,21 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-	if $('#chart')[0]
-		$.get '/stats/hours.json', (data) ->
+	chart=$('#chart')
+	if chart[0]
+		$.get chart.data("url"), (data) ->
 			counts = [0..23].map (i) -> data[i] || 0
 
+
 			sum = counts.reduce (a, b) -> a+b
+			procent=counts.map (a) -> a/sum * 100
+			max=Math.max.apply(this,procent)
+
 
 			source =
 				labels: [0..23]
 				datasets: [
-					data: counts.map (a) -> a/sum * 100
+					data: procent
 					fillColor: '#68d157'
 					strokeColor: '#2b881c'
 				]
@@ -21,7 +26,7 @@ $ ->
 				scaleOverride: true
 				scaleStartValue: 0
 				scaleSteps: 10
-				scaleLabel: "<%=value%>%"
-				scaleStepWidth: 10
+				scaleLabel: "<%=parseInt(value)%>%"
+				scaleStepWidth: max/10
 
 			new Chart($('#chart')[0].getContext('2d')).Line(source, options)

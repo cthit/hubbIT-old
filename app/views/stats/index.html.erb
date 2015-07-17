@@ -1,6 +1,15 @@
-<h1>Stats#index</h1>
 
-<h2>curr:</h2><%= seconds_to_words(@last_session) if @last_session %><br>
-<h2>sum:</h2><%= seconds_to_units(@total_time) if @total_time %> <br>
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+<% @total_time.each do |user| %>
+<tr>
+  <td>
+      <%=user.user_id%>
+  </td>
+  <td>
+      <%= seconds_to_units(user.total_time) %>
+  </td>
+</tr>
+<% end%>
+</table>
 
-<canvas id="chart" width="300" height="300"></canvas>
+<canvas id="chart" data-url="/stats/hours.json" width="1200" height="300"></canvas>

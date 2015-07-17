@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update]
 
   scope :stats do
-    get 'all' => 'stats#show', as: 'all_stats'
-    get '(:user_id)/hours' => 'stats#hours', as: 'hour_stats'
-    get '(:user_id)' => 'stats#show', as: 'stats'
+    get 'hours' => 'stats#hours', as: 'hour_stats'
+    get ':user_id' => 'stats#show', as: 'stats'
+    get '' => 'stats#index', as: 'all_stats'
   end
 
   put '/sessions(.:format)' => 'sessions#update'

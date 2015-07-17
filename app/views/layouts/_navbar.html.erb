@@ -2,6 +2,8 @@
 	<ul>
 		<li><%= link_to 'Me', current_user %></li> |
 		<li><%= link_to 'Users', users_path %></li> |
-		<li><%= link_to 'Stats', stats_path %></li>
+		<li><%= link_to 'Smurrfar i hubben', sessions_path %></li> |
+		<li><%= link_to 'Stats', all_stats_path %></li> |
+		<li><%= link_to 'My stats', stats_path(current_user.cid) %></li>
 	</ul>
 </nav>

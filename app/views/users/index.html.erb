@@ -2,7 +2,7 @@
     <tbody>
         <% @users.each do |user| %>
             <tr class="user">
-                <td><%= link_to user.cid, user %></td>
+                <td><%= link_to user.cid, stats_path(user.cid) %></td>
             </tr>
         <% end %>
     </tbody>
