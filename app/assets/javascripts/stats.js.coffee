@@ -5,6 +5,11 @@
 $ ->
 	chart=$('#chart')
 	if chart[0]
+		console.dir(window.innerWidth)
+		console.dir(chart[0])
+		chart[0].width = window.innerWidth * 0.8
+
+		
 		$.get chart.data("url"), (data) ->
 			counts = [0..23].map (i) -> data[i] || 0
 

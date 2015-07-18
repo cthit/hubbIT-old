@@ -1,7 +1,7 @@
 <h2>Latest session</h2>
-<%= seconds_to_words(@last_session) if @last_session %><br>
+<h3><%= seconds_to_words(@last_session) if @last_session %></h3><br>
 <h2>Total sum</h2>
-<%= seconds_to_units(@total_time) if @total_time %> <br>
+<h3><%= seconds_to_units(@total_time) if @total_time %> </h3><br>
 
 <h2>Hours at the Hub</h2>
-<canvas id="chart" data-url="/stats/hours.json?user_id=<%= @user.cid %>" width="600" height="200"></canvas>
+<canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.cid %>"  height="300"></canvas>

@@ -8,14 +8,19 @@ class SessionsController < ApplicationController
   end
 
   def update
+    logger.info('Update')
     mac = MacAddress.find_by(address: params[:Mac].upcase)
+    logger.info(mac.present?)
+    logger.info(params[:Mac])
     if mac
+      logger.info('mac')
       @user = mac.user
       @session = Session.active.with_mac(mac)
       new_time = DateTime.now + 5.minutes
       if @session.any?
         @session.first.update(end_time: new_time)
       else
+        logger.info('Creating session')
         @session = @user.sessions.create(mac_address: params[:Mac],
           start_time: DateTime.now, end_time: new_time)
       end
@@ -50,7 +55,10 @@ class SessionsController < ApplicationController
 
     def restrict_access
       authenticate_or_request_with_http_token do |token, options|
-        ApiKey.exists?(access_token: token)
+        a=ApiKey.exists?(access_token: token)
+        logger.info(a)
+        logger.info(token)
+        a
       end
     end
 end

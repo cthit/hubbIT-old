@@ -1,6 +1,6 @@
 <section class="profile">
 	<h1><%= @user.cid %></h1>
-	<ul>
+	<ul class="device-list">
 	<% @user.devices.each do |d| %>
 		<li class="mac-address"><%= d.address %></li>
 	<% end %>
@@ -9,6 +9,8 @@
 	<% end %>
 	</ul>
 	<% if @user == current_user %>
-		<%= link_to "Add new device", edit_user_path(@user) %>
+		<%= link_to "Add new device", edit_user_path(@user), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
+		<!-- Raised button with ripple -->
+
 	<% end %>
 </section>
