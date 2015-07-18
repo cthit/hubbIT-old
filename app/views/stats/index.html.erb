@@ -3,7 +3,7 @@
 <% @total_time.each do |user| %>
 <tr>
   <td>
-      <%=user.user_id%>
+      <%= link_to user.user_id, stats_path(user.user_id) %>
   </td>
   <td>
       <%= seconds_to_units(user.total_time) %>
@@ -12,4 +12,4 @@
 <% end%>
 </table>
 
-<canvas id="chart" data-url="/stats/hours.json" width="1200" height="300"></canvas>
+<canvas id="chart" class="stats-graph" data-url="/stats/hours.json" width="1200" height="300"></canvas>

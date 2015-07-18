@@ -14,3 +14,35 @@
  *= require material
  *= require_self
  */
+
+header {
+	background-color: #0097a7;
+	border: 1px solid;
+}
+
+a.title-link {
+  	color: #FFF;
+}
+
+a {
+	color: #005C95;
+	font-weight: 700;
+}
+
+ #wrapper {
+ 	margin: 0 auto;
+ 	display: block;
+ 	position: relative;
+ 	width: 90%;
+ 	text-align: center;
+ 	padding: 2em 0;
+
+ }
+
+ ul {
+ 	list-style-type: none;
+ 	list-style-position: inside;
+ 	padding: 0;
+ }
+
+
