@@ -8,11 +8,11 @@
     <tbody>
 		<% @sessions.each do |session| %>
             <tr>
-            	<td >
+            	<td class="user-row">
             		<%= link_to session.user.nick, stats_path(session.user.cid) %>
             	</td>
-                <td>
-  					<%= session.start_time.strftime('%T') %> - <%= session.end_time.strftime('%T') %> 
+                <td class="time-cell">
+  					<%= "Since " + session.start_time.strftime('%H:%M') %> 
   					(<%= distance_of_time_in_words_to_now session.start_time %>)
                 </td>
             </tr>
