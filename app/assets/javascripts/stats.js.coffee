@@ -14,15 +14,15 @@ $ ->
 			counts = [0..23].map (i) -> data[i] || 0
 
 
-			sum = counts.reduce (a, b) -> a+b
-			procent=counts.map (a) -> a/sum * 100
-			max=Math.max.apply(this,procent)
+			sum = counts.reduce (a, b) -> a + b
+			percentages = counts.map (a) -> parseInt(a / sum * 10000) / 100
+			max = Math.max.apply(this, percentages)
 
 
 			source =
 				labels: [0..23]
 				datasets: [
-					data: procent
+					data: percentages
 					fillColor: '#68d157'
 					strokeColor: '#2b881c'
 				]
