@@ -5,12 +5,20 @@ class SessionsController < ApplicationController
 
   def index
     @sessions = UserSession.active
+    respond_to do |format| 
+      format.json {render json: @sessions}
+      format.html
+    end
+  end
+
+  def list
+    @sessions = UserSession.active
   end
 
   def update
     logger.info('Update')
     mac = MacAddress.find_by(address: params[:Mac].upcase)
-    logger.info(mac.present?)
+    logger.info(mac)
     logger.info(params[:Mac])
     if mac
       logger.info('mac')

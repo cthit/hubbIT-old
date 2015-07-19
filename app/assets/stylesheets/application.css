@@ -15,13 +15,31 @@
  *= require_self
  */
 
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), 
+       local('Roboto-Regular'), 
+       url(http://themes.googleusercontent.com/static/fonts/roboto/v11/2UX7WLTfW3W8TclTUvlFyQ.woff) 
+       format('woff');
+}
+
+body {
+	font-family: 'Roboto'
+}
+
 header {
 	background-color: #0097a7;
 	border: 1px solid;
 }
 
-a.title-link {
+.title-link {
   	color: #FFF;
+  	&:hover {
+  		color: #FFF;
+  	}
+
 }
 
 a {
@@ -43,6 +61,10 @@ a {
  	list-style-type: none;
  	list-style-position: inside;
  	padding: 0;
+ }
+
+ td.user-row {
+ 	text-align: left;
  }
 
 

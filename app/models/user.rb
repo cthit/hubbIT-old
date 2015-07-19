@@ -33,6 +33,24 @@ class User < ActiveRecord::Base
 		user
 	end
 
+	def self.nick(cid)
+		resp = get("", query: {cid: cid, nick: 'nick'})
+		if resp.success? && resp['cid'].present?
+			if resp['nick'].present?
+				return resp['nick']
+			else
+				return resp['cid']
+			end
+		else
+			raise resp.response.inspect
+		end
+	end
+
+	def nick()
+		self.class.nick(cid)
+	end
+		
+
 	private
 		def self.send_request(options)
 			resp = get("", options)

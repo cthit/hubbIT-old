@@ -1,5 +1,5 @@
 <section class="profile">
-	<h1><%= @user.cid %></h1>
+	<h1><%= @user.nick %></h1>
 	<ul class="device-list">
 	<% @user.devices.each do |d| %>
 		<li class="mac-address"><%= d.address %></li>
