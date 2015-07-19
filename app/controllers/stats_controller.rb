@@ -16,6 +16,7 @@ class StatsController < ApplicationController
   def show
     @user_sessions = UserSession.with_user(@user).order("-created_at")
     @session = @user_sessions.first
+    @longest_session = @user_sessions.maximum('TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time)')
 
     if @session.present?
       @last_session_duration = @session.end_time - @session.start_time
