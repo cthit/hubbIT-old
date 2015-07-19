@@ -2,11 +2,20 @@
   <div>You don't seem to have any MAC-addresses defined, go to your <%= link_to "user page", edit_user_path(current_user) %> and add some!</div>
 <% end %>
 
-<h1>Active sessions</h1>
-<% @sessions.each do |session| %>
-  <h3>
-    <%= link_to session.user.nick, stats_path(session.user.cid) %>
-  </h3>
-  <%= session.start_time.strftime('%T') %> - <%= session.end_time.strftime('%T') %> (<%= distance_of_time_in_words_to_now session.start_time %>)
+<h3>Active sessions</h3>
 
-<% end %>
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+    <tbody>
+		<% @sessions.each do |session| %>
+            <tr>
+            	<td >
+            		<%= link_to session.user.nick, stats_path(session.user.cid) %>
+            	</td>
+                <td>
+  					<%= session.start_time.strftime('%T') %> - <%= session.end_time.strftime('%T') %> 
+  					(<%= distance_of_time_in_words_to_now session.start_time %>)
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
