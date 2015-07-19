@@ -14,13 +14,13 @@ class StatsController < ApplicationController
   end
 
   def show
-    user_sessions = UserSession.with_user(@user).order("-created_at")
-    @session = user_sessions.first
+    @user_sessions = UserSession.with_user(@user).order("-created_at")
+    @session = @user_sessions.first
 
     if @session.present?
       @last_session_duration = @session.end_time - @session.start_time
 
-      @total_time = user_sessions.sum('TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time)')
+      @total_time = @user_sessions.sum('TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time)')
     end
   end
 
