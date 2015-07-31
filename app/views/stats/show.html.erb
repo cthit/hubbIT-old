@@ -14,7 +14,7 @@
 <canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.cid %>"  height="300"></canvas>
 
 <h2>Longest session</h2>
-<h3><%= seconds_to_units(@longest_session) %></h3>
+<h3><%= seconds_to_units(@longest_session) if @longest_session %></h3>
 
 <% if current_user == @user %>
 <h2>Previous sessions (only visiable to yourself)</h2>
