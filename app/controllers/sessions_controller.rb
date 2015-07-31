@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   before_action :restrict_access, only: :update
   before_action :set_session, only: [:show, :edit]
 
@@ -24,7 +23,7 @@ class SessionsController < ApplicationController
       logger.info('mac')
       @user = mac.user
       @session = Session.active.with_mac(mac)
-      new_time = DateTime.now + 5.minutes
+      new_time = DateTime.now + 10.minutes
       if @session.any?
         @session.first.update(end_time: new_time)
       else
@@ -63,10 +62,7 @@ class SessionsController < ApplicationController
 
     def restrict_access
       authenticate_or_request_with_http_token do |token, options|
-        a=ApiKey.exists?(access_token: token)
-        logger.info(a)
-        logger.info(token)
-        a
+        ApiKey.exists?(access_token: token)
       end
     end
 end
