@@ -3,7 +3,7 @@ class StatsController < ApplicationController
   before_action :set_user
   def index
     @sessions = UserSession.group(:user_id)
-    @total_time = @sessions.select('id','user_id','sum(TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time)) as total_time').order("total_time DESC")
+    @total_time = @sessions.select('id','user_id','sum(TIMESTAMPDIFF(SECOND, `start_time`, `end_time`)) as total_time').order("total_time DESC")
   end
 
 
