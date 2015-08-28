@@ -8,7 +8,7 @@
 <% end %>
 </h3>
 <h2>Total sum</h2>
-<h3><%= seconds_to_units(@total_time) if @total_time %> </h3>
+<h3><%= seconds_to_units(@summarize_query.total_time) if @summarize_query %> </h3>
 
 <h2>Hours at the Hub</h2>
 <canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.cid %>"  height="300"></canvas>
