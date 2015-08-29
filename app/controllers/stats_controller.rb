@@ -21,7 +21,9 @@ class StatsController < ApplicationController
     if @session.present?
       @last_session_duration = @session.end_time - @session.start_time
 
-      @total_time = @user_sessions.sum('TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time)')
+      @total_time = @user_sessions.select('sum(TIMESTAMPDIFF(SECOND, `start_time`, `end_time`)) as total_time')
+      .order("total_time DESC")
+      .first().total_time
     end
   end
 

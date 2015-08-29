@@ -9,4 +9,9 @@ module StatsHelper
 		hh, mm = mm.divmod(60)
 		[hh, mm, ss].map { |n| n < 10 ? "0#{n}" : n }.join(':')
 	end
+
+	def seconds_to_score(seconds)
+		mm, ss = seconds.divmod(60)
+		mm.to_s
+	end
 end
