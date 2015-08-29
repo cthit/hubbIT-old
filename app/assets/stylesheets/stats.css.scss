@@ -2,6 +2,56 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.user-name-header {
+	font-size: 4em;
+	margin: 0;
+}
+
+.info-dashboard {
+	display: flex;
+	margin: 1em auto;
+
+	.info-container {
+		width: 15em;
+		border: 1px solid;
+		margin: 0 0.4em;
+
+		.wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		.info-header {
+			background-color: rgba(0, 151, 167, 0.5);
+			margin: 0;
+			padding: 0.3em;
+			font-size: 1.2em;
+			border-bottom: 1px solid
+		}
+
+		.info-text {
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			padding: 0.4em;
+			height: 4em
+		}
+	}	
+}
+
+
+.graph-container {
+	border: 1px solid;
+	.graph-header {
+			background-color: rgba(0, 151, 167, 0.5);
+			margin: 0;
+			padding: 0.3em;
+			border-bottom: 1px solid
+	}
+}
+
+
 .stats-graph {
 	padding-top: 1em;
 	margin: 0 auto;

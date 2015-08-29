@@ -1,5 +1,19 @@
 
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+<tr class="header-row">
+  <td > 
+ 	#
+  </td>
+  <td class="user-row">
+  	Name
+  </td>
+  <td>
+      Total time
+  </td>
+  <td>
+      Score
+  </td>
+</tr>
 <% @total_time.each_with_index do |user, index| %>
 <tr>
   <td > 
@@ -10,6 +24,9 @@
   </td>
   <td>
       <%= seconds_to_units(user.total_time) %>
+  </td>
+  <td>
+      <%= seconds_to_score(user.total_time) %>
   </td>
 </tr>
 <% end%>

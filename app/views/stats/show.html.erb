@@ -1,20 +1,52 @@
-<h1><%= @user.nick %><h1>
-<h2>Last session</h2>
-<h3>
-<% if @session %>
-	<%= 'Right now for ' if @session.end_time > Time.zone.now %>
-	<%= @session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " if @session.end_time <= Time.now %>
-	<%= seconds_to_words(@last_session_duration)  %> 
-<% end %>
-</h3>
-<h2>Total sum</h2>
-<h3><%= seconds_to_units(@summarize_query.total_time) if @summarize_query %> </h3>
+<h1 class="user-name-header"><%= @user.nick %><h1>
 
-<h2>Hours at the Hub</h2>
-<canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.cid %>"  height="300"></canvas>
+<div class="info-dashboard">
+    <% if @session %>
+        <div class="info-container">
+            <h2 class="info-header">Last session</h2>
+            <div class="info-text">
+                <%= 'Right now for ' if @session.end_time > Time.zone.now %>
+                <% if @session.end_time <= Time.now %>
+                        <%= distance_of_time_in_words_to_now(@session.end_time.in_time_zone("Stockholm")).capitalize %> ago <br>
+                    <%= @session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %> <br>
+                <% end %>
+                <%= seconds_to_words(@last_session_duration)  %> 
+            </div>
+        </div>
+    <% end %>
 
-<h2>Longest session</h2>
-<h3><%= seconds_to_units(@longest_session) if @longest_session %></h3>
+    <% if @total_time %>
+        <div class="info-container">
+            <h2 class="info-header">Total time</h2>
+            <div class="info-text">
+                <%= seconds_to_units(@total_time) %>
+            </div>
+        </div>
+        <div class="info-container">
+            <h2 class="info-header">Score</h2>
+            <div class="info-text">
+                <%= seconds_to_score(@total_time) %>
+            </div>
+        </div>
+    <% end %>
+
+    <% if @longest_session %>
+        <div class="info-container">
+            <h2 class="info-header">Longest session</h2>
+            <div class="info-text">
+                <%= seconds_to_units(@longest_session) if @longest_session %>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<div class="graph-container">
+    <h2 class="graph-header">Hours at the Hub</h2>
+    <canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.cid %>"  height="300"></canvas>
+</div>
+
+
+
 
 <% if current_user == @user %>
 <h2>Previous sessions (only visiable to yourself)</h2>

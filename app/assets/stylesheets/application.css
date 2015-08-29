@@ -64,6 +64,11 @@ a {
  	padding: 0;
  }
 
+ tr.header-row {
+ 	font-weight: bold;
+ 	background-color: rgba(0, 151, 167, 0.5);
+ }
+
  td.user-row {
  	text-align: left;
  }
