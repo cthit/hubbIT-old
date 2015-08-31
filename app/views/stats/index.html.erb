@@ -1,7 +1,7 @@
 
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 <tr class="header-row">
-  <td > 
+  <td >
  	#
   </td>
   <td class="user-row">
@@ -14,22 +14,26 @@
       Score
   </td>
 </tr>
-<% @total_time.each_with_index do |user_session, index| %>
-<tr>
-  <td > 
-  <%= index+1 %>
-  </td>
-  <td class="user-row">
-      <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
-  </td>
-  <td>
-      <%= seconds_to_units(user_session.total_time) %>
-  </td>
-  <td>
-      <%= seconds_to_score(user_session.total_time) %>
-  </td>
-</tr>
-<% end%>
+<% cache 5.minutes do %>
+  <% @total_time.each_with_index do |user_session, index| %>
+    <% cache ["stats/index", user_session.user_id] do %>
+      <tr>
+        <td>
+        <%= index+1 %>
+        </td>
+        <td class="user-row">
+            <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
+        </td>
+        <td>
+            <%= seconds_to_units(user_session.total_time) %>
+        </td>
+        <td>
+            <%= seconds_to_score(user_session.total_time) %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+<% end %>
 </table>
 
 <canvas id="chart" class="stats-graph" data-url="/stats/hours.json" width="1200" height="300"></canvas>
