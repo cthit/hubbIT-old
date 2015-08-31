@@ -34,22 +34,22 @@ class User < ActiveRecord::Base
 	end
 
 	def self.nick(cid)
-		resp = get("", query: {cid: cid, nick: 'nick'})
-		if resp.success? && resp['cid'].present?
-			if resp['nick'].present?
-				return resp['nick']
+		Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
+			resp = get("", query: {cid: cid, nick: 'nick'})
+			if resp.success? && resp['cid'].present?
+				if resp['nick'].present?
+					return resp['nick']
+				else
+					return resp['cid']
+				end
 			else
-				return resp['cid']
+				raise resp.response.inspect
 			end
-		else
-			raise resp.response.inspect
 		end
 	end
 
 	def nick
-		@nick ||= Rails.cache.fetch "#{cid}/nick", expires_in: 14.hours do
-			self.class.nick(cid)
-		end
+		self.class.nick(cid)
 	end
 
 
