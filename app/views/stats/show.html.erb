@@ -1,38 +1,38 @@
-<h1 class="user-name-header"><%= @user.nick %><h1>
-
-<div class="info-dashboard">
-    <% if @session %>
-        <%= info_box 'Last session' do %>
-            <%= 'Right now for ' if @session.end_time > Time.zone.now %>
-            <% if @session.end_time <= Time.zone.now %>
-                    <%= distance_of_time_in_words_to_now(@session.end_time.in_time_zone("Stockholm")).capitalize %> ago <br>
-                <%= @session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %> <br>
+<h1><%= @user.nick %></h1>
+<section class="show-section">
+    <div class="info-dashboard">
+        <% if @session %>
+            <%= info_box 'Last session' do %>
+                <%= 'Right now for ' if @session.end_time > Time.zone.now %>
+                <% if @session.end_time <= Time.zone.now %>
+                        <%= distance_of_time_in_words_to_now(@session.end_time.in_time_zone("Stockholm")).capitalize %> ago <br>
+                    <%= @session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %> <br>
+                <% end %>
+                <%= seconds_to_words(@last_session_duration)  %>
             <% end %>
-            <%= seconds_to_words(@last_session_duration)  %> 
         <% end %>
-    <% end %>
 
-    <% if @total_time %>
-        <%= info_box 'Total time' do %>
-            <%= seconds_to_units(@total_time) %>
+        <% if @total_time %>
+            <%= info_box 'Total time' do %>
+                <%= seconds_to_units(@total_time) %>
+            <% end %>
+            <%= info_box 'Score' do %>
+                <%= seconds_to_score(@total_time) %>
+            <% end %>
         <% end %>
-        <%= info_box 'Score' do %>
-            <%= seconds_to_score(@total_time) %>
+
+        <% if @longest_session %>
+            <%= info_box 'Longest session' do %>
+                <%= seconds_to_units(@longest_session) %>
+            <% end %>
         <% end %>
-    <% end %>
+    </div>
 
-    <% if @longest_session %>
-        <%= info_box 'Longest session' do %>
-            <%= seconds_to_units(@longest_session) %>
-        <% end %>
-    <% end %>
-</div>
-
-<div class="graph-container">
-    <h2 class="graph-header">Hours at the Hub</h2>
-    <canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.cid %>"  height="300"></canvas>
-</div>
-
+    <div class="graph-container">
+        <h2 class="graph-header">Hours at the Hub</h2>
+        <canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.cid %>"  height="300"></canvas>
+    </div>
+</section>
 
 
 
@@ -44,7 +44,7 @@
             <tr>
                 <td class="time-cell">
                 	<%= session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %>
-                	<%= seconds_to_words(session.end_time - session.start_time)  %> 
+                	<%= seconds_to_words(session.end_time - session.start_time)  %>
                 </td>
             </tr>
         <% end %>
