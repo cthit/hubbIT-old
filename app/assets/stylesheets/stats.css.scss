@@ -2,19 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.user-name-header {
+h1 {
 	font-size: 4em;
 	margin: 0;
 }
 
+.show-section {
+	margin: 2em;
+}
+
 .info-dashboard {
 	display: flex;
-	margin: 1em auto;
+	margin: 2em 0;
 
 	.info-container {
-		width: 15em;
 		border: 1px solid;
-		margin: 0 0.4em;
+		margin-left: 1em;
+		flex-grow: 1;
+
+		&:first-child { margin-left: 0; }
 
 		.wrapper {
 			display: flex;
@@ -37,7 +43,7 @@
 			padding: 0.4em;
 			height: 4em
 		}
-	}	
+	}
 }
 
 
@@ -56,5 +62,5 @@
 	padding-top: 1em;
 	margin: 0 auto;
 	display: block;
-	
+
 }
