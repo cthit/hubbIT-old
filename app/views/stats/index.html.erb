@@ -14,9 +14,9 @@
       Score
   </td>
 </tr>
-<% cache 5.minutes do %>
+<% cache expires_in: 5.minutes do %>
   <% @total_time.each_with_index do |user_session, index| %>
-    <% cache ["stats/index", user_session.user_id] do %>
+    <% cache ["stats/index", user_session.user_id, user_session.total_time] do %>
       <tr>
         <td>
         <%= index+1 %>
