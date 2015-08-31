@@ -16,6 +16,6 @@ module StatsHelper
 	end
 
 	def info_box(title, &block)
-		render 'info_box', title: 'Total time', block: block
+		render 'info_box', title: title, block: block
 	end
 end
