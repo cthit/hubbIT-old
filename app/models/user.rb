@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 	has_many :hour_entries, foreign_key: :cid
 	has_many :user_sessions
 
+	ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedning]
+
 	self.primary_key = :cid
 
 	base_uri "https://account.chalmers.it/userInfo.php"
@@ -52,6 +54,17 @@ class User < ActiveRecord::Base
 		self.class.nick(cid)
 	end
 
+	def self.groups(cid)
+		Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
+			resp = get("", query: {cid: cid, groups: 'groups'})
+			if resp.success? and if resp['groups'].present?
+					return resp['groups']
+				end
+			else
+				raise resp.response.inspect
+			end
+		end
+	end
 
 	private
 		def self.send_request(options)
@@ -62,4 +75,25 @@ class User < ActiveRecord::Base
 				raise resp.response.inspect
 			end
 		end
+end
+
+class Symbol
+	def itize
+		case self
+			when :digit, :styrit, :sexit, :fritid, :snit
+				self.to_s.gsub /it/, 'IT'
+			when :drawit, :armit, :hookit, :flashit
+				self.to_s.titleize.gsub /it/, 'IT'
+			when :'8bit'
+				'8-bIT'
+			when :nollkit
+				'NollKIT'
+			when :prit
+				'P.R.I.T.'
+			when :fanbarerit
+				'FanbärerIT'
+			else
+				self.to_s
+		end
+	end
 end

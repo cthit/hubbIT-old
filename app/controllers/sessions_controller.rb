@@ -1,9 +1,12 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
   before_action :restrict_access, only: :update
   before_action :set_session, only: [:show, :edit]
 
   def index
     @sessions = UserSession.active
+    @groups = map_users_to_groups(@sessions.map { |s| {cid: s.user.cid, groups: User.groups(s.user.cid)} })
+
     respond_to do |format| 
       format.json {render json: @sessions}
       format.html
