@@ -14,19 +14,19 @@
       Score
   </td>
 </tr>
-<% @total_time.each_with_index do |user, index| %>
+<% @total_time.each_with_index do |user_session, index| %>
 <tr>
   <td > 
   <%= index+1 %>
   </td>
   <td class="user-row">
-      <%= link_to User.nick(user.user_id), stats_path(user.user_id) %>
+      <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
   </td>
   <td>
-      <%= seconds_to_units(user.total_time) %>
+      <%= seconds_to_units(user_session.total_time) %>
   </td>
   <td>
-      <%= seconds_to_score(user.total_time) %>
+      <%= seconds_to_score(user_session.total_time) %>
   </td>
 </tr>
 <% end%>
