@@ -14,4 +14,8 @@ module StatsHelper
 		mm, ss = seconds.divmod(60)
 		mm.to_s
 	end
+
+	def info_box(title, &block)
+		render 'info_box', title: 'Total time', block: block
+	end
 end
