@@ -3,22 +3,37 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .active-sessions-container {
-
+	.status-cell {
+		text-align: center;
+	}
 }
 
 .active-groups-container {
     display: flex;
     flex-wrap: wrap;
+    position: absolute;
+    top: 0;
+    right: 0em;
+    width: 30%;
+    max-width: 40%;
     flex-direction: row-reverse;
-    
-    @media (min-width: 767px ) {
-	    position: absolute;
-	    top: 0;
-	    right: 0em;
-	    width: 40%;
+    padding: 2em 0;
+	
+    @media (max-width: 929px) {
+    	position: static;
+    	flex-direction: row; 
+    	justify-content: center;
+    	max-width: 23em;
+    	margin: 0 auto;
+    	padding: 0;
     }
 }
 
 .group-box-container {
-	margin: 0.5em;
+	margin: 0 0.5em;
+
+	@media (max-width: 929px) {
+		margin-top: 1em;
+    }
 }
+
