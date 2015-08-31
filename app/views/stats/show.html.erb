@@ -37,10 +37,10 @@
 
 
 <% if current_user == @user %>
-<h2>Previous sessions (only visiable to yourself)</h2>
+<h2>Your 10 last sessions (only visible to yourself)</h2>
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
     <tbody>
-		<% @user_sessions.each do |session| %>
+		<% @user_sessions.take(10).each do |session| %>
             <tr>
                 <td class="time-cell">
                 	<%= session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %>
