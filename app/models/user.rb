@@ -46,10 +46,12 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def nick()
-		self.class.nick(cid)
+	def nick
+		@nick ||= Rails.cache.fetch "#{cid}/nick", expires_in: 14.hours do
+			self.class.nick(cid)
+		end
 	end
-		
+
 
 	private
 		def self.send_request(options)
