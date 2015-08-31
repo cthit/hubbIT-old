@@ -1,6 +1,7 @@
 class StatsController < ApplicationController
 
   before_action :set_user
+
   def index
     @sessions = UserSession.group(:user_id)
     @total_time = UserSession.total_time
@@ -8,9 +9,19 @@ class StatsController < ApplicationController
 
 
   def hours
+    cache_key = 'hours'
     query = HourEntry.group(:hour)
-    query = query.with_user(@user.cid) if params[:user_id]
-    render json: query.count
+    if params[:user_id]
+      user_id = params[:user_id]
+      cache_key = "hours/#{user_id}"
+      query = query.with_user(user_id)
+    end
+
+    @count = Rails.cache.fetch cache_key, expires_in: 5.minutes do
+      query.count
+    end
+
+    render json: @count
   end
 
   def show

@@ -43,7 +43,7 @@
 		<% @user_sessions.take(10).each do |session| %>
             <tr>
                 <td class="time-cell">
-                	<%= session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %>
+                	<%= session.end_time.in_time_zone("Stockholm").to_s(:short) %> for
                 	<%= seconds_to_words(session.end_time - session.start_time)  %>
                 </td>
             </tr>
