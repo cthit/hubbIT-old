@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     before_action :restrict_user, only: [:show, :edit, :update]
 
     def index
-        @users = User.all
+        @users = User.all.sort_by(&:nick)
     end
 
     def show

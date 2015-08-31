@@ -2,41 +2,29 @@
 
 <div class="info-dashboard">
     <% if @session %>
-        <div class="info-container">
-            <h2 class="info-header">Last session</h2>
-            <div class="info-text">
-                <%= 'Right now for ' if @session.end_time > Time.zone.now %>
-                <% if @session.end_time <= Time.now %>
-                        <%= distance_of_time_in_words_to_now(@session.end_time.in_time_zone("Stockholm")).capitalize %> ago <br>
-                    <%= @session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %> <br>
-                <% end %>
-                <%= seconds_to_words(@last_session_duration)  %> 
-            </div>
-        </div>
+        <%= info_box 'Last session' do %>
+            <%= 'Right now for ' if @session.end_time > Time.zone.now %>
+            <% if @session.end_time <= Time.zone.now %>
+                    <%= distance_of_time_in_words_to_now(@session.end_time.in_time_zone("Stockholm")).capitalize %> ago <br>
+                <%= @session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %> <br>
+            <% end %>
+            <%= seconds_to_words(@last_session_duration)  %> 
+        <% end %>
     <% end %>
 
     <% if @total_time %>
-        <div class="info-container">
-            <h2 class="info-header">Total time</h2>
-            <div class="info-text">
-                <%= seconds_to_units(@total_time) %>
-            </div>
-        </div>
-        <div class="info-container">
-            <h2 class="info-header">Score</h2>
-            <div class="info-text">
-                <%= seconds_to_score(@total_time) %>
-            </div>
-        </div>
+        <%= info_box 'Total time' do %>
+            <%= seconds_to_units(@total_time) %>
+        <% end %>
+        <%= info_box 'Score' do %>
+            <%= seconds_to_score(@total_time) %>
+        <% end %>
     <% end %>
 
     <% if @longest_session %>
-        <div class="info-container">
-            <h2 class="info-header">Longest session</h2>
-            <div class="info-text">
-                <%= seconds_to_units(@longest_session) if @longest_session %>
-            </div>
-        </div>
+        <%= info_box 'Longest session' do %>
+            <%= seconds_to_units(@longest_session) %>
+        <% end %>
     <% end %>
 </div>
 
@@ -49,10 +37,10 @@
 
 
 <% if current_user == @user %>
-<h2>Previous sessions (only visiable to yourself)</h2>
+<h2>Your 10 last sessions (only visible to yourself)</h2>
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
     <tbody>
-		<% @user_sessions.each do |session| %>
+		<% @user_sessions.take(10).each do |session| %>
             <tr>
                 <td class="time-cell">
                 	<%= session.end_time.in_time_zone("Stockholm").to_s(:short) + " for " %>
