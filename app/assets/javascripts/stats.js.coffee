@@ -9,7 +9,7 @@ $ ->
 		console.dir(chart[0])
 		chart[0].width = window.innerWidth * 0.8
 
-		
+
 		$.get chart.data("url"), (data) ->
 			counts = [0..23].map (i) -> data[i] || 0
 
@@ -31,7 +31,7 @@ $ ->
 				scaleOverride: true
 				scaleStartValue: 0
 				scaleSteps: 10
-				scaleLabel: "<%=parseInt(value)%>%"
+				scaleLabel: "<%=parseInt(value * 100) / 100%>%"
 				scaleStepWidth: max/10
 
 			new Chart($('#chart')[0].getContext('2d')).Line(source, options)
