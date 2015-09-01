@@ -24,28 +24,24 @@ class User < ActiveRecord::Base
 	accepts_nested_attributes_for :devices, allow_destroy: true
 
 	def self.find_by_token(token)
-		send_request query: { token: token }
+		fetch_user token: token
 	end
 
 	def self.find(cid)
 		super
 	rescue ActiveRecord::RecordNotFound
-		user = send_request query: { cid: cid }
+		user = fetch_user cid: cid
 		user.save!
 		user
 	end
 
 	def self.nick(cid)
 		Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
-			resp = get("", query: {cid: cid, nick: 'nick'})
-			if resp.success? && resp['cid'].present?
-				if resp['nick'].present?
-					return resp['nick']
-				else
-					return resp['cid']
-				end
+			resp = send_request(query: { cid: cid })
+			if resp['nick'].present?
+				return resp['nick']
 			else
-				raise resp.response.inspect
+				return cid
 			end
 		end
 	end
@@ -55,22 +51,25 @@ class User < ActiveRecord::Base
 	end
 
 	def self.groups(cid)
-		Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
-			resp = get("", query: {cid: cid, groups: 'groups'})
-			if resp.success? and if resp['groups'].present?
-					return resp['groups']
-				end
+		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
+			resp = send_request(query: { cid: cid })
+			if resp['groups'].present?
+				resp['groups']
 			else
-				raise resp.response.inspect
+				[]
 			end
 		end
 	end
 
 	private
+		def self.fetch_user(options)
+			self.new cid: send_request(query: options)['cid']
+		end
+
 		def self.send_request(options)
 			resp = get("", options)
 			if resp.success? && resp['cid'].present?
-				self.new cid: resp['cid']
+				resp
 			else
 				raise resp.response.inspect
 			end
