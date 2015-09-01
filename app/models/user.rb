@@ -50,8 +50,8 @@ class User < ActiveRecord::Base
 		self.class.nick(cid)
 	end
 
-	def self.groups(cid)
-		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
+	def self.groups(cid)	
+		groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
 			resp = send_request(query: { cid: cid })
 			if resp['groups'].present?
 				resp['groups']
