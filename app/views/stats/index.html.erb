@@ -17,7 +17,7 @@
 <% cache expires_in: 5.minutes do %>
   <% @total_time.each_with_index do |user_session, index| %>
     <% cache ["stats/index", user_session.user_id, user_session.total_time] do %>
-      <tr>
+      <tr <%= active_class(user_session) %>>
         <td>
         <%= index+1 %>
         </td>
