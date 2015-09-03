@@ -3,8 +3,7 @@ class StatsController < ApplicationController
   before_action :set_user
 
   def index
-    @sessions = UserSession.group(:user_id)
-    @active_users = UserSession.active
+    @active_users = UserSession.includes(:user).active.map(&:user)
     @total_time = UserSession.total_time
   end
 

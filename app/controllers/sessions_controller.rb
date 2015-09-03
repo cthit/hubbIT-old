@@ -1,14 +1,13 @@
 class SessionsController < ApplicationController
   include SessionsHelper
   before_action :restrict_access, only: :update
-  before_action :set_session, only: [:show, :edit]
 
   def index
     @sessions = UserSession.active
     @groups = map_users_to_groups(@sessions.map { |s| {cid: s.user.cid, groups: User.groups(s.user.cid)} })
 
-    respond_to do |format| 
-      format.json {render json: @sessions}
+    respond_to do |format|
+      format.json
       format.html
     end
   end
@@ -51,16 +50,9 @@ class SessionsController < ApplicationController
     head :no_content
   end
 
-  def show
-  end
-
   private
     def session_params
       params.require(:session).permit(:mac_address, :user_id, :start_time, :end_time)
-    end
-
-    def set_session
-      @session = Session.find(params[:id])
     end
 
     def restrict_access
