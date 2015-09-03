@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
   before_action :restrict_access, only: :update
 
   def index
-    @sessions = UserSession.active
-    @groups = map_users_to_groups(@sessions.map { |s| {cid: s.user.cid, groups: User.groups(s.user.cid)} })
+    @sessions = UserSession.active.includes(:user)
+    @groups = map_users_to_groups(@sessions.map { |s| {user: s.user, groups: s.user.groups} })
 
     respond_to do |format|
       format.json
