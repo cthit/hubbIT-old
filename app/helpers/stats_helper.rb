@@ -11,15 +11,14 @@ module StatsHelper
 	end
 
 	def seconds_to_score(seconds)
-		mm, ss = seconds.divmod(60)
-		mm.to_s
+		seconds / 60
 	end
 
 	def info_box(title, &block)
 		render 'info_box', title: title, block: block
 	end
 
-	def active_class(user_session)
-		'active' if  @active_users.any? { |u| user_session.user_id == u.user_id }
+	def user_active?(user_session)
+		@active_users.any? { |user| user_session.user_id == user.id }
 	end
 end

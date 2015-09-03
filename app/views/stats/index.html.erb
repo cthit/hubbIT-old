@@ -15,7 +15,7 @@
   </td>
 </tr>
 <% @total_time.each_with_index do |user_session, index| %>
-  <%= content_tag :tr, class: active_class(user_session) do %>
+  <%= content_tag :tr, class: ('active' if user_active?(user_session)) do %>
     <td><%= index+1 %></td>
     <td class="user-row">
         <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
@@ -29,5 +29,10 @@
   <% end %>
 <% end %>
 </table>
+<section class="show-section">
+  <div class="graph-container">
+    <h2 class="graph-header">Hours at the Hub (all users)</h2>
+    <canvas id="chart" class="stats-graph" data-url="/stats/hours.json" width="2304" height="300"></canvas>
+  </div>
+</section>
 
-<canvas id="chart" class="stats-graph" data-url="/stats/hours.json" width="1200" height="300"></canvas>
