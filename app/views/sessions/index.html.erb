@@ -4,28 +4,28 @@
 
 <div class="active-sessions-container">
   <div>
-    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-      <tbody>
+    <table class="mdl-data-table mdl-shadow--2dp">
+      <thead>
         <tr class="header-row">
-          <td class="user-row">
+          <th class="user-row">
             Name
-          </td>
-          <td class="status-cell">
+          </th>
+          <th class="status-cell">
             Current status
-          </td>
+          </th>
         </tr>
-        <% @sessions.each do |session| %>
-        <tr>
-          <td class="user-row">
-            <%= link_to session.user.nick, stats_path(session.user.id) %>
-          </td>
-          <td class="time-cell">
-            <%= "Since " + session.start_time.strftime('%H:%M') %>
-            (<%= distance_of_time_in_words_to_now session.start_time %>)
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
+      </thead>
+      <% @sessions.each do |session| %>
+      <tr>
+        <td class="user-row">
+          <%= link_to session.user.nick, stats_path(session.user.id) %>
+        </td>
+        <td class="time-cell">
+          <%= "Since " + session.start_time.strftime('%H:%M') %>
+          (<%= distance_of_time_in_words_to_now session.start_time %>)
+        </td>
+      </tr>
+      <% end %>
     </table>
   </div>
 
