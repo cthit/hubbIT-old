@@ -68,12 +68,6 @@ a {
  	background-color: rgba(0, 151, 167, 0.5);
  }
 
- td.user-row {
+ tr .user-row {
  	text-align: left;
  }
-
- td.time-cell {
- 	text-align: left;
- }
-
-
