@@ -8,17 +8,17 @@ module SessionsHelper
 
 	private
 		def map_cid_to_groups(user_with_groups)
-			user_with_groups[:groups].map { |g| [user_with_groups[:cid], g.downcase.to_sym] }
+			user_with_groups[:groups].map { |g| [user_with_groups[:user], g.downcase.to_sym] }
 		end
 
 		def reduce_users_to_group(user_with_group, groups)
+			user = user_with_group.first
 			group_name = user_with_group.last
-			user_name = user_with_group.first
 			group = groups[group_name]
 			if group.present?
-				group << user_name
+				group << user
 			else
-				group = [user_name]
+				group = [user]
 			end
 			group.uniq!
 			groups[group_name] = group

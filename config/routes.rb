@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   put '/sessions(.:format)' => 'sessions#update'
 
-  resources :sessions
+  resources :sessions, except: :show
 
   root 'sessions#index'
 
