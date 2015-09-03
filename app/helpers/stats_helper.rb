@@ -20,8 +20,6 @@ module StatsHelper
 	end
 
 	def active_class(user_session)
-		'class=active' if  @active_users.any? do |u|
-			user_session.user_id == u.user_id
-		end
+		'active' if  @active_users.any? { |u| user_session.user_id == u.user_id }
 	end
 end

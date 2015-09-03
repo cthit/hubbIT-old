@@ -15,10 +15,8 @@
   </td>
 </tr>
 <% @total_time.each_with_index do |user_session, index| %>
-  <tr <%= active_class(user_session) %>>
-    <td>
-    <%= index+1 %>
-    </td>
+  <%= content_tag :tr, class: active_class(user_session) do %>
+    <td><%= index+1 %></td>
     <td class="user-row">
         <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
     </td>
@@ -28,7 +26,7 @@
     <td>
         <%= seconds_to_score(user_session.total_time) %>
     </td>
-  </tr>
+  <% end %>
 <% end %>
 </table>
 
