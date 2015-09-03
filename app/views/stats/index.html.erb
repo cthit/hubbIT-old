@@ -14,25 +14,21 @@
       Score
   </td>
 </tr>
-<% cache expires_in: 5.minutes do %>
-  <% @total_time.each_with_index do |user_session, index| %>
-    <% cache ["stats/index", user_session.user_id, user_session.total_time] do %>
-      <tr>
-        <td>
-        <%= index+1 %>
-        </td>
-        <td class="user-row">
-            <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
-        </td>
-        <td>
-            <%= seconds_to_units(user_session.total_time) %>
-        </td>
-        <td>
-            <%= seconds_to_score(user_session.total_time) %>
-        </td>
-      </tr>
-    <% end %>
-  <% end %>
+<% @total_time.each_with_index do |user_session, index| %>
+  <tr>
+    <td>
+    <%= index+1 %>
+    </td>
+    <td class="user-row">
+        <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
+    </td>
+    <td>
+        <%= seconds_to_units(user_session.total_time) %>
+    </td>
+    <td>
+        <%= seconds_to_score(user_session.total_time) %>
+    </td>
+  </tr>
 <% end %>
 </table>
 
