@@ -4,6 +4,7 @@ class StatsController < ApplicationController
 
   def index
     @sessions = UserSession.group(:user_id)
+    @active_users = UserSession.active
     @total_time = UserSession.total_time
   end
 

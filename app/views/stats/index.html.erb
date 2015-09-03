@@ -15,7 +15,7 @@
   </td>
 </tr>
 <% @total_time.each_with_index do |user_session, index| %>
-  <tr>
+  <tr <%= active_class(user_session) %>>
     <td>
     <%= index+1 %>
     </td>
