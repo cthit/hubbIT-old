@@ -18,4 +18,8 @@ module StatsHelper
 	def info_box(title, &block)
 		render 'info_box', title: title, block: block
 	end
+
+	def active_class(user_session)
+		'active' if  @active_users.any? { |u| user_session.user_id == u.user_id }
+	end
 end
