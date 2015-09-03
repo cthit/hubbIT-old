@@ -17,10 +17,10 @@
         <% @sessions.each do |session| %>
         <tr>
           <td class="user-row">
-            <%= link_to session.user.nick, stats_path(session.user.cid) %>
+            <%= link_to session.user.nick, stats_path(session.user.id) %>
           </td>
           <td class="time-cell">
-            <%= "Since " + session.start_time.strftime('%H:%M') %> 
+            <%= "Since " + session.start_time.strftime('%H:%M') %>
             (<%= distance_of_time_in_words_to_now session.start_time %>)
           </td>
         </tr>
@@ -31,7 +31,7 @@
 
   <div class="active-groups-container">
     <% @groups.each do |name, users| %>
-    <%= render "sessions/group_box", name: name, users: users %>
+      <%= render "sessions/group_box", name: name, users: users %>
     <% end %>
   </div>
 </div>

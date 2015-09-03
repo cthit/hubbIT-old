@@ -3,12 +3,12 @@
 		<tr class="header-row">
 			<td><%= name.itize %></td>
 		</tr>
-		<% users.each do |user_id| %>
+		<% users.each do |user| %>
 		    <tr>
 		      <td class="user-row">
-	           	<%= link_to User.nick(user_id), stats_path(user_id) %>
+	           	<%= link_to user.nick, stats_path(user.id) %>
 	           </td>
-		        
+
 		    </tr>
 	        <% end %>
 	    </tbody>
