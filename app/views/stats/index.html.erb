@@ -17,7 +17,7 @@
   </tr>
 </thead>
 <% @total_time.each_with_index do |user_session, index| %>
-  <%= content_tag :tr, class: ('active' if user_active?(user_session)) do %>
+  <%= content_tag :tr, id: user_session.user_id, class: ('active' if user_active?(user_session)) do %>
     <td><%= index+1 %></td>
     <td class="user-row">
         <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
