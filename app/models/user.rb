@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
 	def nick
 		@nick ||= Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
-			resp = send_request(query: { cid: cid })
+			resp = self.class.send_request(query: { cid: cid })
 			if resp['nick'].present?
 				resp['nick']
 			else
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 
 	def groups
 		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
-			resp = send_request(query: { cid: cid })
+			resp = self.class.send_request(query: { cid: cid })
 			if resp['groups'].present?
 				resp['groups']
 			else
