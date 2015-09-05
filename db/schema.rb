@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418234857) do
+ActiveRecord::Schema.define(version: 20150905132302) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -60,9 +60,14 @@ ActiveRecord::Schema.define(version: 20140418234857) do
 
   create_table "users", id: false, force: true do |t|
     t.string   "cid"
-    t.integer  "total_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users_total_time", id: false, force: true do |t|
+    t.integer "id",                                  default: 0, null: false
+    t.string  "user_id"
+    t.decimal "total_time", precision: 42, scale: 0
   end
 
 end

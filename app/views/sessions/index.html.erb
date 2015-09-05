@@ -4,15 +4,12 @@
 
 <div class="active-sessions-container">
   <div>
+    <% if @sessions.any? %>
     <table class="mdl-data-table mdl-shadow--2dp">
       <thead>
         <tr class="header-row">
-          <th class="user-row">
-            Name
-          </th>
-          <th class="status-cell">
-            Current status
-          </th>
+          <th class="user-row">Name</th>
+          <th class="status-cell">Current status</th>
         </tr>
       </thead>
       <% @sessions.each do |session| %>
@@ -27,11 +24,14 @@
       </tr>
       <% end %>
     </table>
-  </div>
-
-  <div class="active-groups-container">
-    <% @groups.each do |name, users| %>
-      <%= render "sessions/group_box", name: name, users: users %>
+    <% else %>
+      <div class="noone">There's no one here :(</div>
     <% end %>
   </div>
+</div>
+
+<div class="active-groups-container">
+  <% @groups.each do |name, users| %>
+    <%= render "sessions/group_box", name: name, users: users %>
+  <% end %>
 </div>

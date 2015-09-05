@@ -1,4 +1,4 @@
-
+<%= link_to 'Find me!', anchor: current_user.id %>
 <table class="mdl-data-table mdl-shadow--2dp">
 <thead>
   <tr class="header-row">
@@ -16,17 +16,17 @@
     </th>
   </tr>
 </thead>
-<% @total_time.each_with_index do |user_session, index| %>
-  <%= content_tag :tr, class: ('active' if user_active?(user_session)) do %>
+<% @users.each_with_index do |user, index| %>
+  <%= content_tag :tr, id: user.id, class: ('active' if user_active?(user)) do %>
     <td><%= index+1 %></td>
     <td class="user-row">
-        <%= link_to User.nick(user_session.user_id), stats_path(user_session.user_id) %>
+        <%= link_to user.nick, stats_path(user.id) %>
     </td>
     <td>
-        <%= seconds_to_units(user_session.total_time) %>
+        <%= seconds_to_units(user.total_time) %>
     </td>
     <td>
-        <%= seconds_to_score(user_session.total_time) %>
+        <%= seconds_to_score(user.total_time) %>
     </td>
   <% end %>
 <% end %>

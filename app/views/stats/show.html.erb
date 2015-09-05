@@ -1,4 +1,5 @@
 <h1><%= @user.nick %></h1>
+<%= link_to "Position: #{@user.ranking}", all_stats_path(anchor: @user.id) %>
 <section class="show-section">
     <div class="info-dashboard">
         <% if @session %>

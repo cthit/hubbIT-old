@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .active-sessions-container {
+    margin: 0 0 1em;
 	.status-cell {
 		text-align: center;
 	}
@@ -18,10 +19,10 @@
     max-width: 40%;
     flex-direction: row-reverse;
     padding: 2em 0;
-	
+
     @media (max-width: 929px) {
     	position: static;
-    	flex-direction: row; 
+    	flex-direction: row;
     	justify-content: center;
     	max-width: 23em;
     	margin: 0 auto;
@@ -29,11 +30,11 @@
     }
 }
 
-.group-box-container {
-	margin: 0 0.5em;
+.noone {
+    color: gray;
+}
 
-	@media (max-width: 929px) {
-		margin-top: 1em;
-    }
+.group-box-container {
+	margin: 0 0.5em 1em;
 }
 
