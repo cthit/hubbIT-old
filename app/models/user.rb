@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
 	scope :with_total_time, -> { select('users.*', 'total_time').joins(:users_total_time).where('total_time IS NOT NULL').order('users_total_time.total_time desc') }
 
+	delegate :ranking, to: :users_total_time
+
 	ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedning]
 
 	self.primary_key = :cid
