@@ -9,15 +9,15 @@ class ApplicationController < ActionController::Base
     if not cookies[:chalmersItAuth].present?
       raise SecurityError, "Missing cookie"
     end
-    if session[:cookie] == cookies[:chalmersItAuth] && session[:user].present?
-      @current_user ||= User.find(session[:user])
+    @current_user ||= if session[:cookie] == cookies[:chalmersItAuth] && session[:user].present?
+      User.find(session[:user])
     else
       reset_session
-      @current_user = User.find_by_token cookies[:chalmersItAuth]
+      user = User.find_by_token cookies[:chalmersItAuth]
       session[:cookie] = cookies[:chalmersItAuth]
-      session[:user] = @current_user.id
+      session[:user] = user.id
+      user
     end
-    @current_user
   end
   helper_method :current_user
 
