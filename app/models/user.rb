@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 	has_many :sessions
 	has_many :hour_entries, foreign_key: :cid
 	has_many :user_sessions
+	has_one :users_total_time, class_name: UsersTotalTime
+
+	scope :with_total_time, -> { select('users.*', 'total_time').joins(:users_total_time).where('total_time IS NOT NULL').order('users_total_time.total_time desc') }
 
 	ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedning]
 
@@ -35,8 +38,8 @@ class User < ActiveRecord::Base
 		user
 	end
 
-	def self.nick(cid)
-		Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
+	def nick
+		@nick ||= Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
 			resp = send_request(query: { cid: cid })
 			if resp['nick'].present?
 				resp['nick']
@@ -46,16 +49,8 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def nick
-		@nick ||= self.class.nick(cid)
-	end
-
 	def groups
-		@groups ||= self.class.groups(cid)
-	end
-
-	def self.groups(cid)
-		Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
+		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
 			resp = send_request(query: { cid: cid })
 			if resp['groups'].present?
 				resp['groups']
