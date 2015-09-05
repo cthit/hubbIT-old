@@ -32,10 +32,10 @@
       <div class="noone">There's no one here :(</div>
     <% end %>
   </div>
+</div>
 
-  <div class="active-groups-container">
-    <% @groups.each do |name, users| %>
-      <%= render "sessions/group_box", name: name, users: users %>
-    <% end %>
-  </div>
+<div class="active-groups-container">
+  <% @groups.each do |name, users| %>
+    <%= render "sessions/group_box", name: name, users: users %>
+  <% end %>
 </div>

@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .active-sessions-container {
+    margin: 0 0 1em;
 	.status-cell {
 		text-align: center;
 	}
@@ -34,10 +35,6 @@
 }
 
 .group-box-container {
-	margin: 0 0.5em;
-
-	@media (max-width: 929px) {
-		margin-top: 1em;
-    }
+	margin: 0 0.5em 1em;
 }
 
