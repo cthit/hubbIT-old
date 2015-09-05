@@ -18,7 +18,7 @@ module StatsHelper
 		render 'info_box', title: title, block: block
 	end
 
-	def user_active?(user_session)
-		@active_users.any? { |user| user_session.user_id == user.id }
+	def user_active?(user)
+		@active_users.include? user
 	end
 end

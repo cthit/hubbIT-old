@@ -3,8 +3,8 @@ class StatsController < ApplicationController
   before_action :set_user
 
   def index
+    @users = User.with_total_time
     @active_users = UserSession.includes(:user).active.map(&:user)
-    @total_time = UserSession.total_time
   end
 
 
@@ -32,9 +32,7 @@ class StatsController < ApplicationController
     if @session.present?
       @last_session_duration = @session.end_time - @session.start_time
 
-      @total_time = @user_sessions.select('sum(TIMESTAMPDIFF(SECOND, `start_time`, `end_time`)) as total_time')
-      .order("total_time DESC")
-      .first().total_time
+      @total_time = @user.users_total_time.total_time
     end
   end
 
