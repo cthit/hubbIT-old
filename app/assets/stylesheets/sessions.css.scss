@@ -18,15 +18,19 @@
     max-width: 40%;
     flex-direction: row-reverse;
     padding: 2em 0;
-	
+
     @media (max-width: 929px) {
     	position: static;
-    	flex-direction: row; 
+    	flex-direction: row;
     	justify-content: center;
     	max-width: 23em;
     	margin: 0 auto;
     	padding: 0;
     }
+}
+
+.noone {
+    color: gray;
 }
 
 .group-box-container {
