@@ -4,6 +4,7 @@
 
 <div class="active-sessions-container">
   <div>
+    <% if @sessions.any? %>
     <table class="mdl-data-table mdl-shadow--2dp">
       <thead>
         <tr class="header-row">
@@ -27,6 +28,9 @@
       </tr>
       <% end %>
     </table>
+    <% else %>
+      <div class="noone">There's no one here :(</div>
+    <% end %>
   </div>
 
   <div class="active-groups-container">
