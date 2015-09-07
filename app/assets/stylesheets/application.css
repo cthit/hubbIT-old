@@ -37,10 +37,10 @@ h4 {
 }
 
 .title-link {
-  	color: #FFF;
-  	&:hover {
-  		color: #FFF;
-  	}
+	color: #FFF;
+	&:hover {
+		color: #FFF;
+	}
 }
 
 a {
@@ -48,26 +48,29 @@ a {
 	font-weight: 700;
 }
 
- #wrapper {
- 	margin: 0 auto;
- 	display: block;
- 	position: relative;
- 	text-align: center;
- 	padding: 2em 0;
+#wrapper {
+	margin: 0 auto;
+	display: block;
+	position: relative;
+	text-align: center;
+	padding: 2em 0;
+}
 
- }
+ul {
+	list-style-type: none;
+	list-style-position: inside;
+	padding: 0;
+}
 
- ul {
- 	list-style-type: none;
- 	list-style-position: inside;
- 	padding: 0;
- }
+tr.header-row {
+	font-weight: bold;
+	background-color: rgba(0, 151, 167, 0.5);
+}
 
- tr.header-row {
- 	font-weight: bold;
- 	background-color: rgba(0, 151, 167, 0.5);
- }
+tr .user-row {
+	text-align: left;
+}
 
- tr .user-row {
- 	text-align: left;
- }
+.active-groups-container th {
+	text-align: center;
+}
