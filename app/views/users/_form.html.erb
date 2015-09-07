@@ -1,20 +1,20 @@
 <%= form_for @user do |f| %>
-	<% if @user.errors.any? %>
+  <% if @user.errors.any? %>
     <div id="error_explanation" class="message-warning">
-      <h3><%= @user.errors.count %> fel hindrade denna bokning från att sparas:</h3>
+      <h3><%= @user.errors.count %> errors occured while saving the device list:</h3>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
-	<li><%= msg %></li>
-      <% end %>
+        <li><%= msg %></li>
+      <% end %>-
       </ul>
     </div>
   <% end %>
-	<div class="devices">
-		<%= link_to_add_fields "Add Devices", f, :devices %>
-		<%= f.fields_for :devices do |builder| %>
-			<%= render 'device_fields', f: builder %>
-		<% end %>
-	</div>
-	<%= f.submit %>
+  <div class="devices">
+    <%= link_to_add_fields "Add Devices", f, :devices %>
+    <%= f.fields_for :devices do |builder| %>
+      <%= render 'device_fields', f: builder %>
+    <% end %>
+  </div>
+  <%= f.submit %>
 <% end %>
