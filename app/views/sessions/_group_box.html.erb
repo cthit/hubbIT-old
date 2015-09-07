@@ -1,17 +1,14 @@
 <div class="group-box-container">
-	<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-		<tr class="header-row">
-			<td><%= name.itize %></td>
-		</tr>
-		<% users.each do |user| %>
-		    <tr>
-		      <td class="user-row">
-	           	<%= link_to user.nick, stats_path(user.id) %>
-	           </td>
-
-		    </tr>
-	        <% end %>
-	    </tbody>
-
-	</table>
+  <table class="mdl-data-table mdl-shadow--2dp">
+    <tr class="header-row">
+      <th><%= name.itize %></th>
+    </tr>
+    <% users.each do |user| %>
+      <tr>
+        <td class="user-row">
+        <%= link_to user.nick, stats_path(user.id) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
