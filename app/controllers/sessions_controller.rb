@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
     logger.info(mac)
     logger.info(params[:Mac])
     if mac
-      @@semaphore.syncronized do
+      @@semaphore.synchronize do
         @user = mac.user
         @session = Session.active.with_mac(mac)
         new_time = DateTime.now + 10.minutes
