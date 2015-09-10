@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   @@semaphore = Mutex.new
 
   def index
-    @sessions = UserSession.active.includes(:user).sort_by(&:nick)
+    @sessions = UserSession.active.includes(:user)
     @groups = map_users_to_groups(@sessions.map { |s| {user: s.user, groups: s.user.groups} })
 
     respond_to do |format|
