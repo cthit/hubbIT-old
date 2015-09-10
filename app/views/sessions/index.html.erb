@@ -2,9 +2,11 @@
 <div>You don't seem to have any MAC-addresses defined, go to your <%= link_to "user page", edit_user_path(current_user) %> and add some!</div>
 <% end %>
 
+
 <div class="active-sessions-container">
   <div>
     <% if @sessions.any? %>
+      There are <%= @sessions.count %> smurfs in the Hubb right now!
     <table class="mdl-data-table mdl-shadow--2dp">
       <thead>
         <tr class="header-row">
