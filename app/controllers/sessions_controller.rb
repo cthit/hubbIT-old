@@ -17,19 +17,17 @@ class SessionsController < ApplicationController
   end
 
   def update
-    logger.info('Update')
     mac = MacAddress.find_by(address: params[:Mac].upcase)
     logger.info(mac)
     logger.info(params[:Mac])
     if mac
-      logger.info('mac')
       @user = mac.user
       @session = Session.active.with_mac(mac)
       new_time = DateTime.now + 10.minutes
       if @session.any?
         @session.first.update(end_time: new_time)
       else
-        logger.info('Creating session')
+        logger.info("Creating session for #{@user.id} (#{params[:Mac]})")
         @session = @user.sessions.create(mac_address: params[:Mac],
           start_time: DateTime.now, end_time: new_time)
       end
