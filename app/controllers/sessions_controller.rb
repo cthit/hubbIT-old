@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_action :restrict_access, only: :update
 
   def index
-    @sessions = UserSession.active.includes(:user)
+    @sessions = UserSession.active.includes(:user).sort_by(&:nick)
     @groups = map_users_to_groups(@sessions.map { |s| {user: s.user, groups: s.user.groups} })
 
     respond_to do |format|
