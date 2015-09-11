@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     if not cookies[:chalmersItAuth].present?
       raise SecurityError, "Missing cookie"
     end
-    @current_user ||= if session[:cookie] == cookies[:chalmersItAuth] && session[:user].present?
+    if session[:cookie] == cookies[:chalmersItAuth] && session[:user].present?
       User.find(session[:user])
     else
       reset_session
