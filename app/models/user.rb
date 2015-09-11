@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
 			if resp.success? && resp['cid'].present?
 				resp
 			else
-				raise resp.response.inspect
+				raise SecurityError, resp['error']
 			end
 		end
 end
