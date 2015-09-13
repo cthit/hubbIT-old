@@ -19,35 +19,38 @@ class SessionsController < ApplicationController
   end
 
   def update
-    mac = MacAddress.find_by(address: params[:Mac].upcase)
-    logger.info(mac)
-    logger.info(params[:Mac])
-    if mac
-      @@semaphore.synchronize do
-        @user = mac.user
-        @session = Session.active.with_mac(mac)
-        new_time = DateTime.now + 10.minutes
-        if @session.any?
-          @session.first.update(end_time: new_time)
-        else
-          logger.info("Creating session for #{@user.id} (#{params[:Mac]})")
-          @session = @user.sessions.create(mac_address: params[:Mac],
-            start_time: DateTime.now, end_time: new_time)
-        end
+    @@semaphore.synchronize do
+        macs = params[:macs]
+        macs.each do |address|
+          address, count = address
+          mac = MacAddress.find_by(address: address.upcase)
+          next unless mac.present?
 
-        @u_session = UserSession.active.with_user(@user)
-        if @u_session.any?
-          @u_session.last.update(end_time: new_time)
-        else
-          @user.user_sessions.create(start_time: DateTime.now, end_time: new_time)
-        end
+          logger.info(mac)
+          logger.info(address)
+          @user = mac.user
+          @session = Session.active.with_mac(mac)
+          new_time = DateTime.now + 10.minutes
+          if @session.any?
+            @session.first.update(end_time: new_time)
+          else
+            logger.info("Creating session for #{@user.id} (#{address})")
+            @session = @user.sessions.create(mac_address: address,
+              start_time: DateTime.now, end_time: new_time)
+          end
 
-        @hentry = HourEntry.with_user(@user).last
-        if @hentry.nil? || (@hentry.date < Date.today || @hentry.hour < DateTime.now.hour)
-          @user.hour_entries.create(date: Date.today, hour: DateTime.now.hour)
-        end
-      end
+          @u_session = UserSession.active.with_user(@user)
+          if @u_session.any?
+            @u_session.last.update(end_time: new_time)
+          else
+            @user.user_sessions.create(start_time: DateTime.now, end_time: new_time)
+          end
 
+          @hentry = HourEntry.with_user(@user).last
+          if @hentry.nil? || (@hentry.date < Date.today || @hentry.hour < DateTime.now.hour)
+            @user.hour_entries.create(date: Date.today, hour: DateTime.now.hour)
+          end
+        end
     end
     head :no_content
   end
