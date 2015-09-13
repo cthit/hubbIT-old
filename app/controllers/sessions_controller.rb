@@ -19,8 +19,10 @@ class SessionsController < ApplicationController
   end
 
   def update
+    macs = params[:macs]
+    return unless macs.present?
+
     @@semaphore.synchronize do
-        macs = params[:macs]
         macs.each do |address|
           address, count = address
           mac = MacAddress.find_by(address: address.upcase)
