@@ -20,7 +20,10 @@ class SessionsController < ApplicationController
 
   def update
     macs = params[:macs]
-    return unless macs.present?
+    unless macs.present?
+      render json: {error: 'macs cannot be nil'}, status: :unprocessable_entity
+      return
+    end
 
     @@semaphore.synchronize do
         macs.each do |address|
