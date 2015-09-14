@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
 
 	private
 		def self.fetch_user(options)
-			self.new cid: send_request(query: options)['cid']
+			User.find_or_create_by(cid: send_request(query: options)['cid'])
 		end
 
 		def self.send_request(options)
