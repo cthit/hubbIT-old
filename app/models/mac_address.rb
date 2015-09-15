@@ -15,7 +15,7 @@ class MacAddress < ActiveRecord::Base
 
   self.primary_key = :address
 
-  validates :address, presence: true, allow_blank: true, uniqueness: true, format: { with: /\A([0-9A-F]{2}[:-]?){5}([0-9A-F]{2})\z/ }
+  validates :address, presence: true, uniqueness: true, format: { with: /\A([0-9A-F]{2}[:-]?){5}([0-9A-F]{2})\z/ }
 
   private
     def format_mac
