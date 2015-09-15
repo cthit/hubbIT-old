@@ -31,10 +31,42 @@
   <% end %>
 <% end %>
 </table>
+
+<div class="group-info-box">
+  <table class="mdl-data-table mdl-shadow--2dp">
+    <thead>
+      <tr class="header-row">
+        <th>
+          #
+        </th>
+        <th class="user-row">
+          Name
+        </th>
+        <th>
+          Total time
+        </th>
+        <th>
+          Score
+        </th>
+      </tr>
+    </thead>
+    <% get_sorted_groups_with_time.each_with_index do |(group, time), index| %>
+      <% if time != 0 %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td class="user-row"><%= group.itize %></td>
+          <td><%= seconds_to_units time %></td>
+          <td><%= seconds_to_score time %></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <% get_sorted_groups_with_time %>
+  </table>
+</div>
+
 <section class="show-section">
   <div class="graph-container">
     <h2 class="graph-header">Hours at the Hub (all users)</h2>
     <canvas id="chart" class="stats-graph" data-url="/stats/hours.json" width="2304" height="300"></canvas>
   </div>
 </section>
-
