@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
+  include SessionsHelper, ApplicationHelper
   before_action :restrict_access, only: :update
 
   @@semaphore = Mutex.new

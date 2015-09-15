@@ -21,4 +21,14 @@ module StatsHelper
 	def user_active?(user)
 		@active_users.include? user
 	end
+
+	def time_for_group(group)
+		users_in_group = @users.select { |u| u.groups.include? group}
+		users_in_group.map { |u| u.total_time }.sum
+	end
+
+	def get_sorted_groups_with_time()
+		Hash[User::ALLOWED_GROUPS.map { |g| [g, (time_for_group g.to_s)] } ]
+		.sort_by{ |_k, v| v}.reverse
+	end
 end
