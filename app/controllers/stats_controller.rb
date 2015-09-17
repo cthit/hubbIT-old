@@ -1,4 +1,5 @@
 class StatsController < ApplicationController
+  include StatsHelper
 
   before_action :set_user
 
