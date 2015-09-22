@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905132302) do
+ActiveRecord::Schema.define(version: 20150915161752) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 20150905132302) do
     t.string   "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "device_name"
   end
 
+  add_index "mac_addresses", ["address"], name: "address", unique: true, using: :btree
   add_index "mac_addresses", ["user_id"], name: "index_mac_addresses_on_user_id", using: :btree
 
   create_table "sessions", force: true do |t|

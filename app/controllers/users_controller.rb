@@ -14,6 +14,8 @@ class UsersController < ApplicationController
     end
 
     def update
+        @user = User.find(params[:id])
+        p @user
         if @user.update(user_params)
             redirect_to @user, notice: 'User updated successfully'
         else
@@ -29,7 +31,7 @@ class UsersController < ApplicationController
         end
 
         def user_params
-            params.require(:user).permit(devices_attributes: [:address, :id, :_destroy])
+            params.require(:user).permit(devices_attributes: [:id, :address, :_destroy, :device_name])
         end
 
         def restrict_user
