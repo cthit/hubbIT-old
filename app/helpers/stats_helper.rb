@@ -16,7 +16,7 @@ module StatsHelper
         format += hf if d.hours > 0
         format += mf if d.minutes > 0
         format += "%ss"
-        return d.format(format)
+        d.format(format)
     end
 
 
@@ -45,6 +45,12 @@ module StatsHelper
         end
 
         seconds
+    end
+
+    def human_time_today
+      secs = seconds_today
+      return seconds_to_precise_words(secs) if secs > 0
+      "Not seen today"
     end
 
 	def time_for_group(group)
