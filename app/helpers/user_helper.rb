@@ -9,6 +9,9 @@ module UserHelper
   end
 
   def device_name name
-    name || "Unknown device"
+    unless name.blank?
+      return name
+    end
+    "Unknown device"
   end
 end
