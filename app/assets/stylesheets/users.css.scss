@@ -13,7 +13,7 @@ table {
 
 .mac-address {
     font-family: monospace;
-    font-size: 1.2em;
+    font-size: 1.0em;
 }
 
 .devices {
@@ -31,4 +31,8 @@ table {
 			transition: all 1s ease-in 0s;
 		}
 	}
+}
+
+.mdl-button {
+    margin-top: 1em;
 }

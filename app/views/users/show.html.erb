@@ -4,11 +4,17 @@
 <% if @user.devices.empty? %>
   <p>You haven't added any devices yet...</p>
 <% else %>
-  <table>
+  <table class="mdl-data-table mdl-shadow--1dp">
+      <thead>
+          <tr>
+              <th class="mdl-data-table__cell--non-numeric">MAC-Address</th>
+              <th class="mdl-data-table__cell--non-numeric">Device description</th>
+          </tr>
+      </thead>
   <% @user.devices.each do |d| %>
     <tr>
-      <td><%= d.address %></td>
-      <td><%= device_name d.device_name %></td>
+      <td class="mac-address"><%= d.address %></td>
+      <td class="mdl-data-table__cell--non-numeric"><%= device_name d.device_name %></td>
     </tr>
   <% end %>
   </table>
