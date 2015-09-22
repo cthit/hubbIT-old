@@ -1,5 +1,6 @@
 <h1><%= @user.nick %></h1>
-<%= link_to "Position: #{@user.ranking}", all_stats_path(anchor: @user.id) %>
+<%= link_to "Position: #{@user.ranking}", all_stats_path(anchor: @user.id) %><br/>
+Score: <%= seconds_to_score(@total_time) %>
 <section class="show-section">
     <div class="info-dashboard">
         <% if @session %>
@@ -13,18 +14,19 @@
             <% end %>
         <% end %>
 
+        <%= info_box 'Today' do %>
+            <%= seconds_to_precise_words(seconds_today)%>
+        <% end %>
+
         <% if @total_time %>
             <%= info_box 'Total time' do %>
-                <%= seconds_to_units(@total_time) %>
-            <% end %>
-            <%= info_box 'Score' do %>
-                <%= seconds_to_score(@total_time) %>
+                <%= seconds_to_precise_words(@total_time) %><br />(<%= seconds_to_units(@total_time) %>)
             <% end %>
         <% end %>
 
         <% if @longest_session %>
             <%= info_box 'Longest session' do %>
-                <%= seconds_to_units(@longest_session) %>
+                <%= seconds_to_precise_words(@longest_session) %>
             <% end %>
         <% end %>
     </div>
@@ -38,7 +40,7 @@
 
 
 <% if current_user == @user %>
-<h2>Your 10 last sessions (only visible to yourself)</h2>
+<h2>Your 10 last sessions</h2>
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
     <tbody>
 		<% @user_sessions.take(10).each do |session| %>
