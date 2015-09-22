@@ -16,4 +16,19 @@ table {
     font-size: 1.2em;
 }
 
+.devices {
+	max-width: 720px;
+	margin: 0 auto;
+}
 
+.device {
+	padding: 0 10px;
+
+	input {
+		padding: 1px 3px;
+		&:focus {
+			border-bottom: 1px solid #09CDDA;
+			transition: all 1s ease-in 0s;
+		}
+	}
+}
