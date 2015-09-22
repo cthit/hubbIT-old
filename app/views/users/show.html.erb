@@ -1,16 +1,30 @@
 <h1><%= @user.nick %></h1>
 <section class="profile">
-	<ul class="device-list">
-	<% @user.devices.each do |d| %>
-		<li class="mac-address"><%= d.address %></li>
-	<% end %>
-	<% if @user.devices.empty? %>
-		<li>No devices found</li>
-	<% end %>
-	</ul>
-	<% if @user == current_user %>
-		<%= link_to "Add new device", edit_user_path(@user), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
-		<!-- Raised button with ripple -->
 
-	<% end %>
+<% if @user.devices.empty? %>
+  <p>You haven't added any devices yet...</p>
+<% else %>
+  <table class="mdl-data-table mdl-shadow--1dp">
+      <thead>
+          <tr>
+              <th class="mdl-data-table__cell--non-numeric">MAC-Address</th>
+              <th class="mdl-data-table__cell--non-numeric">Device description</th>
+          </tr>
+      </thead>
+  <% @user.devices.each do |d| %>
+    <tr>
+      <td class="mac-address"><%= d.address %></td>
+      <td class="mdl-data-table__cell--non-numeric"><%= device_name d.device_name %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+
+  <% if @user == current_user %>
+    <% if @user.devices.empty? %>
+      <%= link_to "Add device", edit_user_path(@user), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
+    <% else %>
+      <%= link_to "Manage devices", edit_user_path(@user), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
+    <% end %>
+  <% end %>
 </section>

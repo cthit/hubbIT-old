@@ -11,10 +11,11 @@
     </div>
   <% end %>
   <div class="devices">
-    <%= link_to_add_fields "Add Devices", f, :devices %>
+    <%= link_to_add_fields "Add Device", f, :devices %>
     <%= f.fields_for :devices do |builder| %>
       <%= render 'device_fields', f: builder %>
     <% end %>
   </div>
-  <%= f.submit %>
+  <%= link_to 'Back', :back, class: ['mdl-button', 'mdl-js-button', 'mdl-button--colored', 'mdl-js-ripple-effect'] %>
+  <%= f.submit class: ['mdl-button', 'mdl-js-button', 'mdl-button--raised', 'mdl-js-ripple-effect'] %>
 <% end %>

@@ -1,6 +1,10 @@
-<div>
-	<%= f.label :address %>
-	<%= f.text_field :address %>
-	<%= f.hidden_field :_destroy %>
-	<%= link_to "Remove Device", '#', class: 'remove_fields' %>
+<div class="mdl-layout__header-row is-upgraded" data-upgraded=",MaterialTextfield">
+  <div class='mdl-layout__content device'>
+    <%= f.text_field :device_name, class: ['mdl-textfield__input', 'mdl-textfield--expandable'] , placeholder: 'Device name' %>
+  </div>
+  <div class='mdl-layout__content device'>
+    <%= f.text_field :address, class: ['mdl-textfield__input', 'mdl-textfield--expandable'] , placeholder: 'MAC Address' %>
+  </div>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Remove Device", '#', class: ['remove_fields', 'mdl-button'] %>
 </div>
