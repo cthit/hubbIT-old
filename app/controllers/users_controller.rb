@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
     def edit
         @user.devices.build
-        p @user.devices.count
     end
 
     def update
