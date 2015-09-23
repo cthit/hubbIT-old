@@ -15,8 +15,11 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        p @user
-        if @user.update(user_params)
+        update_params = user_params
+        update_params[:devices_attributes].delete_if do |id, device|
+          device[:address].empty? && device[:device_name].empty?
+        end
+        if @user.update(update_params)
             redirect_to @user, notice: 'User updated successfully'
         else
             render action: 'edit'
