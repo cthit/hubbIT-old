@@ -54,8 +54,8 @@ module StatsHelper
     end
 
 	def time_for_group(group)
-		users_in_group = @users.select { |u| u.groups.include? group}
-		users_in_group.map { |u| u.total_time }.sum
+		users_in_group = @sessions_within_timeframe.select { |s| s.user.groups.include? group}
+		users_in_group.map { |s| s.total_time }.sum
 	end
 
 	def get_sorted_groups_with_time()

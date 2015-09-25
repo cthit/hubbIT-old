@@ -4,8 +4,32 @@ class StatsController < ApplicationController
   before_action :set_user
 
   def index
-    @users = User.with_total_time
+    @timeframe = params[:timeframe]
+    if params[:from].present?
+      from = params[:from]
+    else
+      from = case params[:timeframe]
+      when 'year'
+        Date.today.beginning_of_year
+      when 'month'
+        Date.today.beginning_of_month
+      when 'week'
+        Date.today.beginning_of_week
+      when 'day'
+        Date.today.beginning_of_day
+      else
+        0
+      end
+    end
+
+    if params[:to].present?
+      to = params[:to]
+    else
+      to = '2099-01-01'
+    end
+
     @active_users = UserSession.includes(:user).active.map(&:user)
+    @sessions_within_timeframe = UserSession.includes(:user).time_between(from, to)
   end
 
 
