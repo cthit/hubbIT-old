@@ -1,6 +1,6 @@
 <ul class="inline-list">
     <%= content_tag :li do %>
-        <%= link_to_if @timeframe.present?, 'All time', all_stats_path, title: 'Show stats from the start of time' %>
+        <%= link_to_if @timeframe.present?, 'All time', all_stats_path%>
     <% end %>
     <% timeframe_links.each do |name, link| %>
         <%= content_tag :li do %>
