@@ -4,6 +4,7 @@ class StatsController < ApplicationController
   before_action :set_user
 
   def index
+    @timeframe = params[:timeframe]
     if params[:from].present?
       from = params[:from]
     else
