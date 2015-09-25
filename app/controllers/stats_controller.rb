@@ -5,10 +5,10 @@ class StatsController < ApplicationController
 
   def index
     @timeframe = params[:timeframe]
-    if params[:from].present?
-      from = params[:from]
+    from = if params[:from].present?
+      params[:from]
     else
-      from = case params[:timeframe]
+      case @timeframe
       when 'year'
         Date.today.beginning_of_year
       when 'month'
@@ -22,10 +22,10 @@ class StatsController < ApplicationController
       end
     end
 
-    if params[:to].present?
-      to = params[:to]
+    to = if params[:to].present?
+      params[:to]
     else
-      to = '2099-01-01'
+      '2099-01-01'
     end
 
     @active_users = UserSession.includes(:user).active.map(&:user)

@@ -1,8 +1,8 @@
 module StatsHelper
 
-	def seconds_to_words(seconds)
-		distance_of_time_in_words Time.at(0).utc, Time.at(seconds).utc
-	end
+    def seconds_to_words(seconds)
+        distance_of_time_in_words Time.at(0).utc, Time.at(seconds).utc
+    end
 
     def seconds_to_precise_words(seconds)
         d = Duration.new(seconds)
@@ -20,23 +20,23 @@ module StatsHelper
     end
 
 
-	def seconds_to_units(secs)
-		mm, ss = secs.divmod(60)
-		hh, mm = mm.divmod(60)
-		[hh, mm, ss].map { |n| n < 10 ? "0#{n}" : n }.join(':')
-	end
+    def seconds_to_units(secs)
+        mm, ss = secs.divmod(60)
+        hh, mm = mm.divmod(60)
+        [hh, mm, ss].map { |n| n < 10 ? "0#{n}" : n }.join(':')
+    end
 
-	def seconds_to_score(seconds)
-		seconds / 60
-	end
+    def seconds_to_score(seconds)
+        seconds / 60
+    end
 
-	def info_box(title, &block)
-		render 'info_box', title: title, block: block
-	end
+    def info_box(title, &block)
+        render 'info_box', title: title, block: block
+    end
 
-	def user_active?(user)
-		@active_users.include? user
-	end
+    def user_active?(user)
+        @active_users.include? user
+    end
 
     def seconds_today
       seconds = 0
@@ -53,13 +53,33 @@ module StatsHelper
       "Not seen today"
     end
 
-	def time_for_group(group)
-		users_in_group = @sessions_within_timeframe.select { |s| s.user.groups.include? group}
-		users_in_group.map { |s| s.total_time }.sum
-	end
+    def time_for_group(group)
+        users_in_group = @sessions_within_timeframe.select { |s| s.user.groups.include? group}
+        users_in_group.map { |s| s.total_time }.sum
+    end
 
-	def get_sorted_groups_with_time()
-		Hash[User::ALLOWED_GROUPS.map { |g| [g, (time_for_group g.to_s)] } ]
-		.sort_by{ |_k, v| v}.reverse
-	end
+    def get_sorted_groups_with_time()
+        Hash[User::ALLOWED_GROUPS.map { |g| [g, (time_for_group g.to_s)] } ]
+        .sort_by{ |_k, v| v}.reverse
+    end
+
+    def link_title from
+      "Show stats from #{from}"
+    end
+
+    def timeframe_links
+      # List of the anchor links to show on /stats
+      [ # Name             Link
+       ['Stats for today', :day],
+       ['Weekly stats',    :week],
+       ['Monthly stats',   :month],
+      ]
+    end
+
+    def row_classes user
+      classes = []
+      classes << 'active' if user_active?(user)
+      classes << 'me' if user.id == current_user.id
+      classes.join ' '
+    end
 end
