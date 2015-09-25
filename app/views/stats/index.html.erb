@@ -1,15 +1,15 @@
 <ul class="inline-list">
     <%= content_tag :li, class: '' do %>
-        <%= link_to 'All time' %>
+        <%= link_to_if @timeframe.present?, 'All time', all_stats_path %>
     <% end %>
     <%= content_tag :li, class: '' do %>
-        <%= link_to 'Stats for today', timeframe: :day %>
+        <%= link_to_unless_current 'Stats for today', timeframe: :day %>
     <% end %>
     <%= content_tag :li, class: '' do %>
-        <%= link_to 'Weekly stats', timeframe: :week %>
+        <%= link_to_unless_current 'Weekly stats', timeframe: :week %>
     <% end %>
     <%= content_tag :li, class: '' do %>
-        <%= link_to 'Monthly stats', timeframe: :month %>
+        <%= link_to_unless_current 'Monthly stats', timeframe: :month %>
     <% end %>
 </ul>
 <%= link_to 'Find me!', anchor: current_user.id %>
