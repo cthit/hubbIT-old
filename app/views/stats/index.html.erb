@@ -1,18 +1,16 @@
 <ul class="inline-list">
-    <%= content_tag :li, class: '' do %>
-        <%= link_to_if @timeframe.present?, 'All time', all_stats_path %>
+    <%= content_tag :li do %>
+        <%= link_to_if @timeframe.present?, 'All time', all_stats_path, title: 'Show stats from the start of time' %>
     <% end %>
-    <%= content_tag :li, class: '' do %>
-        <%= link_to_unless_current 'Stats for today', timeframe: :day %>
-    <% end %>
-    <%= content_tag :li, class: '' do %>
-        <%= link_to_unless_current 'Weekly stats', timeframe: :week %>
-    <% end %>
-    <%= content_tag :li, class: '' do %>
-        <%= link_to_unless_current 'Monthly stats', timeframe: :month %>
+    <% timeframe_links.each do |name, link| %>
+        <%= content_tag :li do %>
+            <%= link_to_unless_current name, timeframe: link %>
+        <% end %>
     <% end %>
 </ul>
-<%= link_to 'Find me!', anchor: current_user.id %>
+<% unless @timeframe.present? %>
+    <%= link_to 'Find me!', anchor: current_user.id %>
+<% end %>
 <table class="mdl-data-table mdl-shadow--2dp">
 <thead>
   <tr class="header-row">
@@ -32,7 +30,7 @@
 </thead>
 <% @sessions_within_timeframe.each_with_index do |session, index| %>
   <% user = session.user %>
-  <%= content_tag :tr, id: session.user.id, class: ('active' if user_active?(user)) do %>
+  <%= content_tag :tr, id: session.user.id, class: row_classes(user) do %>
     <td><%= index+1 %></td>
     <td class="user-row">
         <%= link_to user.nick, stats_path(user.id) %>
