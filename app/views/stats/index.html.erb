@@ -1,9 +1,23 @@
+<ul class="inline-list">
+    <%= content_tag :li, class: '' do %>
+        <%= link_to 'All time' %>
+    <% end %>
+    <%= content_tag :li, class: '' do %>
+        <%= link_to 'Stats for today', timeframe: :day %>
+    <% end %>
+    <%= content_tag :li, class: '' do %>
+        <%= link_to 'Weekly stats', timeframe: :week %>
+    <% end %>
+    <%= content_tag :li, class: '' do %>
+        <%= link_to 'Monthly stats', timeframe: :month %>
+    <% end %>
+</ul>
 <%= link_to 'Find me!', anchor: current_user.id %>
 <table class="mdl-data-table mdl-shadow--2dp">
 <thead>
   <tr class="header-row">
     <th>
-      #
+        #
     </th>
     <th class="user-row">
       Name
@@ -16,22 +30,24 @@
     </th>
   </tr>
 </thead>
-<% @users.each_with_index do |user, index| %>
-  <%= content_tag :tr, id: user.id, class: ('active' if user_active?(user)) do %>
+<% @sessions_within_timeframe.each_with_index do |session, index| %>
+  <% user = session.user %>
+  <%= content_tag :tr, id: session.user.id, class: ('active' if user_active?(user)) do %>
     <td><%= index+1 %></td>
     <td class="user-row">
         <%= link_to user.nick, stats_path(user.id) %>
     </td>
     <td>
-        <%= seconds_to_units(user.total_time) %>
+        <%= seconds_to_units(session.total_time) %>
     </td>
     <td>
-        <%= seconds_to_score(user.total_time) %>
+        <%= seconds_to_score(session.total_time) %>
     </td>
   <% end %>
 <% end %>
 </table>
 
+<% if false %>
 <div class="group-info-box">
   <table class="mdl-data-table mdl-shadow--2dp">
     <thead>
@@ -63,10 +79,13 @@
     <% get_sorted_groups_with_time %>
   </table>
 </div>
+<% end %>
 
+<% unless @timeframe.present? %>
 <section class="show-section">
   <div class="graph-container">
     <h2 class="graph-header">Hours at the Hub (all users)</h2>
     <canvas id="chart" class="stats-graph" data-url="/stats/hours.json" width="2304" height="300"></canvas>
   </div>
 </section>
+<% end %>
