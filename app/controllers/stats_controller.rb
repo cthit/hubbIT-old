@@ -30,6 +30,7 @@ class StatsController < ApplicationController
 
     @active_users = UserSession.includes(:user).active.map(&:user)
     @sessions_within_timeframe = UserSession.includes(:user).time_between(from, to)
+    @users = @sessions_within_timeframe.map(&:user)
   end
 
 
