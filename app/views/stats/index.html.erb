@@ -8,9 +8,7 @@
         <% end %>
     <% end %>
 </ul>
-<% unless @timeframe.present? %>
-    <%= link_to 'Find me!', anchor: current_user.id %>
-<% end %>
+<%= link_to 'Find me!', "##{current_user.id}" %>
 <table class="mdl-data-table mdl-shadow--2dp">
 <thead>
   <tr class="header-row">
