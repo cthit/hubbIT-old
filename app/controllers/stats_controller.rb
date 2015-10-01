@@ -58,7 +58,7 @@ class StatsController < ApplicationController
       @last_session_duration = @session.end_time - @session.start_time
 
       @total_time = @user.users_total_time.total_time
-      @ranking = @total_time.ranking
+      @ranking = @user.ranking
     else
       @last_session_duration = 0
       @total_time = 0
