@@ -1,5 +1,5 @@
 <h1><%= @user.nick %></h1>
-<%= link_to "Position: #{@user.ranking}", all_stats_path(anchor: @user.id) %><br/>
+<%= link_to "Position: #{@ranking}", all_stats_path(anchor: @user.id) %><br/>
 Score: <%= seconds_to_score(@total_time) %>
 <section class="show-section">
     <div class="info-dashboard">
