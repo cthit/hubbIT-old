@@ -8,9 +8,7 @@
         <% end %>
     <% end %>
 </ul>
-<% unless @timeframe.present? %>
-    <%= link_to 'Find me!', anchor: current_user.id %>
-<% end %>
+<%= link_to 'Find me!', "##{current_user.id}" %>
 <table class="mdl-data-table mdl-shadow--2dp">
 <thead>
   <tr class="header-row">
@@ -31,7 +29,7 @@
 <% @sessions_within_timeframe.each_with_index do |session, index| %>
   <% user = session.user %>
   <%= content_tag :tr, id: session.user.id, class: row_classes(user) do %>
-    <td><%= index+1 %></td>
+    <td><%= index %></td>
     <td class="user-row">
         <%= link_to user.nick, stats_path(user.id) %>
     </td>

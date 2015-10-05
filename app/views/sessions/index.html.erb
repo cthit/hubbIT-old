@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <% @sessions.each do |session| %>
-      <tr>
+          <tr class="<%= "me" if current_user.id == session.user.id %>">
         <td class="user-row">
           <%= link_to session.user.nick, stats_path(session.user.id) %>
         </td>
