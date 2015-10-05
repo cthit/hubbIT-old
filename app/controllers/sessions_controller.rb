@@ -31,8 +31,6 @@ class SessionsController < ApplicationController
           mac = MacAddress.find_by(address: address.upcase)
           next unless mac.present?
 
-          logger.info(mac)
-          logger.info(address)
           @user = mac.user
           @session = Session.active.with_mac(mac)
           new_time = DateTime.now + 10.minutes
