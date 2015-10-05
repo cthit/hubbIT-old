@@ -1,15 +1,10 @@
 class AchievementApiService
 	include HTTParty
 
-	base_uri "http://ndushi.chalmers.it:3000"
+	base_uri "http://achieveit.chalmers.it"
 	ACHIEVEMENT_URI = "/achievements.json"
 	UNLOCK_URI = "/unlocks.json"
-    API_TOKEN = "f6f804ba8bd4247bca6e21eeaac115f7"
-
-	def self.derp
-		p "derp"
-		return "herp"
-	end
+    API_TOKEN = Rails.application.secrets.achievement_api_key
 
 	def self.submit_achievement(name, code, icon="", description="", category="", points=1)
     	body = { 
