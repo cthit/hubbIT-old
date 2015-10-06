@@ -14,7 +14,6 @@ class AroundTheClock < Achievement
                                                     Time.now.yesterday.to_date, 
                                                     Time.now.hour, 
                                                     Time.now.to_date)
-        p entries.count
         return false if entries.nil?
         entries.count >= HOURS_IN_DAY
     end
