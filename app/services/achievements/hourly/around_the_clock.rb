@@ -9,7 +9,6 @@ class AroundTheClock < Achievement
     end
 
     def achieved? user
-        return false
         entries = HourEntry.with_user(user).where('(date = ? AND hour > ?) OR date = ?', 
                                                     Time.now.yesterday.to_date, 
                                                     Time.now.hour, 
