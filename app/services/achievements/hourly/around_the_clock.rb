@@ -5,7 +5,7 @@ class AroundTheClock < Achievement
     HOURS_IN_DAY = 24
 
     def initialize
-        super 'Around the clock', 'around_the_clock', '', 'Spend 24 consecutive hours in the Hub', 'No life', 100
+        super 'Around the clock', 'around_the_clock', 'Spend 24 consecutive hours in the Hub', 'No life', 100
     end
 
     def achieved? user

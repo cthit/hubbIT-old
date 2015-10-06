@@ -3,7 +3,7 @@ require_relative '../achievement'
 class TopTwenty < Achievement
 
     def initialize
-        super 'Top 20', 'top_twenty', '', 'Place yourself top 20 overall', 'Hardcore', 50
+        super 'Top 20', 'top_twenty', 'Place yourself top 20 overall', 'Hardcore', 50
     end
 
     def achieved? user

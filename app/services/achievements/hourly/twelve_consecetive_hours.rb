@@ -5,7 +5,7 @@ class TwelveConsecetiveHours < Achievement
     THRESHOLD = 12
 
     def initialize
-        super 'Extreme study day', 'study_day', '', 'Spend 12 consecutive hours in the Hub', 'Hardcore', 50
+        super 'Extreme study day', 'study_day', 'Spend 12 consecutive hours in the Hub', 'Hardcore', 50
     end
 
     def achieved? user
@@ -31,22 +31,24 @@ class TwelveConsecetiveHours < Achievement
 
     def max_number_of_consecetive_hours entries
         return 0 unless entries.any?
-        max = 1
-        hour = entries.first.hour
 
-        entries.drop(1).reduce max do |count, curr|
+        result = entries.drop(1).reduce [entries.first.hour, 1,1] do |acc, curr|
+            hour=acc[0]
+            count=acc[1]
+            max=acc[2]
+
             next_hour = (hour+1)%24
             hour = curr.hour
 
             if hour == next_hour
                 max = count if count > max
-                count+1
+                [hour, count+1, max]
             else
                 max = count if count > max
-                1
+                [hour, 1, max]                                     
             end
         end
 
-        return max
+        return result[2]
     end
 end

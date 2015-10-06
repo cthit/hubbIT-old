@@ -4,10 +4,10 @@ class Achievement
 
 	attr_accessor :name, :code
 
-	def initialize(name, code, icon="", description="", category="", points=1)
+	def initialize(name, code, description="", category="", points=1)
 		@name = name
 		@code = code
-		@icon = icon
+		@icon = "/achievements/#{code}.svg"
 		@description = description
 		@category = category
 		@points = points

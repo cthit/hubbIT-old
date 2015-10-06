@@ -1,7 +1,10 @@
 class AchievementApiService
 	include HTTParty
+    #debug_output $stdout
+	base_uri "https://achieveit.chalmers.it"
 
-	base_uri "http://achieveit.chalmers.it"
+    ROOT_URL = "https://hubbit.chalmers.it"
+
 	ACHIEVEMENT_URI = "/achievements.json"
 	UNLOCK_URI = "/unlocks.json"
     API_TOKEN = Rails.application.secrets.achievement_api_key
@@ -10,7 +13,7 @@ class AchievementApiService
     	body = { 
 				name: name,
                 code: code,
-				icon: icon,
+				icon: ROOT_URL + icon,
 				desc: description,
 				category: category,
 				points: points
