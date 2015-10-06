@@ -1,6 +1,6 @@
 require_relative '../achievement'
 
-class TwelveConsecetiveHours < Achievement
+class TwelveConsecutiveHours < Achievement
 
     THRESHOLD = 12
 
@@ -23,19 +23,17 @@ class TwelveConsecetiveHours < Achievement
         end
         return false unless entries.any?
 
-        max_number_of_consecetive_hours = self.max_number_of_consecetive_hours entries
+        max_number_of_consecutive_hours = self.max_number_of_consecutive_hours entries
 
-        max_number_of_consecetive_hours >= THRESHOLD
+        max_number_of_consecutive_hours >= THRESHOLD
     end
 
 
-    def max_number_of_consecetive_hours entries
+    def max_number_of_consecutive_hours entries
         return 0 unless entries.any?
 
         result = entries.drop(1).reduce [entries.first.hour, 1,1] do |acc, curr|
-            hour=acc[0]
-            count=acc[1]
-            max=acc[2]
+            hour, count, max = acc
 
             next_hour = (hour+1)%24
             hour = curr.hour
