@@ -70,7 +70,7 @@ module StatsHelper
     def timeframe_links
       # List of the anchor links to show on /stats
       [ # Name             Link
-       ['Stats for today', :day],
+       ['Daily stats', :day],
        ['Weekly stats',    :week],
        ['Monthly stats',   :month],
       ]
@@ -81,5 +81,17 @@ module StatsHelper
       classes << 'active' if user_active?(user)
       classes << 'me' if user.id == current_user.id
       classes.join ' '
+    end
+
+    def selected_timeframe frame
+      'selected' if @timeframe == frame.to_s 
+    end
+
+    def format_to_on_frame frame
+      if frame.to_s == 'day'
+        (@to + 1.seconds).to_date
+      else
+        @to.to_date
+      end
     end
 end

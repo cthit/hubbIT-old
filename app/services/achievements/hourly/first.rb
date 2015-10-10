@@ -4,7 +4,6 @@ class First < Achievement
 
     def initialize
         super 'First', 'first', 'Place yourself first', 'No life', 500
-        p 'init first'
     end
 
     def achieved? user
