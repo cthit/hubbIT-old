@@ -18,6 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+env :PATH, ENV['PATH']
 
 every :hour do 
 	rake "HubbIT:hourly"
