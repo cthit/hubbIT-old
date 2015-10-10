@@ -87,4 +87,20 @@ class StatsController < ApplicationController
         @user = current_user
       end
     end
+
+    def change_page nbr
+      case @timeframe
+        when 'year'
+          [@from + nbr.year, @to + nbr.year]
+        when 'month'
+          [@from + nbr.month, @to + nbr.month]
+        when 'week'
+          [@from + nbr.weeks, @to + nbr.weeks]
+        when 'day'
+          [@from + nbr.day, @to + nbr.day]
+        else
+          [@from, @to]
+      end
+    end
+
 end
