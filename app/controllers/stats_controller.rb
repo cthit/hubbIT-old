@@ -31,21 +31,6 @@ class StatsController < ApplicationController
     @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
   end
 
-  def change_page nbr
-    case @timeframe
-      when 'year'
-        [@from + nbr.year, @to + nbr.year]
-      when 'month'
-        [@from + nbr.month, @to + nbr.month]
-      when 'week'
-        [@from + nbr.weeks, @to + nbr.weeks]
-      when 'day'
-        [@from + nbr.day, @to + nbr.day]
-      else
-        [@from, @to]
-      end
-  end
-
   def hours
     cache_key = 'hours'
     query = HourEntry.group(:hour)
