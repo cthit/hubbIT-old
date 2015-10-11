@@ -44,7 +44,7 @@
   <%= content_tag :tr, id: session.user.id, class: row_classes(user) do %>
     <td>
       <span class='arrow'><%= display_arrow user.cid %></span>
-      <span><%= index %></span>
+      <span><%= index+1 %></span>
     </td>
     <td class="user-row">
         <%= link_to user.nick, stats_path(user.id) %>
