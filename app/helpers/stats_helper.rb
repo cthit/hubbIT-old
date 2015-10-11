@@ -70,7 +70,7 @@ module StatsHelper
     def timeframe_links
       # List of the anchor links to show on /stats
       [ # Name             Link
-       ['Stats for today', :day],
+       ['Daily stats', :day],
        ['Weekly stats',    :week],
        ['Monthly stats',   :month],
       ]
@@ -81,5 +81,54 @@ module StatsHelper
       classes << 'active' if user_active?(user)
       classes << 'me' if user.id == current_user.id
       classes.join ' '
+    end
+
+
+    def change_page nbr
+      case @timeframe
+        when 'year'
+          [@from + nbr.year, @to + nbr.year]
+        when 'month'
+          [@from + nbr.month, @to + nbr.month]
+        when 'week'
+          [@from + nbr.weeks, @to + nbr.weeks]
+        when 'day'
+          [@from + nbr.day, @to + nbr.day]
+        else
+          [@from, @to]
+      end
+    end
+
+    def selected_timeframe frame
+      'selected' if @timeframe == frame.to_s 
+    end
+
+    def format_to_on_frame frame
+      if frame.to_s == 'day'
+        (@to + 1.seconds).to_date
+      else
+        @to.to_date
+      end
+    end
+
+    def display_arrow user
+      if @sessions_within_timeframe.nil? || @timeframe.nil?
+        return nil
+      end
+
+      index = @sessions_within_timeframe.index { |s| s.user.cid == user }
+      old_index = if @old_sessions_within_timeframe.present? 
+        @old_sessions_within_timeframe.index { |s| s.user.cid == user } || 9999
+      else
+        9999
+      end
+
+      if index < old_index
+        return image_tag 'up-arrow.svg' 
+      elsif index > old_index
+        return image_tag 'down-arrow.svg'
+      else
+        return nil
+      end
     end
 end
