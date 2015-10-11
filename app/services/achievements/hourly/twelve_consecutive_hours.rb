@@ -5,7 +5,7 @@ class TwelveConsecutiveHours < Achievement
     THRESHOLD = 12
 
     def initialize
-        super 'Extreme study day', 'study_day', 'Spend 12 consecutive hours in the Hub', 'Hardcore', 50
+        super 'Extreme study day', 'study_day', 'Spend 12 consecutive hours in the Hubb', 'Hardcore', 50
     end
 
     def achieved? user
