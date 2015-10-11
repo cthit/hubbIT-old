@@ -3,11 +3,24 @@
         <%= link_to_if @timeframe.present?, 'All time', all_stats_path%>
     <% end %>
     <% timeframe_links.each do |name, link| %>
-        <%= content_tag :li do %>
+        <%= content_tag :li, class: selected_timeframe(link) do %>
             <%= link_to_unless_current name, timeframe: link %>
         <% end %>
     <% end %>
 </ul>
+
+<% if @timeframe.present? %>
+<ul class="inline-list">
+    <%= content_tag :span do %>
+        <%= link_to 'Prev',  {timeframe: @timeframe, page: @page-1} %>
+    <% end %>
+    <span class="timeframe"><%= @from.to_date %> - <%= format_to_on_frame(@timeframe) %></span>
+    <%= content_tag :span do %>
+        <%= link_to 'Next',  {timeframe: @timeframe, page: @page+1} %>
+    <% end %>
+</ul>
+<% end %>
+
 <%= link_to 'Find me!', "##{current_user.id}" %>
 <table class="mdl-data-table mdl-shadow--2dp">
 <thead>
@@ -29,7 +42,10 @@
 <% @sessions_within_timeframe.each_with_index do |session, index| %>
   <% user = session.user %>
   <%= content_tag :tr, id: session.user.id, class: row_classes(user) do %>
-    <td><%= index %></td>
+    <td>
+      <span class='arrow'><%= display_arrow user.cid %></span>
+      <span><%= index %></span>
+    </td>
     <td class="user-row">
         <%= link_to user.nick, stats_path(user.id) %>
     </td>
