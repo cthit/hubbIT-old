@@ -112,8 +112,16 @@ module StatsHelper
     end
 
     def display_arrow user
+      if @sessions_within_timeframe.nil? || @timeframe.nil?
+        return nil
+      end
+
       index = @sessions_within_timeframe.index { |s| s.user.cid == user }
-      old_index = @old_sessions_within_timeframe.index { |s| s.user.cid == user } || 999999
+      old_index = if @old_sessions_within_timeframe.present? 
+        @old_sessions_within_timeframe.index { |s| s.user.cid == user } || 9999
+      else
+        9999
+      end
 
       if index < old_index
         return image_tag 'up-arrow.svg' 
