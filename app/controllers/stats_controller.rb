@@ -5,33 +5,31 @@ class StatsController < ApplicationController
 
   def index
     @timeframe = params[:timeframe]
-    from = if params[:from].present?
-      params[:from]
+    @from, @to = if params[:from].present? and params[:to].present?
+      [params[:from], params[:to]]
     else
       case @timeframe
       when 'year'
-        Date.today.beginning_of_year
+        [Date.today.beginning_of_year, Date.today.end_of_year]
       when 'month'
-        Date.today.beginning_of_month
+        [Date.today.beginning_of_month, Date.today.end_of_month]
       when 'week'
-        Date.today.beginning_of_week
+        [Date.today.beginning_of_week, Date.today.end_of_week]
       when 'day'
-        Date.today.beginning_of_day
+        [Date.today.beginning_of_day, Date.today.end_of_day]
       else
-        0
+        [Date.new(0), Date.new(2999)]
       end
     end
 
-    to = if params[:to].present?
-      params[:to]
-    else
-      '2099-01-01'
-    end
+    @to = @to.end_of_day
+
+    @page = params[:page].to_i || 0
+    @from, @to = change_page @page
 
     @active_users = UserSession.includes(:user).active.map(&:user)
-    @sessions_within_timeframe = UserSession.includes(:user).time_between(from, to)
+    @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
   end
-
 
   def hours
     cache_key = 'hours'
@@ -74,4 +72,20 @@ class StatsController < ApplicationController
         @user = current_user
       end
     end
+
+    def change_page nbr
+      case @timeframe
+        when 'year'
+          [@from + nbr.year, @to + nbr.year]
+        when 'month'
+          [@from + nbr.month, @to + nbr.month]
+        when 'week'
+          [@from + nbr.weeks, @to + nbr.weeks]
+        when 'day'
+          [@from + nbr.day, @to + nbr.day]
+        else
+          [@from, @to]
+      end
+    end
+
 end
