@@ -29,6 +29,12 @@ class StatsController < ApplicationController
 
     @active_users = UserSession.includes(:user).active.map(&:user)
     @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
+
+    if @timeframe.present?
+      old_from, old_to = change_page -1
+      @old_sessions_within_timeframe = UserSession.includes(:user).time_between(old_from, old_to)
+    end
+
   end
 
   def hours
@@ -72,20 +78,4 @@ class StatsController < ApplicationController
         @user = current_user
       end
     end
-
-    def change_page nbr
-      case @timeframe
-        when 'year'
-          [@from + nbr.year, @to + nbr.year]
-        when 'month'
-          [@from + nbr.month, @to + nbr.month]
-        when 'week'
-          [@from + nbr.weeks, @to + nbr.weeks]
-        when 'day'
-          [@from + nbr.day, @to + nbr.day]
-        else
-          [@from, @to]
-      end
-    end
-
 end
