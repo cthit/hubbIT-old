@@ -83,6 +83,22 @@ module StatsHelper
       classes.join ' '
     end
 
+
+    def change_page nbr
+      case @timeframe
+        when 'year'
+          [@from + nbr.year, @to + nbr.year]
+        when 'month'
+          [@from + nbr.month, @to + nbr.month]
+        when 'week'
+          [@from + nbr.weeks, @to + nbr.weeks]
+        when 'day'
+          [@from + nbr.day, @to + nbr.day]
+        else
+          [@from, @to]
+      end
+    end
+
     def selected_timeframe frame
       'selected' if @timeframe == frame.to_s 
     end
@@ -92,6 +108,19 @@ module StatsHelper
         (@to + 1.seconds).to_date
       else
         @to.to_date
+      end
+    end
+
+    def display_arrow user
+      index = @sessions_within_timeframe.index { |s| s.user.cid == user }
+      old_index = @old_sessions_within_timeframe.index { |s| s.user.cid == user } || 999999
+
+      if index < old_index
+        return image_tag 'up-arrow.svg' 
+      elsif index > old_index
+        return image_tag 'down-arrow.svg'
+      else
+        return nil
       end
     end
 end

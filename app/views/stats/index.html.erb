@@ -42,7 +42,10 @@
 <% @sessions_within_timeframe.each_with_index do |session, index| %>
   <% user = session.user %>
   <%= content_tag :tr, id: session.user.id, class: row_classes(user) do %>
-    <td><%= index %></td>
+    <td>
+      <span class='arrow'><%= display_arrow user.cid %></span>
+      <span><%= index %></span>
+    </td>
     <td class="user-row">
         <%= link_to user.nick, stats_path(user.id) %>
     </td>
