@@ -5,12 +5,14 @@ Score: <%= seconds_to_score(@total_time) %>
     <div class="info-dashboard">
         <% if @session %>
             <%= info_box 'Last session' do %>
-                <%= 'Right now for ' if @session.end_time > Time.zone.now %>
                 <% if @session.end_time <= Time.zone.now %>
                         <%= distance_of_time_in_words_to_now(@session.end_time.in_time_zone("Stockholm")).capitalize %> ago <br>
                     <%= @session.start_time.to_s(:short) %> <br> for
+                    <%= seconds_to_words(@last_session_duration) %>
+                <% else %>
+                    <%= 'Right now for ' %>
+                    <%= seconds_to_words(current_session) %>
                 <% end %>
-                <%= seconds_to_words(@last_session_duration)  %>
             <% end %>
         <% end %>
 
