@@ -38,13 +38,21 @@ module StatsHelper
         @active_users.include? user
     end
 
+    def current_session
+        Time.zone.now - @session.start_time
+    end
+
     def seconds_today
       seconds = 0
         @user_sessions.where("created_at >= ?", Time.now.beginning_of_day).each do |s|
           seconds += (s.end_time - s.start_time)
         end
 
-        seconds
+        if @session.end_time > Time.zone.now
+          seconds - (@session.end_time - Time.zone.now)
+        else
+          seconds
+        end
     end
 
     def human_time_today
