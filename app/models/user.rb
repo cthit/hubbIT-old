@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 
 	delegate :ranking, to: :users_total_time
 
+<<<<<<< HEAD
 	ALLOWED_GROUPS = [
 		:styrit, 
 		:snit, 
@@ -42,6 +43,9 @@ class User < ActiveRecord::Base
 		:didit,
 		:nollqit
 		]
+=======
+	ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen]
+>>>>>>> develop
 
 	self.primary_key = :cid
 
@@ -117,6 +121,8 @@ class Symbol
 				'S.P.R.I.T.'
 			when :nollqit
 				'NollQIT'
+			when :valberedningen
+				'Valberedningen'
 			else
 				self.to_s
 		end

@@ -3,7 +3,12 @@ json.nick @user.nick
 json.total_time @total_time
 json.position @ranking
 json.score seconds_to_score(@total_time)
-json.last_session_duration @last_session_duration
+
+if @session.end_time <= Time.zone.now
+	json.last_session_duration @last_session_duration
+else
+	json.last_session_duration current_session.round
+end
 
 if @longest_session.nil?
   json.longest_session "0"
