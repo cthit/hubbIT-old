@@ -119,6 +119,8 @@ class Symbol
 				'NollQIT'
 			when :valberedningen
 				'Valberedningen'
+			when :revisorer
+				'Revisorer'
 			else
 				self.to_s
 		end
