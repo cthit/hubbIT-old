@@ -95,13 +95,13 @@ module StatsHelper
     def change_page nbr
       case @timeframe
         when 'year'
-          [@from + nbr.year, @to + nbr.year]
+          [(@from + nbr.year).beginning_of_year, (@to + nbr.year).end_of_year]
         when 'month'
-          [@from + nbr.month, @to + nbr.month]
+          [(@from + nbr.month).beginning_of_month, (@to + nbr.month).end_of_month]
         when 'week'
-          [@from + nbr.weeks, @to + nbr.weeks]
+          [(@from + nbr.weeks).beginning_of_week, (@to + nbr.weeks).end_of_week]
         when 'day'
-          [@from + nbr.day, @to + nbr.day]
+          [(@from + nbr.day).beginning_of_day, (@to + nbr.day).end_of_day]
         else
           [@from, @to]
       end
