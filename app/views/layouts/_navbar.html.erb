@@ -1,12 +1,12 @@
 <nav>
 	<ul class="menu">
         <% if current_user %>
-		<li><%= link_to_unless_current 'Me', current_user %></li> |
+		<li <%= 'class="active"' if current_page?(current_user) %>><%= link_to_unless_current 'Me', current_user %></li>
         <% end %>
-		<li><%= link_to_unless_current 'Smurfs in the Hubb', sessions_path %></li> |
-		<li><%= link_to_unless_current 'Stats', all_stats_path %></li> |
+		<li <%= 'class="active"' if current_page?(sessions_path) %>><%= link_to_unless_current 'Smurfs in the Hubb', sessions_path %></li>
+		<li <%= 'class="active"' if current_page?(all_stats_path) %>><%= link_to_unless_current 'Stats', all_stats_path %></li>
         <% if current_user %>
-        <li><%= link_to_unless_current 'My stats', stats_path(current_user.cid) %></li>
+        <li <%= 'class="active"' if current_page?(stats_path(current_user.cid)) %>><%= link_to_unless_current 'My stats', stats_path(current_user.cid) %></li>
         <% end %>
 	</ul>
 </nav>

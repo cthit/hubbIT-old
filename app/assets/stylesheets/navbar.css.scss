@@ -1,8 +1,33 @@
-
 .menu {
 	font-size: 1.3em;
 
-    li {
-        font-weight: 700;
-    }
+	li {
+		font-weight: 700;
+		color: white;
+	    text-transform: uppercase;
+	    padding: 16px;
+	    font-size: 14px;
+
+		a {
+			color: #fff;
+			opacity: 0.6;
+
+			&:hover {
+				opacity: 1;
+				color: #fff;
+			}
+		}
+
+		&.active {
+			border-bottom: 3px solid #fff;
+		}
+
+		@media screen and (max-width: 580px) {
+			padding: 5px;
+		}
+
+		@media screen and (max-width: 450px) {
+			padding: 5px 0px;
+		}
+	}
 }

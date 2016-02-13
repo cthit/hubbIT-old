@@ -1,18 +1,26 @@
 $text-color: #999;
+
 body {
   background-color: #F1F1F1;
   font-family: 'Roboto', sans-serif;
 }
+
 header {
   h1 {
+    text-align: center;
+
+    .title-link {
+      @media screen and (max-width: 580px) {
+        font-size: 30px;
+        font-weight: normal;
+      }
+    }
     a {
       color: #000;
       &:hover {
         color: $text-color;
       }
     }
-    text-shadow: 0 0 2px #000;
-    text-align: center;
   }
 
   nav {
