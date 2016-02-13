@@ -3,7 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .active-sessions-container {
+    color: #666;
     margin: 0 0 1em;
+
+    div > table:first-child {
+        margin-top: 15px;
+    }
+
 	.status-cell {
 		text-align: center;
 	}

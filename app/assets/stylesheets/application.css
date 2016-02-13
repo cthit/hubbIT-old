@@ -16,12 +16,15 @@
  */
 
 header {
-	background-color: #0097a7;
-	border: 1px solid;
+	background-color: #44aedb;
+	padding-top: 10px;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 h1 {
-	font-size: 2em;
+	font-weight: 200;
+	font-size: 52px;
+	color: #293133;
 }
 
 h2 {
@@ -38,9 +41,9 @@ h4 {
 
 .title-link {
 	color: #FFF;
-	&:hover {
-		color: #FFF;
-	}
+}
+.title-link:hover {
+	color: #FFF;
 }
 
 a {
@@ -73,4 +76,8 @@ tr .user-row {
 
 .active-groups-container th {
 	text-align: center;
+}
+
+#main-title .title-link {
+    font-weight: 200;
 }
