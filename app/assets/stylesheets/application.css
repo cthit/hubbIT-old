@@ -41,9 +41,9 @@ h4 {
 
 .title-link {
 	color: #FFF;
-	&:hover {
-		color: #FFF;
-	}
+}
+.title-link:hover {
+	color: #FFF;
 }
 
 a {
