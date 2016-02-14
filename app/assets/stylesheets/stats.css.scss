@@ -62,13 +62,11 @@ h1 {
 
 .graph-container {
 	padding-bottom: 20px;
-	border: 1px solid;
 
 	.graph-header {
-			background-color: rgba(0, 151, 167, 0.5);
+			background-color: #00B3E6;
 			margin: 0;
 			padding: 0.3em;
-			border-bottom: 1px solid
 	}
 }
 
@@ -122,27 +120,4 @@ h1 {
 
 .me {
 	background-color: #EEE;
-}
-
-.mdl-data-table {
-	border: none;
-	border-radius: 2px;
-	overflow: hidden;
-
-	tr.header-row th {
-		color: #fff;
-	}
-
-	tr.header-row {
-		font-weight: bold;
-		background-color: rgb(0, 179, 230);
-	}
-
-	tr:first-child td {
-		border-top: none;
-	}
-
-	tr:last-child td {
-		border-bottom: none;
-	}
 }

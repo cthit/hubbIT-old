@@ -81,3 +81,9 @@ tr .user-row {
 #main-title .title-link {
     font-weight: 200;
 }
+
+.mdl-data-table {
+	border: none;
+	border-radius: 2px;
+	overflow: hidden;
+}
