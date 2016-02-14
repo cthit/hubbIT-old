@@ -14,7 +14,17 @@ h1 {
 .info-dashboard {
 	display: flex;
 	margin: 2em 0;
+
+	@media screen and (max-width: 700px) {
+		flex-direction: column;
+
+		.info-container {
+			margin: 0;
+			margin-bottom: 20px;
+		}
+	}
 }
+
 .info-container .info-header, .graph-container .graph-header {
 	font-weight: bold;
 	color: #fff;
