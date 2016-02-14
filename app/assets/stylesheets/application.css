@@ -27,6 +27,12 @@ h1 {
 	color: #293133;
 }
 
+@media screen and (max-width: 580px) {
+	h1#main-title {
+		margin: 0;
+	}
+}
+
 h2 {
 	font-size: 1.8em;
 }
