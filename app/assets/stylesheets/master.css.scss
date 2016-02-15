@@ -58,3 +58,26 @@ a {
     flex: 1;
   }
 }
+
+.mdl-data-table {
+	border: none;
+	border-radius: 2px;
+	overflow: hidden;
+
+	tr.header-row th {
+		color: #fff;
+	}
+
+	tr.header-row {
+		font-weight: bold;
+		background-color: #44aedb;
+	}
+
+	tr:first-child td, tr:nth-child(2) td {
+		border-top: none;
+	}
+
+	tr:last-child td {
+		border-bottom: none;
+	}
+}
