@@ -27,6 +27,12 @@ h1 {
 	color: #293133;
 }
 
+@media screen and (max-width: 580px) {
+	h1#main-title {
+		margin: 0;
+	}
+}
+
 h2 {
 	font-size: 1.8em;
 }
@@ -67,7 +73,7 @@ ul {
 
 tr.header-row {
 	font-weight: bold;
-	background-color: rgba(0, 151, 167, 0.5);
+	background-color: #44aedb;
 }
 
 tr .user-row {
@@ -80,4 +86,10 @@ tr .user-row {
 
 #main-title .title-link {
     font-weight: 200;
+}
+
+.mdl-data-table {
+	border: none;
+	border-radius: 2px;
+	overflow: hidden;
 }

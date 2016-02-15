@@ -9,6 +9,11 @@ table {
 .profile {
   margin: 0 20px;
   font-size: 1.3em;
+
+  thead td {
+      background-color: #44AEDB;
+      color: #fff;
+  }
 }
 
 .mac-address {
