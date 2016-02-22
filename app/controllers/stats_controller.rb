@@ -1,8 +1,8 @@
 class StatsController < ApplicationController
   include StatsHelper
 
-  before_action :set_user
-
+  before_action :set_user, except: [:get_stats]
+  before_action :restrict_access, only: [:get_stats]
   def index
     @timeframe = params[:timeframe]
     @from, @to = if params[:from].present? and params[:to].present?
@@ -34,7 +34,11 @@ class StatsController < ApplicationController
       old_from, old_to = change_page -1
       @old_sessions_within_timeframe = UserSession.includes(:user).time_between(old_from, old_to)
     end
+  end
 
+  def get_stats
+    self.index
+    render 'stats/index'
   end
 
   def hours
@@ -76,6 +80,11 @@ class StatsController < ApplicationController
         @user = User.find(params[:user_id])
       else
         @user = current_user
+      end
+    end
+    def restrict_access
+      authenticate_or_request_with_http_token do |token, options|
+        ApiKey.exists?(access_token: token)
       end
     end
 end
