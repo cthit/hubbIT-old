@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get ':user_id' => 'stats#show', as: 'stats'
     get '' => 'stats#index', as: 'all_stats'
   end
+  get 'get_stats' => 'stats#get_stats', as: 'get_stats'
 
   put '/sessions(.:format)' => 'sessions#update'
 
