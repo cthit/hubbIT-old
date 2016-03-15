@@ -12,10 +12,10 @@
           </tr>
       </thead>
   <% @user.devices.each do |d| %>
-    <tr>
+    <%= content_tag :tr, class: d.sessions.active.exists? ? :active : nil do %>
       <td class="mac-address"><%= d.address %></td>
       <td class="mdl-data-table__cell--non-numeric"><%= device_name d.device_name %></td>
-    </tr>
+    <% end %>
   <% end %>
   </table>
 <% end %>
