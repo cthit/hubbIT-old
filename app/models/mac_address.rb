@@ -10,7 +10,6 @@
 
 class MacAddress < ActiveRecord::Base
   belongs_to :user
-  has_many :sessions, foreign_key: :mac_address
 
   before_validation :format_mac
 

@@ -15,5 +15,4 @@ class Session < ActiveRecord::Base
   scope :with_mac, -> (mac) { where(mac_address: mac) }
   scope :active, -> { where("end_time > ?", DateTime.now) }
   belongs_to :user
-  belongs_to :mac_address
 end
