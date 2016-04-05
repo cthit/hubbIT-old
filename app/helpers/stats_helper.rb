@@ -120,6 +120,8 @@ module StatsHelper
     end
 
     def display_arrow user
+      no_session_number = 9999
+
       if @sessions_within_timeframe.nil? || @timeframe.nil?
         return nil
       end
@@ -128,7 +130,7 @@ module StatsHelper
       old_index = if @old_sessions_within_timeframe.present? 
         @old_sessions_within_timeframe.index { |s| s.user.cid == user } || 9999
       else
-        9999
+        no_session_number
       end
 
       if index < old_index
