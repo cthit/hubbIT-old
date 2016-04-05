@@ -134,7 +134,8 @@ module StatsHelper
       end
 
       if index < old_index
-        return image_tag 'up-arrow.svg', title: "Up from " + old_index.to_s
+        from = old_index == no_session_number ? "You weren't here!" : "Up from " + (old_index + 1).to_s
+        return image_tag 'up-arrow.svg', title: from
       elsif index > old_index
         return image_tag 'down-arrow.svg', title: "Down from " + old_index.to_s
       else
