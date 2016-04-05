@@ -41,12 +41,15 @@ class User < ActiveRecord::Base
 	end
 
 	def nick
+		if Rails.env.development?
+			return cid
+		end
 		@nick ||= Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
 			resp = self.class.send_request(query: { cid: cid })
 			if resp['nick'].present?
 				resp['nick']
 			else
-				cid
+					cid
 			end
 		end
 	end

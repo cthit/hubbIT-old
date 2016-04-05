@@ -17,7 +17,7 @@ num_users.times do |i|
     start = Faker::Time.between(1.days.ago, Time.now, :all)
     end_time = Faker::Time.between(start, Time.now, :all)
     Session.create(start_time: start, end_time: end_time, mac_address: mac, user_id: user.cid)
-    #UserSession.create(start_time: start, end_time: end_time, user_id: user.cid)
+    UserSession.create(start_time: start, end_time: end_time, user_id: user.cid)
     HourEntry.create(cid: user.cid, date: start, hour: ((end_time - start) / 1.hour).round)
   end
 end
