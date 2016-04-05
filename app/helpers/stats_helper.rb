@@ -132,9 +132,9 @@ module StatsHelper
       end
 
       if index < old_index
-        return image_tag 'up-arrow.svg' 
+        return image_tag 'up-arrow.svg', title: "Up from " + old_index.to_s
       elsif index > old_index
-        return image_tag 'down-arrow.svg'
+        return image_tag 'down-arrow.svg', title: "Down from " + old_index.to_s
       else
         return nil
       end
