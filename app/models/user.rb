@@ -55,6 +55,10 @@ class User < ActiveRecord::Base
 	end
 
 	def groups
+		if Rails.env.development?
+			group = ["styrit", "snit", "sexit", "prit", "nollkit", "armit", "digit"].sample
+			return [group]
+		end
 		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
 			resp = self.class.send_request(query: { cid: cid })
 			if resp['groups'].present?
