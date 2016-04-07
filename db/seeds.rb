@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 NUM_USERS = 25
-NUM_SESSIONS = 10
+NUM_SESSIONS = 20
 
 puts "Creating users with sessions and mac addresses"
 NUM_USERS.times do |i|
