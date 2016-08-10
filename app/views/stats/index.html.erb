@@ -1,7 +1,4 @@
 <ul class="inline-list">
-    <%= content_tag :li do %>
-        <%= link_to_if @timeframe.present?, 'All time', all_stats_path%>
-    <% end %>
     <% timeframe_links.each do |name, link| %>
         <%= content_tag :li, class: selected_timeframe(link) do %>
             <%= link_to_unless_current name, timeframe: link %>
@@ -9,7 +6,7 @@
     <% end %>
 </ul>
 
-<% if @timeframe.present? %>
+<% if not all_time? %>
 <ul class="inline-list">
     <%= content_tag :span do %>
         <%= link_to 'Prev',  {timeframe: @timeframe, page: @page-1} %>

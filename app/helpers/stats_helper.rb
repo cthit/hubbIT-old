@@ -126,6 +126,7 @@ module StatsHelper
     def timeframe_links
       # List of the anchor links to show on /stats
       [ # Name             Link
+       ['All Time',    :all_time],
        ['Study Year',    :study_year],
        ['Study Period',    :study_period],
        ['Monthly stats',   :month],
@@ -141,6 +142,9 @@ module StatsHelper
       classes.join ' '
     end
 
+    def all_time?
+        @timeframe == 'all_time'
+    end
 
     def change_page nbr
       case @timeframe
