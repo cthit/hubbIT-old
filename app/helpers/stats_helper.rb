@@ -1,5 +1,53 @@
 module StatsHelper
 
+    @@study_years = [
+        [Time.new(2015,8,18), Time.new(2016,8,15)],
+        [Time.new(2016,8,16), Time.new(2017,8,15)],
+        [Time.new(2017,8,16), Time.new(2018,8,15)],
+    ]
+
+    @@study_period = [
+        [Time.new(2015,8,31), Time.new(2015,11,1)],
+        [Time.new(2015,11,2), Time.new(2016,1,17)],
+        [Time.new(2016,1,18), Time.new(2016,3,20)],
+        [Time.new(2016,3,21), Time.new(2016,6,4)],
+
+        [Time.new(2016,6,5), Time.new(2016,8,28)],  #sommar läsperiod... vi orkar inte hantera detta edgecaset på något annat sätt
+
+        [Time.new(2016,8,29), Time.new(2016,10,29)],
+        [Time.new(2016,10,30), Time.new(2017,1,14)],
+        [Time.new(2017,1,15), Time.new(2017,3,18)],
+        [Time.new(2017,3,19), Time.new(2017,6,9)],
+    ]
+
+    def get_current_study_year_index()
+        @@study_years.each_with_index do |study_year, index|
+            if study_year[0] <= Time.now && Time.now <= study_year[1]
+                return index
+            end
+        end
+    end
+
+    def get_current_study_period_index()
+        @@study_period.each_with_index do |study_period, index|
+            if study_period[0] <= Time.now && Time.now <= study_period[1]
+                return index
+            end
+        end
+    end
+
+    def get_study_year(index)
+        new_index = [0, index].max
+        new_index = [new_index, @@study_years.length-1].min
+        @@study_years[new_index]
+    end
+
+    def get_study_period(index)
+        new_index = [0, index].max
+        new_index = [new_index, @@study_period.length-1].min
+        @@study_period[new_index]
+    end
+
     def seconds_to_words(seconds)
         distance_of_time_in_words Time.at(0).utc, Time.at(seconds).utc
     end
@@ -78,9 +126,12 @@ module StatsHelper
     def timeframe_links
       # List of the anchor links to show on /stats
       [ # Name             Link
-       ['Daily stats', :day],
-       ['Weekly stats',    :week],
+       ['All Time',    :all_time],
+       ['Study Year',    :study_year],
+       ['Study Period',    :study_period],
        ['Monthly stats',   :month],
+       ['Weekly stats',    :week],
+       ['Daily stats', :day],
       ]
     end
 
@@ -91,11 +142,20 @@ module StatsHelper
       classes.join ' '
     end
 
+    def all_time?
+        @timeframe == 'all_time'
+    end
 
     def change_page nbr
       case @timeframe
         when 'year'
           [(@from + nbr.year).beginning_of_year, (@to + nbr.year).end_of_year]
+        when 'study_year'
+          from, to = get_study_year(get_current_study_year_index+nbr)
+          [(from).beginning_of_day, (to).end_of_day]
+        when 'study_period'
+          from, to = get_study_period(get_current_study_period_index+nbr)
+          [(from).beginning_of_day, (to).end_of_day]
         when 'month'
           [(@from + nbr.month).beginning_of_month, (@to + nbr.month).end_of_month]
         when 'week'
@@ -108,7 +168,7 @@ module StatsHelper
     end
 
     def selected_timeframe frame
-      'selected' if @timeframe == frame.to_s 
+      'selected' if @timeframe == frame.to_s
     end
 
     def format_to_on_frame frame
@@ -120,21 +180,24 @@ module StatsHelper
     end
 
     def display_arrow user
+      no_session_number = 9999
+
       if @sessions_within_timeframe.nil? || @timeframe.nil?
         return nil
       end
 
       index = @sessions_within_timeframe.index { |s| s.user.cid == user }
-      old_index = if @old_sessions_within_timeframe.present? 
+      old_index = if @old_sessions_within_timeframe.present?
         @old_sessions_within_timeframe.index { |s| s.user.cid == user } || 9999
       else
-        9999
+        no_session_number
       end
 
       if index < old_index
-        return image_tag 'up-arrow.svg' 
+        from = old_index == no_session_number ? "You weren't here!" : "Up from " + (old_index + 1).to_s
+        return image_tag 'up-arrow.svg', title: from
       elsif index > old_index
-        return image_tag 'down-arrow.svg'
+        return image_tag 'down-arrow.svg', title: "Down from " + old_index.to_s
       else
         return nil
       end
