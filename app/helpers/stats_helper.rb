@@ -168,7 +168,7 @@ module StatsHelper
     end
 
     def selected_timeframe frame
-      'selected' if @timeframe == frame.to_s 
+      'selected' if @timeframe == frame.to_s
     end
 
     def format_to_on_frame frame
@@ -187,7 +187,7 @@ module StatsHelper
       end
 
       index = @sessions_within_timeframe.index { |s| s.user.cid == user }
-      old_index = if @old_sessions_within_timeframe.present? 
+      old_index = if @old_sessions_within_timeframe.present?
         @old_sessions_within_timeframe.index { |s| s.user.cid == user } || 9999
       else
         no_session_number
