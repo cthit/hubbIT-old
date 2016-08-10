@@ -126,11 +126,11 @@ module StatsHelper
     def timeframe_links
       # List of the anchor links to show on /stats
       [ # Name             Link
-       ['Daily stats', :day],
-       ['Weekly stats',    :week],
-       ['Monthly stats',   :month],
-       ['Study Period',    :study_period],
        ['Study Year',    :study_year],
+       ['Study Period',    :study_period],
+       ['Monthly stats',   :month],
+       ['Weekly stats',    :week],
+       ['Daily stats', :day],
       ]
     end
 
