@@ -4,8 +4,8 @@ class StatsController < ApplicationController
   before_action :set_user, except: [:get_stats]
   before_action :restrict_access, only: [:get_stats]
   def index
-    @study_year_index = 0
-    @study_period_index = 0
+    @study_year_index = get_current_study_year_index
+    @study_period_index = get_current_study_period_index
     @timeframe = params[:timeframe] || 'study_year'
     @from, @to = if params[:from].present? and params[:to].present?
       [params[:from], params[:to]]
