@@ -22,7 +22,7 @@ module StatsHelper
 
     def get_current_study_year_index()
         @@study_years.each_with_index do |study_year, index|
-            if study_year[0] <= Time.now && Time.now <= study_year[1]
+            if study_year[0].beginning_of_day <= Time.now && Time.now <= study_year[1].end_of_day
                 return index
             end
         end
