@@ -4,8 +4,8 @@ class StatsController < ApplicationController
   before_action :set_user, except: [:get_stats]
   before_action :restrict_access, only: [:get_stats]
   def index
-    @study_year_index = 0
-    @study_period_index = 0
+    @study_year_index = get_current_study_year_index
+    @study_period_index = get_current_study_period_index
     @timeframe = params[:timeframe] || 'study_year'
     @from, @to = if params[:from].present? and params[:to].present?
       [params[:from], params[:to]]
@@ -64,6 +64,9 @@ class StatsController < ApplicationController
   end
 
   def show
+    @from, @to = get_study_year get_current_study_year_index
+    @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
+
     @user_sessions = UserSession.with_user(@user).order("-created_at")
     @session = @user_sessions.first
     @longest_session = @user_sessions.longest_session.first.longest_session
@@ -71,8 +74,13 @@ class StatsController < ApplicationController
     if @session.present?
       @last_session_duration = @session.end_time - @session.start_time
 
-      @total_time = @user.users_total_time.total_time
-      @ranking = @user.ranking
+      @sessions_within_timeframe.each_with_index do |session, index|
+          if @user == session.user
+              @total_time = session.total_time
+              @ranking = index + 1
+              break
+          end
+      end
     else
       @last_session_duration = 0
       @total_time = 0
