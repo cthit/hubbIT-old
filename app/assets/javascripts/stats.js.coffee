@@ -3,14 +3,14 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-	chart=$('#chart')
-	if chart[0]
-		console.dir(window.innerWidth)
-		console.dir(chart[0])
-		chart[0].width = window.innerWidth * 0.8
+	$chart = $('#chart')
+	chart = $chart[0]
+
+	if chart
+		chart.width = window.innerWidth * 0.8
 
 
-		$.get chart.data("url"), (data) ->
+		$.get $chart.data("url"), (data) ->
 			counts = [0..23].map (i) -> data[i] || 0
 
 
@@ -23,15 +23,20 @@ $ ->
 				labels: [0..23]
 				datasets: [
 					data: percentages
-					fillColor: '#68d157'
-					strokeColor: '#2b881c'
+					backgroundColor: '#68d157'
+					borderColor: '#2b881c',
+					borderWidth: 1
 				]
 			options =
-				barStrokeWidth: 5
-				scaleOverride: true
-				scaleStartValue: 0
-				scaleSteps: 10
-				scaleLabel: "<%=parseInt(value * 100) / 100%>%"
-				scaleStepWidth: max/10
+				legend: false
+				maintainAspectRatio: false
+				scales:
+					yAxes: [
+						ticks:
+							callback: (value) => (parseInt(value * 100) / 100) + "%"
+					]
 
-			new Chart($('#chart')[0].getContext('2d')).Line(source, options)
+			new Chart $chart,
+				type: 'line'
+				data: source
+				options: options
