@@ -46,6 +46,7 @@ gem 'chart-js-rails'
 
 # Material design rails
 gem 'material_design_lite-rails'
+gem 'momentjs-rails'
 
 # Better output of time duration
 gem 'ruby-duration'
