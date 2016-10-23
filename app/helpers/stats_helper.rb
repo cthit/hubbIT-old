@@ -186,9 +186,9 @@ module StatsHelper
         return nil
       end
 
-      index = @sessions_within_timeframe.index { |s| s.user.cid == user }
+      index = @sessions_within_timeframe.find_index { |s| s.user.cid == user }
       old_index = if @old_sessions_within_timeframe.present?
-        @old_sessions_within_timeframe.index { |s| s.user.cid == user } || 9999
+        @old_sessions_within_timeframe.find_index { |s| s.user.cid == user } || 9999
       else
         no_session_number
       end

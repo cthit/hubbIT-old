@@ -15,13 +15,15 @@
         </tr>
       </thead>
       <% @sessions.each do |session| %>
-          <tr class="<%= "me" if current_user.id == session.user.id %>">
+          <tr class="<%= "me" if current_user.id == session.user.id %>" data-cid="<%= session.user.id %>">
         <td class="user-row">
           <%= link_to session.user.nick, stats_path(session.user.id) %>
         </td>
         <td class="time-cell">
-          <%= "Since " + session.start_time.strftime('%H:%M') %>
-          (<%= distance_of_time_in_words_to_now session.start_time %>)
+            <%= "Since " + session.start_time.strftime('%H:%M') %>
+          <time class="moment" datetime="<%= session.start_time.iso8601 %>">
+            (<%= distance_of_time_in_words_to_now session.start_time %>)
+          </time>
         </td>
       </tr>
       <% end %>

@@ -9,7 +9,7 @@
 #
 
 class MacAddress < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, inverse_of: :devices
   has_many :sessions, foreign_key: :mac_address
 
   before_validation :format_mac
