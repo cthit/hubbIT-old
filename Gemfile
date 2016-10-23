@@ -63,6 +63,7 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'puma', group: :development
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

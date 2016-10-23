@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   include SessionsHelper
   before_action :restrict_access, only: :update
 
-  @@semaphore = Mutex.new
+  @@semaphore ||= Mutex.new
 
   def index
     @sessions = UserSession.active.includes(:user)
@@ -44,9 +44,13 @@ class SessionsController < ApplicationController
 
           @u_session = UserSession.active.with_user(@user)
           if @u_session.any?
-            @u_session.last.update(end_time: new_time)
+            new_session = @u_session.last
+            if new_session.update(end_time: new_time)
+              ActionCable.server.broadcast('sessions_index', new_session)
+            end
           else
-            @user.user_sessions.create(start_time: DateTime.now, end_time: new_time)
+            new_session = @user.user_sessions.create(start_time: DateTime.now, end_time: new_time)
+            ActionCable.server.broadcast('sessions_index', new_session)
           end
 
           @hentry = HourEntry.with_user(@user).last
