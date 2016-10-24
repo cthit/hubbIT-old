@@ -7,8 +7,7 @@ updateTimestamps = () ->
         string = "(" + moment($(tag).attr('datetime')).fromNow(true) + ")"
         $(tag).text(string)
 
-
 $ ->
-    setTimeout ->
+    setInterval ->
         updateTimestamps()
-    , 1000
+    , 10000
