@@ -36,6 +36,14 @@
     }
 }
 
+.user-row a {
+    transition: opacity 50ms ease-in;
+}
+
+.animate .user-row a {
+    opacity: 0.8;
+}
+
 .noone {
     color: gray;
 }

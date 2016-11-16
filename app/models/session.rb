@@ -14,6 +14,6 @@
 class Session < ActiveRecord::Base
   scope :with_mac, -> (mac) { where(mac_address: mac) }
   scope :active, -> { where("end_time > ?", DateTime.now) }
-  belongs_to :user
-  belongs_to :mac_address, foreign_key: :mac_address
+  belongs_to :user, inverse_of: :sessions
+  belongs_to :device, foreign_key: :mac_address
 end
