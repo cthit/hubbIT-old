@@ -21,7 +21,7 @@ class MacAddress < ActiveRecord::Base
   private
     def format_mac
       if address.present?
-	       self.address = address.upcase.gsub(/[-:]/, '').scan(/.{2}/).join ':'
+	       self.address = address.strip.upcase.gsub(/[-:]/, '').scan(/.{2}/).join ':'
       end
     end
 end
