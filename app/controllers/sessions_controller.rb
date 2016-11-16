@@ -14,10 +14,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def list
-    @sessions = UserSession.active
-  end
-
   def update
     macs = params[:macs]
     unless macs.present?
