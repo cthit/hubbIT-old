@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   include SessionsHelper
-  before_action :restrict_access, only: [:index, :update]
+  before_action :restrict_access
 
   @@semaphore ||= Mutex.new
 
@@ -12,10 +12,6 @@ class SessionsController < ApplicationController
       format.json
       format.html
     end
-  end
-
-  def list
-    @sessions = UserSession.active
   end
 
   def update
@@ -68,8 +64,10 @@ class SessionsController < ApplicationController
     end
 
     def restrict_access
-      authenticate_or_request_with_http_token do |token, options|
-        ApiKey.exists?(access_token: token)
+      unless current_user
+        authenticate_or_request_with_http_token do |token, options|
+          ApiKey.exists?(access_token: token)
+        end
       end
     end
 end
