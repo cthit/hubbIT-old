@@ -17,4 +17,5 @@
 //= require Chart
 //= require material
 //= require turbolinks
+//= require turbolinks-compatibility
 //= require_tree .
