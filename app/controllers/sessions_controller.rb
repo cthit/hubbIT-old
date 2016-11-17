@@ -20,39 +20,39 @@ class SessionsController < ApplicationController
       render json: {error: 'macs cannot be nil'}, status: :unprocessable_entity
       return
     end
+    @addresses = macs.map do |m|
+      address, count = m
+      address.upcase
+    end
 
     @@semaphore.synchronize do
-        macs.each do |address|
-          address, count = address
-          mac = MacAddress.find_by(address: address.upcase)
-          next unless mac.present?
+        @addresses = MacAddress.where('address IN (?)', @addresses)
+        now = DateTime.now
+        new_time = now + 10.minutes
 
+        @addresses.each do |mac|
           @user = mac.user
-          @session = Session.active.with_mac(mac)
-          new_time = DateTime.now + 10.minutes
-          if @session.any?
-            @session.first.update(end_time: new_time)
+          sessions = mac.sessions.active
+
+          if sessions.any?
+            @session = sessions.first.update(end_time: new_time)
           else
-            logger.info("Creating session for #{@user.id} (#{address})")
-            @session = @user.sessions.create(mac_address: mac,
-              start_time: DateTime.now, end_time: new_time)
+            logger.info("Creating session for #{@user.id} (#{mac.address})")
+            @session = sessions.create(start_time: now, end_time: new_time)
           end
 
-          @u_session = UserSession.active.with_user(@user)
+          @u_session = @user.user_sessions.active
           if @u_session.any?
             new_session = @u_session.last
             if new_session.update(end_time: new_time)
               ActionCable.server.broadcast('sessions_index', new_session)
             end
           else
-            new_session = @user.user_sessions.create(start_time: DateTime.now, end_time: new_time)
+            new_session = @user.user_sessions.create(start_time: now, end_time: new_time)
             ActionCable.server.broadcast('sessions_index', new_session)
           end
 
-          @hentry = HourEntry.with_user(@user).last
-          if @hentry.nil? || (@hentry.date < Date.today || @hentry.hour < DateTime.now.hour)
-            @user.hour_entries.create(date: Date.today, hour: DateTime.now.hour)
-          end
+          @user.hour_entries.find_or_create_by(date: Date.today, hour: now.hour)
         end
     end
     head :no_content
