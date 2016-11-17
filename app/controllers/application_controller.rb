@@ -10,6 +10,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user?
+    begin
+      @current_user || current_user
+    rescue SecurityError
+      false
+    end
+  end
+
   def current_user
     if not cookies[:chalmersItAuth].present?
       raise SecurityError, "Missing cookie"
