@@ -64,10 +64,8 @@ class SessionsController < ApplicationController
     end
 
     def restrict_access
-      unless current_user
-        authenticate_or_request_with_http_token do |token, options|
-          ApiKey.exists?(access_token: token)
-        end
+      current_user? || authenticate_or_request_with_http_token do |token, options|
+        ApiKey.exists?(access_token: token)
       end
     end
 end

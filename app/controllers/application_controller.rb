@@ -3,13 +3,27 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
-  rescue_from SecurityError, with: :not_signed_in
+  rescue_from 'SecurityError' do |error|
+    respond_to do |format|
+      format.json { render json: {error: error}, status: :forbidden }
+      format.html { not_signed_in }
+    end
+  end
+
+  def current_user?
+    begin
+      @current_user || current_user
+    rescue SecurityError
+      false
+    end
+  end
 
   def current_user
-    if not cookies[:chalmersItAuth].present?
+    auth_cookie = cookies[:chalmersItAuth]
+    if not auth_cookie.present?
       raise SecurityError, "Missing cookie"
     end
-    @current_user ||= if session[:cookie] == cookies[:chalmersItAuth] && session[:user].present?
+    @current_user ||= if session[:cookie] == auth_cookie && session[:user].present?
       User.find(session[:user])
     else
       reset_session
