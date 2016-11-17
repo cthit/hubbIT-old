@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   include SessionsHelper
-  before_action :restrict_access
+  before_action :authenticate
 
   @@semaphore ||= Mutex.new
 
@@ -84,9 +84,22 @@ class SessionsController < ApplicationController
       params.require(:session).permit(:mac_address, :user_id, :start_time, :end_time)
     end
 
-    def restrict_access
-      current_user? || authenticate_or_request_with_http_token do |token, options|
+    def authenticate
+      authenticated, token_present = authenticate_token
+      return if authenticated
+
+      raise SecurityError.new "HTTP Token: Access denied" if token_present
+
+      current_user
+    end
+
+    def authenticate_token
+      token_is_set = false
+      res = authenticate_with_http_token do |token, options|
+        token_is_set = token.present?
         ApiKey.exists?(access_token: token)
       end
+
+      [res, token_is_set]
     end
 end
