@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   include SessionsHelper
-  before_action :restrict_access
+  before_action :authenticate
 
   @@semaphore ||= Mutex.new
 
@@ -25,36 +25,57 @@ class SessionsController < ApplicationController
       address.upcase
     end
 
+    @addresses = MacAddress.where('address IN (?)', @addresses)
+    @users = User.find(@addresses.map(&:user_id).uniq)
+
     @@semaphore.synchronize do
-        @addresses = MacAddress.where('address IN (?)', @addresses)
-        now = DateTime.now
-        new_time = now + 10.minutes
+      now = DateTime.now
+      new_time = now + 10.minutes
+      sessions_to_save = []
+      user_sessions_to_save = []
+      hour_entries_to_save = []
 
-        @addresses.each do |mac|
-          @user = mac.user
-          sessions = mac.sessions.active
+      @addresses.each do |mac|
+        sessions = mac.sessions.active
 
-          if sessions.any?
-            @session = sessions.first.update(end_time: new_time)
-          else
-            logger.info("Creating session for #{@user.id} (#{mac.address})")
-            @session = sessions.create(user: @user, start_time: now, end_time: new_time)
-          end
+        session = sessions.first_or_initialize do |s|
+          s.user = mac.user
+          s.start_time = now
 
-          @u_session = @user.user_sessions.active
-          if @u_session.any?
-            new_session = @u_session.last
-            if new_session.update(end_time: new_time)
-              ActionCable.server.broadcast('sessions_index', new_session)
-            end
-          else
-            new_session = @user.user_sessions.create(start_time: now, end_time: new_time)
-            ActionCable.server.broadcast('sessions_index', new_session)
-          end
-
-          @user.hour_entries.find_or_create_by(date: Date.today, hour: now.hour)
+          logger.info("Creating session for #{mac.user.id} (#{mac.address})")
         end
+        session.end_time = new_time
+
+        sessions_to_save << session
+      end
+
+      @users.each do |user|
+        user_sessions = user.user_sessions.active
+
+        new_record = false
+        user_session = user_sessions.first_or_initialize do |us|
+          us.start_time = now
+          new_record = true
+        end
+        user_session.end_time = new_time
+        user_sessions_to_save << user_session
+        ActionCable.server.broadcast('sessions_index', user_session) if new_record
+
+        hour_entry = user.hour_entries.where(date: Date.today, hour: now.hour).first_or_initialize
+        hour_entries_to_save << hour_entry
+      end
+
+      Session.transaction do
+        UserSession.transaction do
+          HourEntry.transaction do
+            sessions_to_save.each(&:save!)
+            user_sessions_to_save.each(&:save!)
+            hour_entries_to_save.each(&:save!)
+          end
+        end
+      end
     end
+
     head :no_content
   end
 
@@ -63,9 +84,22 @@ class SessionsController < ApplicationController
       params.require(:session).permit(:mac_address, :user_id, :start_time, :end_time)
     end
 
-    def restrict_access
-      current_user? || authenticate_or_request_with_http_token do |token, options|
+    def authenticate
+      authenticated, token_present = authenticate_token
+      return if authenticated
+
+      raise SecurityError.new "HTTP Token: Access denied" if token_present
+
+      current_user
+    end
+
+    def authenticate_token
+      token_is_set = false
+      res = authenticate_with_http_token do |token, options|
+        token_is_set = token.present?
         ApiKey.exists?(access_token: token)
       end
+
+      [res, token_is_set]
     end
 end
