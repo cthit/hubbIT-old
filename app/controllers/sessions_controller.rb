@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
             @session = sessions.first.update(end_time: new_time)
           else
             logger.info("Creating session for #{@user.id} (#{mac.address})")
-            @session = sessions.create(start_time: now, end_time: new_time)
+            @session = sessions.create(user: @user, start_time: now, end_time: new_time)
           end
 
           @u_session = @user.user_sessions.active
