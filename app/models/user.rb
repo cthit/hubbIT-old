@@ -20,7 +20,28 @@ class User < ActiveRecord::Base
 
 	delegate :ranking, to: :users_total_time
 
-	ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen]
+	ALLOWED_GROUPS = [
+		:styrit, 
+		:snit, 
+		:sexit, 
+		:prit, 
+		:nollkit, 
+		:armit, 
+		:digit, 
+		:fanbarerit, 
+		:fritid, 
+		:'8bit', 
+		:drawit, 
+		:flashit, 
+		:hookit, 
+		:revisorer, 
+		:valberedningen,
+		:emeritus,
+		:sprit,
+		:exit,
+		:didit,
+		:nollqit
+		]
 
 	self.primary_key = :cid
 
@@ -80,7 +101,7 @@ end
 class Symbol
 	def itize
 		case self
-			when :digit, :styrit, :sexit, :fritid, :snit
+			when :digit, :styrit, :sexit, :fritid, :snit, :didit, :exit, :emeritus
 				self.to_s.gsub /it/, 'IT'
 			when :drawit, :armit, :hookit, :flashit
 				self.to_s.titleize.gsub /it/, 'IT'
@@ -92,8 +113,14 @@ class Symbol
 				'P.R.I.T.'
 			when :fanbarerit
 				'FanbärerIT'
+			when :sprit
+				'S.P.R.I.T.'
+			when :nollqit
+				'NollQIT'
 			when :valberedningen
 				'Valberedningen'
+			when :revisorer
+				'Revisorer'
 			else
 				self.to_s
 		end
