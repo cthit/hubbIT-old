@@ -1,7 +1,7 @@
 <div class="group-box-container">
   <table class="mdl-data-table mdl-shadow--2dp">
-    <tr class="header-row">
-      <th><%= name.itize %></th>
+    <tr class="header-row" id="<%= 'hookIT' if name.itize == 'HookIT' %>">
+      <th><%= name.itize if name.itize != 'HookIT' else 'WANTED' %></th>
     </tr>
     <% users.each do |user| %>
       <tr>
