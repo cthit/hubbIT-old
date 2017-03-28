@@ -57,7 +57,7 @@
 }
 
 tr#HookIT {
-    background: url(<%= asset_path 'wanted.png' %>);
+    background: image-url("wanted.png");
     th {
         color: #282828;
         font-family: "Rye";
