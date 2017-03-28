@@ -2,40 +2,41 @@
 <div>You don't seem to have any MAC-addresses defined, go to your <%= link_to "user page", edit_user_path(current_user) %> and add some!</div>
 <% end %>
 
-
-<div class="active-sessions-container">
-  <div>
-    <% if @sessions.any? %>
-      There are <%= @sessions.count %> smurfs in the Hubb right now!
-    <table class="mdl-data-table mdl-shadow--2dp">
-      <thead>
-        <tr class="header-row">
-          <th class="user-row">Name</th>
-          <th class="status-cell">Current status</th>
+<div class="sessions-container">
+  <div class="active-sessions-container">
+    <div>
+      <% if @sessions.any? %>
+        There are <%= @sessions.count %> smurfs in the Hubb right now!
+      <table class="mdl-data-table mdl-shadow--2dp">
+        <thead>
+          <tr class="header-row">
+            <th class="user-row">Name</th>
+            <th class="status-cell">Current status</th>
+          </tr>
+        </thead>
+        <% @sessions.each do |session| %>
+            <tr class="<%= "me" if current_user.id == session.user.id %>" data-cid="<%= session.user.id %>">
+          <td class="user-row">
+            <%= link_to session.user.nick, stats_path(session.user.id) %>
+          </td>
+          <td class="time-cell">
+              <%= "Since " + session.start_time.strftime('%H:%M') %>
+            <time class="moment" datetime="<%= session.start_time.iso8601 %>">
+              (<%= distance_of_time_in_words_to_now session.start_time %>)
+            </time>
+          </td>
         </tr>
-      </thead>
-      <% @sessions.each do |session| %>
-          <tr class="<%= "me" if current_user.id == session.user.id %>" data-cid="<%= session.user.id %>">
-        <td class="user-row">
-          <%= link_to session.user.nick, stats_path(session.user.id) %>
-        </td>
-        <td class="time-cell">
-            <%= "Since " + session.start_time.strftime('%H:%M') %>
-          <time class="moment" datetime="<%= session.start_time.iso8601 %>">
-            (<%= distance_of_time_in_words_to_now session.start_time %>)
-          </time>
-        </td>
-      </tr>
+        <% end %>
+      </table>
+      <% else %>
+        <div class="noone">There's no one here :(</div>
       <% end %>
-    </table>
-    <% else %>
-      <div class="noone">There's no one here :(</div>
+    </div>
+  </div>
+
+  <div class="active-groups-container">
+    <% @groups.each do |name, users| %>
+      <%= render "sessions/group_box", name: name, users: users %>
     <% end %>
   </div>
-</div>
-
-<div class="active-groups-container">
-  <% @groups.each do |name, users| %>
-    <%= render "sessions/group_box", name: name, users: users %>
-  <% end %>
 </div>
