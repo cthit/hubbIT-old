@@ -18,6 +18,13 @@ module StatsHelper
         [Time.new(2016,10,30), Time.new(2017,1,14)],
         [Time.new(2017,1,15), Time.new(2017,3,18)],
         [Time.new(2017,3,19), Time.new(2017,6,9)],
+
+        [Time.new(2017,6,10), Time.new(2017,8,27)], # Summer break
+
+        [Time.new(2017,8,28), Time.new(2017,10,29)],
+        [Time.new(2017,10,30), Time.new(2018,1,14)],
+        [Time.new(2018,1,15), Time.new(2018,3,18)],
+        [Time.new(2018,3,19), Time.new(2018,6,5)],
     ]
 
     def get_current_study_year_index()
