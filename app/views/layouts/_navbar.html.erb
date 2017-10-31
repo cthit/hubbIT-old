@@ -5,7 +5,7 @@
                 <%= link_to_unless_current 'Me', current_user %>
             </li>
         <% end %>
-            <li class="<%= 'active' if current_page?(sessions_path) %>">
+            <li class="<%= 'active' if current_page?(sessions_path) or current_page?(root_path) %>">
                 <%= link_to_unless_current 'Smurfs in the Hubb', sessions_path %>
             </li>
             <li class="<%= 'active' if current_page?(all_stats_path) %>">
