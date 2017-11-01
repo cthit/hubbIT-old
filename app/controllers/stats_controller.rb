@@ -73,6 +73,8 @@ class StatsController < ApplicationController
 
     if @session.present?
       @last_session_duration = @session.end_time - @session.start_time
+      @total_time = 0
+      @ranking = 0
 
       @sessions_within_timeframe.each_with_index do |session, index|
           if @user == session.user
