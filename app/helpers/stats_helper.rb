@@ -103,7 +103,7 @@ module StatsHelper
           seconds += (s.end_time - s.start_time)
         end
 
-        if @session.end_time > Time.zone.now
+        if @session.present? && @session.end_time > Time.zone.now
           seconds - (@session.end_time - Time.zone.now)
         else
           seconds
