@@ -69,10 +69,12 @@ class StatsController < ApplicationController
 
     @user_sessions = UserSession.with_user(@user).order("-created_at")
     @session = @user_sessions.first
-    @longest_session = @user_sessions.longest_session.first.longest_session
+    @longest_session = @user_sessions.with_longest_session.first.longest_session
 
     if @session.present?
       @last_session_duration = @session.end_time - @session.start_time
+      @total_time = 0
+      @ranking = 0
 
       @sessions_within_timeframe.each_with_index do |session, index|
           if @user == session.user
