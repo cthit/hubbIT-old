@@ -10,10 +10,10 @@
 
 class User < ActiveRecord::Base
 	include HTTParty
-	has_many :devices, class_name: MacAddress
-	has_many :sessions
-	has_many :hour_entries, foreign_key: :cid
-	has_many :user_sessions
+	has_many :devices, class_name: MacAddress, dependent: :destroy
+	has_many :sessions, dependent: :destroy
+	has_many :hour_entries, foreign_key: :cid, dependent: :destroy
+	has_many :user_sessions, dependent: :destroy
 	has_one :users_total_time, class_name: UsersTotalTime
 
 	scope :with_total_time, -> { select('users.*', 'total_time').joins(:users_total_time).where('total_time IS NOT NULL').order('users_total_time.total_time desc') }
