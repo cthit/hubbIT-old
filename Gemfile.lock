@@ -73,6 +73,8 @@ GEM
     factory_bot_rails (4.8.2)
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
+    faker (1.8.7)
+      i18n (>= 0.7)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     httparty (0.14.0)
@@ -235,6 +237,7 @@ DEPENDENCIES
   chart-js-rails
   coffee-rails (~> 4.2.1)
   factory_bot_rails
+  faker
   httparty
   jbuilder (~> 2.0)
   jquery-rails

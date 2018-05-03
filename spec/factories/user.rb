@@ -1,4 +1,4 @@
 FactoryBot.define do
-  factory :api_key do
+  factory :user do
   end
 end
