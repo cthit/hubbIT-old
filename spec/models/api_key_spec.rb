@@ -1,16 +1,6 @@
-# == Schema Information
-#
-# Table name: api_keys
-#
-#  id           :integer          not null, primary key
-#  access_token :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  comment      :string(255)
-#
-
-require 'spec_helper'
-
 describe ApiKey do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'should generate an access token' do
+    a = create(:api_key)
+    expect(a.access_token).not_to be_empty
+  end
 end
