@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    cid Faker::Internet.domain_word
+    cid { Faker::Internet.domain_word }
 
     factory :user_with_devices do
       transient do
