@@ -52,10 +52,12 @@ gem 'momentjs-rails'
 gem 'ruby-duration'
 
 # Testing gems
-gem "rspec-rails", :group => [:test, :development]
+gem 'rspec-rails', :group => [:test, :development]
 group :test do
-  gem "factory_girl_rails"
-  gem "capybara"
+  gem 'factory_bot_rails'
+  gem 'capybara'
+  gem 'faker'
+  gem 'timecop'
 end
 
 # Use ActiveModel has_secure_password
