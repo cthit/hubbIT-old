@@ -33,12 +33,12 @@ class StatsController < ApplicationController
     @page = params[:page].to_i || 0
     @from, @to = change_page @page
 
-    @active_users = UserSession.includes(:user).active.map(&:user)
-    @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
+    @active_users = UserSession.active.map(&:user)
+    @sessions_within_timeframe = UserSession.time_between(@from, @to)
 
     if @timeframe.present?
       old_from, old_to = change_page -1
-      @old_sessions_within_timeframe = UserSession.includes(:user).time_between(old_from, old_to)
+      @old_sessions_within_timeframe = UserSession.time_between(old_from, old_to)
     end
   end
 
