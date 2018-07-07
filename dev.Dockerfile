@@ -23,6 +23,8 @@ ENV DATABASE_NAME hubbit_dev
 ENV DATABASE_HOST db
 ENV DATABASE_USER hubbit
 ENV DATABASE_PASSWORD iamapassword
+ENV DATABASE_ADAPTER mysql2
+
 
 # Start server
 ENV RAILS_ENV development
