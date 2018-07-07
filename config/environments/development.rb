@@ -47,7 +47,7 @@ Rails.application.configure do
 
   #
   config.web_console.whitelisted_ips = '172.20.0.0/12'
-
+  Rails.application.config.action_cable.allowed_request_origins = ['http://local.chalmers.it:4000']
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
