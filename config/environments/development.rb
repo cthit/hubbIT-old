@@ -45,6 +45,9 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  #
+  config.web_console.whitelisted_ips = '172.20.0.0/12'
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

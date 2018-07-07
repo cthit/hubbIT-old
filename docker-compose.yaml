@@ -4,13 +4,13 @@ services:
     image: mariadb
     environment:
       MYSQL_DATABASE: hubbit_dev
-      MYSQL_USER: "hubbit"
+      MYSQL_USER: hubbit
       MYSQL_PASSWORD: iamapassword
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
    web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     ports:
       - "4000:3000"
     depends_on:

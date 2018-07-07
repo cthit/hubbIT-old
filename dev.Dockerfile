@@ -18,7 +18,7 @@ RUN chown -R ruby /app
 USER ruby
 
 # Database defaults
-ENV DATABASE_NAME hubbit
+ENV DATABASE_NAME hubbit_dev
 ENV DATABASE_HOST db
 ENV DATABASE_USER hubbit
 ENV DATABASE_PASSWORD iamapassword
