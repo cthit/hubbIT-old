@@ -10,7 +10,7 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: mysql2
+  adapter: <%= ENV.fetch("DATABASE_ADAPTER") %>
   encoding: utf8
   username: <%= ENV.fetch("DATABASE_USER") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD") %>
@@ -20,7 +20,7 @@ default: &default
 
 development:
   <<: *default
-  database: hubbit_dev
+  database: <%= ENV.fetch("DATABASE_NAME") %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

@@ -2,8 +2,7 @@ FROM ruby:2.3.3
 #
 RUN apt-get update && apt-get install -y \
 #Packages
-net-tools \
-nodejs
+net-tools
 
 #Install gems
 RUN mkdir /app
@@ -18,10 +17,11 @@ RUN chown -R ruby /app
 USER ruby
 
 # Database defaults Replace these in Rancher.
-ENV DATABASE_NAME user
+ENV DATABASE_NAME name
 ENV DATABASE_HOST host
 ENV DATABASE_USER user
 ENV DATABASE_PASSWORD pass
+ENV DATABASE_ADAPTER mysql2
 
 # Start server
 ENV RAILS_ENV production
