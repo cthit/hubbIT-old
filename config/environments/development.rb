@@ -45,7 +45,7 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  #
+  #enable displaying information when application is run in a docker container
   config.web_console.whitelisted_ips = '172.20.0.0/12'
   Rails.application.config.action_cable.allowed_request_origins = ['http://local.chalmers.it:4000']
   # Raises error for missing translations
