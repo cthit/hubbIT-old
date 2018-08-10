@@ -3,3 +3,34 @@ hubbIT
 Is used together with https://github.com/cthit/hubbIT-sniffer
 
 Is build in rails...
+
+### To setup the docker development environment:
+
+rename or copy the files `config/database.example.yml` to `config/database.yml` and `config/secrets.example.yml` to `config/secrets.yml`
+
+``` bash
+cp config/database.example.yml config/database.yml
+cp config/secrets.example.yml config/secrets.yml
+```
+
+now run
+```
+docker-compose up --build
+```
+
+sometimes you will need to kill the server and restart it again if you encounter database errors.
+
+```
+docker-compose up
+```
+
+you should now have a server live on port 4000
+
+To solve authentication against accounts add
+
+```
+0.0.0.0       local.chalmers.it
+```
+to `/etc/hosts`
+
+If you use Windows. I don't know. Pray or Google it.
