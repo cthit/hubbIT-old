@@ -4,6 +4,7 @@ module StatsHelper
         [Time.new(2015,8,18), Time.new(2016,8,15)],
         [Time.new(2016,8,16), Time.new(2017,8,15)],
         [Time.new(2017,8,16), Time.new(2018,8,15)],
+        [Time.new(2018,8,16), Time.new(2019,8,15)],
     ]
 
     @@study_period = [
@@ -25,6 +26,16 @@ module StatsHelper
         [Time.new(2017,10,30), Time.new(2018,1,14)],
         [Time.new(2018,1,15), Time.new(2018,3,18)],
         [Time.new(2018,3,19), Time.new(2018,6,5)],
+
+        [Time.new(2018,6,6), Time.new(2018,9,2)], # Summer break
+        
+        [Time.new(2018,9,3), Time.new(2018,11,4)], #LP1
+        [Time.new(2018,11,5), Time.new(2019,1,20)], #LP2
+        [Time.new(2019,1,21), Time.new(2019,3,24)], #LP3
+        [Time.new(2019,3,25), Time.new(2019,6,8)], #LP4
+        
+        [Time.new(2019,6,9), Time.new(2019,9,3)], # Summer break
+
     ]
 
     def get_current_study_year_index()
