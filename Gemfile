@@ -16,6 +16,8 @@ gem 'therubyracer',  platforms: :ruby
 
 gem 'whenever', :require => false
 
+gem 'bootsnap'
+
 # caching!
 gem 'redis-rails'
 
