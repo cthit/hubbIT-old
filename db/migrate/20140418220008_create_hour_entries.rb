@@ -1,4 +1,4 @@
-class CreateHourEntries < ActiveRecord::Migration
+class CreateHourEntries < ActiveRecord::Migration[5.1]
   def change
     create_table :hour_entries do |t|
       t.string :cid
