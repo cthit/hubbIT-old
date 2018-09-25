@@ -2,7 +2,7 @@ FROM ruby:2.5.1
 #
 RUN apt-get update && apt-get install -y \
 #Packages
-net-tools
+net-tools netcat
 
 RUN apt-get clean
 
