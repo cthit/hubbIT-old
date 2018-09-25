@@ -32,5 +32,6 @@ ENV SECRET_KEY_BASE secret
 ENV PORT 3000
 EXPOSE 3000
 
+RUN rails assets:precompile
 
 CMD ["sh", "start.sh"]
