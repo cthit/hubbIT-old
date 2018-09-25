@@ -6,20 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-def random_mac
-  (0..15).to_a.sample(12).map{ |n| n.to_s(16) }.each_slice(2).to_a.map { |arr| arr.join }.join(":").upcase
-end
-
-ALPHABET = ('a'..'z').to_a
-
-def random_cid(len = 7)
-  ALPHABET.sample(len).join
-end
-
-
-30.times do
-  u = User.create(cid: random_cid)
-  [1, 2, 3].sample.times do
-    u.devices.create(address: random_mac)
-  end
-end
+load(Rails.root.join('db', 'seeds', "#{Rails.env.downcase}.rb"))
