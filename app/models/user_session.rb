@@ -13,7 +13,8 @@
 class UserSession < ActiveRecord::Base
   scope :with_user, -> (user) { where(user_id: user) }
   scope :active, -> { where("end_time > ?", DateTime.now) }
-  scope :time_between, -> (from=0, to='2099-01-01') {
+  scope :time_between, -> (from='2010-01-01', to='2099-01-01') {
+    
     where('start_time >= ? and end_time <= ?', from, to)
       .select('user_id, SUM(TIMESTAMPDIFF(SECOND, START_TIME, END_TIME)) as total_time')
       .group(:user_id)
