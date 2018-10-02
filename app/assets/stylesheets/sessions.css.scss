@@ -29,9 +29,9 @@
           margin-top: 15px;
       }
 
-  	.status-cell {
-  		text-align: center;
-  	}
+    .status-cell {
+      text-align: center;
+    }
   }
 
   .active-groups-container {
@@ -59,7 +59,7 @@
   }
 
   .group-box-container {
-  	margin: 0 0.5em 1em;
+    margin: 0 0.5em 1em;
     width: 150px;
     flex: 1;
     flex-basis: 150px;
@@ -72,7 +72,7 @@
       background-color: #00b3e6;
   }
 
-  tr#HookIT {
+  tr#hookit {
     background: image-url("wanted.png");
     th {
       color: #282828;
@@ -80,12 +80,45 @@
       font-size: 1em;
     }
   }
-  tr#FikIT { 
+  tr#fikit { 
     background: image-url("fikIT.png");
     th {
       color: white;
       font-size: 1em;
       text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     } 
+  }
+  tr#prit {
+    background: image-url("pritbak.png");
+    th {
+      color: white;
+    }
+  }
+
+  tr#nollkit {
+    background: image-url("nollkit.png");
+    th {
+      opacity: 0;
+    }
+  }
+
+  tr#digit {
+    background: image-url("digIT.png");
+    th {
+      color: white;
+    }
+  }
+  tr#styrit {
+    background: image-url("styritsvagn.jpg");
+    th {
+      color: white;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+  }
+  tr#drawit {
+    background: image-url("drawit.png");
+    th {
+      color: white;
+    }
   }
 }
