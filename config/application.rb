@@ -15,7 +15,7 @@ module HubbIT
 
     config.load_defaults 5.0
 
-    config.cache_store = :redis_store, { :host => "localhost",
+    config.cache_store = :redis_store, { :host => "redis",
                                          :port => 6379,
                                          :db => 0,
                                          :namespace => "hubbit",
