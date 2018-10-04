@@ -34,3 +34,10 @@ To solve authentication against accounts add
 to `/etc/hosts`
 
 If you use Windows. I don't know. Pray or Google it.
+
+### Testing ###
+If you want to simulate a user that is in the hub for testing purposes you can run:
+```
+curl -X PUT -H "Authorization: Token token=<API_TOKEN>" -F "macs[]=<The mac adresses, must be in testing database>" localhost:4000/sessions
+```
+ask digIT for the api_key

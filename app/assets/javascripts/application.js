@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require moment
-//= require Chart
+//= require Chart.min
 //= require material
 //= require turbolinks
 //= require turbolinks-compatibility

@@ -11,7 +11,10 @@ services:
     build:
       context: .
       dockerfile: dev.Dockerfile
+    command: bash -c "sh wait_for_db.sh && sh start.sh"
     ports:
       - "4000:3000"
     depends_on:
       - db
+    volumes: 
+      - .:/app

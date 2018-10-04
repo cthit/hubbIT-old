@@ -1,4 +1,4 @@
-class CreateTotalTimeView < ActiveRecord::Migration
+class CreateTotalTimeView < ActiveRecord::Migration[5.1]
   def self.up
     execute <<-SQL
       CREATE VIEW users_total_time AS

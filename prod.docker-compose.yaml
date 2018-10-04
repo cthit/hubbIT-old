@@ -1,0 +1,21 @@
+version: '2'
+services:
+   db:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: name
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+   web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:3000"
+    depends_on:
+      - db
+   redis:
+    image: redis
+    ports: 
+      - "6379:6379"
