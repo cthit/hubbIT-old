@@ -40,4 +40,6 @@ If you want to simulate a user that is in the hub for testing purposes you can r
 ```
 curl -X PUT -H "Authorization: Token token=<API_TOKEN>" -F "macs[]=<The mac adresses, must be in testing database>" localhost:4000/sessions
 ```
-ask digIT for the api_key
+ask digIT for the api_key production key
+Or in development The key is set to 123456789
+
