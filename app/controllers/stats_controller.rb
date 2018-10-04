@@ -64,7 +64,7 @@ class StatsController < ApplicationController
   end
 
   def show
-    @from, @to = get_study_year get_current_study_year_index
+    @from, @to = [Date.new(0), Date.new(2999)]
     @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
 
     @user_sessions = UserSession.with_user(@user).order("-created_at")
