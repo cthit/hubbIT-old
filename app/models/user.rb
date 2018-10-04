@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
 	delegate :ranking, to: :users_total_time
 
-	ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :fikit]
+	ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :dpo, :fikit]
 
 	self.primary_key = :cid
 
@@ -94,6 +94,10 @@ class Symbol
 				'FanbärerIT'
 			when :valberedningen
 				'Valberedningen'
+			when :revisorer
+			        'Revisorerna'
+			when :dpo
+			        'DPO'
 			else
 				self.to_s
 		end
