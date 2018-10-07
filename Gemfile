@@ -43,6 +43,8 @@ gem 'annotate'
 # HTTP api wrapper (for auth)
 gem 'httparty'
 
+gem 'rest-client'
+
 # OAuth2
 gem 'activeresource'
 gem 'omniauth-oauth2'
