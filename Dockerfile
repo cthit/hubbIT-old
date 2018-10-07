@@ -41,6 +41,7 @@ ENV DATABASE_ADAPTER mysql2
 
 ENV OAUTH_ID oauth_id
 ENV OAUTH_SECRET oauth_secret
+ENV CLIENT_CREDENTIALS oauth_client_credentials
 
 # Start server
 ENV RAILS_ENV production

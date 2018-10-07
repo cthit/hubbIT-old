@@ -1,6 +1,7 @@
 class User < ActiveResource::Base
   extend ActiveModel::Naming
   self.site = Rails.configuration.account_ip
+  ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :fikit]
 
   def devices
     @devices ||= MacAddress.where user_id: self.id
@@ -20,5 +21,32 @@ class User < ActiveResource::Base
 
   def self.headers
     { 'authorization' => "Bearer #{Rails.application.secrets.client_credentials}" }
+  end
+end
+
+class Symbol
+  def itize
+    case self
+      when :digit, :styrit, :sexit, :fritid, :snit
+        self.to_s.gsub /it/, 'IT'
+      when :drawit, :armit, :hookit, :flashit, :laggit, :fikit
+        self.to_s.titleize.gsub /it/, 'IT'
+      when :'8bit'
+        '8-bIT'
+      when :nollkit
+        'NollKIT'
+      when :prit
+        'P.R.I.T.'
+      when :fanbarerit
+        'FanbärerIT'
+      when :valberedningen
+        'Valberedningen'
+      when :revisorer
+        'Revisorerna'
+      when :dpo
+        'DPO'
+      else
+        self.to_s
+    end
   end
 end

@@ -7,4 +7,9 @@ class Session < ActiveRecord::Base
   def user
     @user ||= User.find self.user_id
   end
+
+  def user=(user)
+    @user = user
+    self.user_id = user.id
+  end
 end
