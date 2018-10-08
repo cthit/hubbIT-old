@@ -22,6 +22,13 @@ class User < ActiveResource::Base
   def self.headers
     { 'authorization' => "Bearer #{Rails.application.secrets.client_credentials}" }
   end
+
+  def destroy
+    devices.delete_all
+    sessions.delete_all
+    user_sessions.delete_all
+    hour_entries.delete_all
+  end
 end
 
 class Symbol
