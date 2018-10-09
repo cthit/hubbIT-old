@@ -64,22 +64,33 @@ class StatsController < ApplicationController
   end
 
   def show
-    @from, @to = [Date.new(0), Date.new(2999)]
+    @from, @to = [Date.new(0), Date.new(2999)] 
     @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
 
     @user_sessions = UserSession.with_user(@user).order("-created_at")
     @session = @user_sessions.first
     @longest_session = @user_sessions.with_longest_session.first.longest_session
-
+    
     if @session.present?
       @last_session_duration = @session.end_time - @session.start_time
       @total_time = 0
       @ranking = 0
-
+      @average_time = 0
+      
       @sessions_within_timeframe.each_with_index do |session, index|
           if @user == session.user
               @total_time = session.total_time
               @ranking = index + 1
+
+
+              @average_time = @total_time/( @user_sessions.first.start_time - @user_sessions.last.end_time)
+              p @user_sessions.last.end_time
+              p @user_sessions.first.start_time
+              p @user_sessions.last.end_time - @user_sessions.first.start_time
+              p @total_time
+              #p @user_sessions.last
+              #@user_sessions.first.start_time - @user_session
+              #total_time / (Date.today -  @user_sessions.first)
               break
           end
       end

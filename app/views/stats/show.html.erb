@@ -31,6 +31,12 @@ Score: <%= seconds_to_score(@total_time) %>
                 <%= seconds_to_precise_words(@longest_session) %>
             <% end %>
         <% end %>
+
+         <% if @average_time %>
+            <%= info_box 'average time' do %>
+                <%= seconds_to_precise_words(@average_time) %>
+            <% end %>
+        <% end %>
     </div>
 
     <div class="graph-container">

@@ -15,13 +15,13 @@ class User < ActiveRecord::Base
 	has_many :hour_entries, foreign_key: :cid, dependent: :destroy
 	has_many :user_sessions, dependent: :destroy
 	has_one :users_total_time, class_name: UsersTotalTime
-
+	
 	scope :with_total_time, -> { select('users.*', 'total_time').joins(:users_total_time).where('total_time IS NOT NULL').order('users_total_time.total_time desc') }
 
 	delegate :ranking, to: :users_total_time
 
 	ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :fikit]
-
+	AdmissionYear = fetch_user admissionYear: 
 	self.primary_key = :cid
 
 	base_uri "https://account.chalmers.it/userInfo.php"
@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
 		fetch_user token: token
 	end
 
+
 	def self.find(cid)
 		super
 	rescue ActiveRecord::RecordNotFound
@@ -41,10 +42,11 @@ class User < ActiveRecord::Base
 	end
 
 	def nick
-		@nick ||= Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
+		@nick ||= Rails.cache.fetch "#{cid}/lastname", expires_in: 24.hours do
 			resp = self.class.send_request(query: { cid: cid })
-			if resp['nick'].present?
-				resp['nick']
+			if resp['lastname'].present?
+				if user.groups.contains[didit]
+				resp['lastname']
 			else
 				cid
 			end
@@ -52,7 +54,7 @@ class User < ActiveRecord::Base
 	end
 
 	def groups
-		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
+		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.seconds do
 			resp = self.class.send_request(query: { cid: cid })
 			if resp['groups'].present?
 				resp['groups']
