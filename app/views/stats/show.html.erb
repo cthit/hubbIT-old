@@ -20,7 +20,7 @@ Score: <%= seconds_to_score(@total_time) %>
             <%= human_time_today %>
         <% end %>
 
-                <% if @total_time %>
+         <% if @total_time %>
             <%= info_box 'Total time' do %>
                 <%= seconds_to_precise_words(@total_time) %><br />(<%= seconds_to_units(@total_time) %>)
             <% end %>

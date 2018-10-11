@@ -80,10 +80,10 @@ class StatsController < ApplicationController
 
       @sessions_within_timeframe.each_with_index do |session, index|
           if @user == session.user
-            @total_time = session.total_time
-            @ranking = index + 1
-            @percent_total =  (@total_time.to_f/( Time.now.to_f -  @user_sessions.first.start_time.to_f ))
-            @average_time = @percent_total * 3600 *24
+              @total_time = session.total_time
+              @ranking = index + 1
+              @percent_total =  (@total_time.to_f/ ( Time.now.to_f -  @user_sessions.last.start_time.to_f ))
+              @average_time = @percent_total * 3600 * 24
               break
           end
       end
