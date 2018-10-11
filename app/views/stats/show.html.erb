@@ -32,6 +32,14 @@ Score: <%= seconds_to_score(@total_time) %>
             <% end %>
         <% end %>
     </div>
+    
+        <% if @average_time %>
+            <%= info_box 'Average time' do %>
+                <%= seconds_to_precise_words(@average_time) %>
+            <% end %>
+        <% end %>
+    </div>
+
 
     <div class="graph-container">
         <h2 class="graph-header">Hours at the Hub</h2>

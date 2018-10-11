@@ -1,11 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  cid        :string(255)      primary key
-#  total_time :integer
-#  created_at :datetime
-#  updated_at :datetime
 #
 
 class User < ActiveRecord::Base
