@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
 		fetch_user token: token
 	end
 
+
 	def self.find(cid)
 		super
 	rescue ActiveRecord::RecordNotFound
@@ -33,10 +34,11 @@ class User < ActiveRecord::Base
 	end
 
 	def nick
-		@nick ||= Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
+		@nick ||= Rails.cache.fetch "#{cid}/lastname", expires_in: 24.hours do
 			resp = self.class.send_request(query: { cid: cid })
-			if resp['nick'].present?
-				resp['nick']
+			if resp['lastname'].present?
+				if user.groups.contains[didit]
+				resp['lastname']
 			else
 				cid
 			end
@@ -44,7 +46,7 @@ class User < ActiveRecord::Base
 	end
 
 	def groups
-		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.hours do
+		@groups ||= Rails.cache.fetch "#{cid}/groups", expires_in: 24.seconds do
 			resp = self.class.send_request(query: { cid: cid })
 			if resp['groups'].present?
 				resp['groups']

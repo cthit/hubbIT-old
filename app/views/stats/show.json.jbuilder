@@ -2,7 +2,7 @@ json.user_id @user.id
 json.nick @user.nick
 json.total_time @total_time
 json.position @ranking
-json.average_time @average_time
+json.average_hours @average_hours
 json.score seconds_to_score(@total_time)
 
 if @session.end_time <= Time.zone.now
