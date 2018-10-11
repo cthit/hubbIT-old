@@ -63,6 +63,7 @@ class StatsController < ApplicationController
     render json: @count
   end
 
+
   def show
     @from, @to = [Date.new(0), Date.new(2999)]
     @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
@@ -75,11 +76,14 @@ class StatsController < ApplicationController
       @last_session_duration = @session.end_time - @session.start_time
       @total_time = 0
       @ranking = 0
+      @average_time = 0
 
       @sessions_within_timeframe.each_with_index do |session, index|
           if @user == session.user
               @total_time = session.total_time
               @ranking = index + 1
+              @percent_total =  (@total_time.to_f/ ( Time.now.to_f -  @user_sessions.last.start_time.to_f ))
+              @average_time = @percent_total * 3600 * 24
               break
           end
       end
@@ -89,6 +93,8 @@ class StatsController < ApplicationController
       @ranking = 0
     end
   end
+
+  
 
   private
     def set_user
