@@ -1,6 +1,7 @@
 <h1><%= @user.nick %></h1>
+Score: <%= seconds_to_score(@total_time) %><br/>
 <%= link_to "Position: #{@ranking}", all_stats_path(anchor: @user.id) %><br/>
-Score: <%= seconds_to_score(@total_time) %>
+<%= link_to "Study year position: #{@ranking}", all_stats_path(anchor: @user.id, timeframe: "all_time") %><br/>    
 <section class="show-section">
     <div class="info-dashboard">
         <% if @session %>
