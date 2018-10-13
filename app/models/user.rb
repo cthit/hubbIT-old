@@ -7,6 +7,10 @@ class User < ActiveResource::Base
     @devices ||= MacAddress.where user_id: self.id
   end
 
+  def devices=(input)
+    @devices = input
+  end
+
   def sessions
     @sessions ||= Session.where user_id: self.id
   end
