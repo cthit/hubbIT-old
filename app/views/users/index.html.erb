@@ -1,11 +1,11 @@
 <div class="content">
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-    <tbody>
-        <% @users.each do |user| %>
-            <tr class="user">
-                <td class="user-row"><%= link_to user.nick, stats_path(user.cid) %></td>
-            </tr>
-        <% end %>
-    </tbody>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="user">
+        <td class="user-row"><%= link_to user.nickname, stats_path(user.cid) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 </div>

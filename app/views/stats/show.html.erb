@@ -1,4 +1,4 @@
-<h1><%= @user.nick %></h1>
+<h1><%= @user.nickname %></h1>
 <%= link_to "Position: #{@ranking}", all_stats_path(anchor: @user.id) %><br/>
 Score: <%= seconds_to_score(@total_time) %>
 <section class="show-section">
@@ -41,7 +41,7 @@ Score: <%= seconds_to_score(@total_time) %>
 
     <div class="graph-container">
         <h2 class="graph-header">Hours at the Hub</h2>
-        <canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.cid %>"  height="300"></canvas>
+        <canvas id="chart" class="stats-graph" data-url="/stats/hours.json?user_id=<%= @user.id %>"  height="300"></canvas>
     </div>
 </section>
 

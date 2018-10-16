@@ -6,7 +6,7 @@
     <% users.each do |user| %>
       <tr>
         <td class="user-row">
-        <%= link_to user.nick, stats_path(user.id) %>
+        <%= link_to user.nickname, stats_path(user.id) %>
         </td>
       </tr>
     <% end %>

@@ -40,11 +40,11 @@
   <% user = session.user %>
   <%= content_tag :tr, id: session.user.id, class: row_classes(user) do %>
     <td>
-      <span class='arrow'><%= display_arrow user.cid %></span>
+      <span class='arrow'><%= display_arrow user.id %></span>
       <span><%= index+1 %></span>
     </td>
     <td class="user-row">
-        <%= link_to user.nick, stats_path(user.id) %>
+        <%= link_to user.nickname, stats_path(user.id) %>
     </td>
     <td>
         <%= seconds_to_units(session.total_time) %>

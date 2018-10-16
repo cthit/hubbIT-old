@@ -10,7 +10,7 @@ ENV PATH=/root/.yarn/bin:$PATH
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -       
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y \
-yarn 
+yarn
 #Packages
 
 RUN apt-get clean
@@ -39,6 +39,9 @@ ENV DATABASE_USER user
 ENV DATABASE_PASSWORD pass
 ENV DATABASE_ADAPTER mysql2
 
+ENV OAUTH_ID oauth_id
+ENV OAUTH_SECRET oauth_secret
+ENV CLIENT_CREDENTIALS oauth_client_credentials
 
 # Start server
 ENV RAILS_ENV production

@@ -1,20 +1,15 @@
-# == Schema Information
-#
-# Table name: sessions
-#
-#  id          :integer          not null, primary key
-#  start_time  :datetime
-#  end_time    :datetime
-#  mac_address :string(255)
-#  user_id     :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#
-
 class Session < ActiveRecord::Base
-  scope :with_user, -> (user) { where(user_id: user) }
+  scope :with_user, -> (user) { where(user_id: user.id) }
   scope :with_mac, -> (mac) { where(mac_address: mac) }
   scope :active, -> { where("end_time > ?", DateTime.now) }
-  belongs_to :user, inverse_of: :sessions
   belongs_to :device, class_name: 'MacAddress', foreign_key: :mac_address
+
+  def user
+    @user ||= User.find self.user_id
+  end
+
+  def user=(user)
+    @user = user
+    self.user_id = user.id
+  end
 end
