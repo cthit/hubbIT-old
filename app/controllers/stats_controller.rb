@@ -104,21 +104,7 @@ class StatsController < ApplicationController
   end
 end
 
-  
-def show2
-  @from, to = get_study_year study_year_index
-  @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
-  @user_sessions = UserSession.with_user(@user).order("-created_at") 
-  if @session.present?
-      @session = @user_sessions.first 
-      @year_ranking = 13
-      @sessions_within_timeframe.each_with_index do |session, index|
-        if @user == session.user
-          @year_ranking = index + 7
-        end
-  end
-end
-end
+
 
   private
     def set_user
