@@ -53,7 +53,7 @@ class StatsController < ApplicationController
     if params[:user_id]
       user_id = params[:user_id]
       cache_key = "hours/#{user_id}"
-      query = query.with_user(user_id)
+      query = query.with_user(user_id)  
     end
 
     @count = Rails.cache.fetch cache_key, expires_in: 5.minutes do
@@ -83,7 +83,9 @@ class StatsController < ApplicationController
       @from1, @to1 = get_study_year get_current_study_year_index
       @sessions_within_timeframe_year = UserSession.includes(:user).time_between(@from1, @to1)
       if @sessions_within_timeframe_year.each_with_index do |session, index|
+        if @user == session.user
          @year_ranking = index + 1
+        end
       end 
       @sessions_within_timeframe.each_with_index do |session, index|
           if @user == session.user
