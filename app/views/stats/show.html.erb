@@ -1,6 +1,6 @@
 <h1><%= @user.nickname %></h1>
-<%= link_to "Position: #{@ranking}", all_stats_path(anchor: @user.id) %><br/>
-<%= link_to "All time position: #{@year_ranking}", all_stats_path(anchor: @user.id, timeframe: "all_time") %><br/>    
+<%= link_to "Position: #{@year_ranking}", all_stats_path(anchor: @user.id) %><br/>
+<%= link_to "All time position: #{@ranking}", all_stats_path(anchor: @user.id, timeframe: "all_time") %><br/>    
 <section class="show-section">
     <div class="info-dashboard">
         <% if @session %>
