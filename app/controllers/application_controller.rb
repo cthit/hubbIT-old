@@ -19,25 +19,16 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    auth_cookie = cookies[:chalmersItAuth]
-    if not auth_cookie.present?
-      raise SecurityError, "Missing cookie"
-    end
-    @current_user ||= if session[:cookie] == auth_cookie && session[:user].present?
-      User.find(session[:user])
+    if session[:user_id]
+      @current_user = User.find session[:user_id]
     else
-      reset_session
-      user = User.find_by_token cookies[:chalmersItAuth]
-      session[:cookie] = cookies[:chalmersItAuth]
-      session[:user] = user.id
-      user
+      raise SecurityError, "Not signed in"
     end
   end
   helper_method :current_user
 
   private
     def not_signed_in
-      redirect_to "https://account.chalmers.it?redirect_to=#{request.original_url}"
+      redirect_to '/auth/account'
     end
-
 end

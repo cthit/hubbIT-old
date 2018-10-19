@@ -1,5 +1,5 @@
 json.user_id @user.id
-json.nick @user.nick
+json.nick @user.nickname
 json.total_time @total_time
 json.position @ranking
 json.score seconds_to_score(@total_time)

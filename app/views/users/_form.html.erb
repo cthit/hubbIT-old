@@ -1,19 +1,24 @@
 <%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
+  <% if @user.devices.flat_map(&:errors).any? %>
     <div id="error_explanation" class="message-warning">
-      <h3><%= @user.errors.count %> errors occured while saving the device list:</h3>
+    <% number_errors = @user.devices.map { |d| d.errors.count }.reduce(:+) %>
+      <h3><%= pluralize number_errors, 'error' %> occured while saving the device list:</h3>
 
       <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>-
+      <% @user.devices.each do |d| %>
+        <% d.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      <% end %>
       </ul>
     </div>
   <% end %>
   <div class="devices">
-    <%= link_to_add_fields "Add Device", f, :devices %>
-    <%= f.fields_for :devices do |builder| %>
-      <%= render 'device_fields', f: builder %>
+    <%= link_to_add_fields "Add Device", f, MacAddress %>
+    <% @user.devices.each do |device| %>
+      <%= f.fields_for :devices, device do |builder| %>
+        <%= render 'device_fields', f: builder %>
+      <% end %>
     <% end %>
   </div>
   <p>If you are unsure how to determine your <a target="_blank" href="https://en.wikipedia.org/wiki/MAC_address">MAC address</a>, click <a target="_blank" href="http://www.wikihow.com/Find-the-MAC-Address-of-Your-Computer">here</a></p>

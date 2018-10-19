@@ -33,12 +33,12 @@ class StatsController < ApplicationController
     @page = params[:page].to_i || 0
     @from, @to = change_page @page
 
-    @active_users = UserSession.includes(:user).active.map(&:user)
-    @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
+    @active_users = UserSession.active.map(&:user)
+    @sessions_within_timeframe = UserSession.time_between(@from, @to)
 
     if @timeframe.present?
       old_from, old_to = change_page -1
-      @old_sessions_within_timeframe = UserSession.includes(:user).time_between(old_from, old_to)
+      @old_sessions_within_timeframe = UserSession.time_between(old_from, old_to)
     end
   end
 
@@ -68,7 +68,7 @@ class StatsController < ApplicationController
   #here be stupidity. 
   def show
     @from, @to = [Date.new(0), Date.new(2999)]
-    @sessions_within_timeframe = UserSession.includes(:user).time_between(@from, @to)
+    @sessions_within_timeframe = UserSession.time_between(@from, @to)
 
     @user_sessions = UserSession.with_user(@user).order("-created_at")
     @session = @user_sessions.first

@@ -4,7 +4,7 @@ FactoryBot.define do
 
     factory :user_with_devices do
       transient do
-        device_count 2
+        device_count { 2 }
       end
 
       after(:create) do |user, evaluator|

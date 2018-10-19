@@ -41,3 +41,7 @@ table {
 .mdl-button {
     margin-top: 1em;
 }
+
+.field_with_errors input {
+    border-color: #e53935;
+}

@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
   @@semaphore ||= Mutex.new
 
   def index
-    @sessions = UserSession.active.includes(:user)
-    @groups = map_users_to_groups(@sessions.map { |s| {user: s.user, groups: s.user.groups} })
+    @sessions = UserSession.active
+    @groups = map_users_to_groups(@sessions.map { |s| s.user_id }.uniq )
 
     respond_to do |format|
       format.json
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
     end
 
     @addresses = MacAddress.where('address IN (?)', @addresses)
-    @users = User.find(@addresses.map(&:user_id).uniq)
+    @users = @addresses.map(&:user).uniq
 
     @@semaphore.synchronize do
       now = DateTime.now
