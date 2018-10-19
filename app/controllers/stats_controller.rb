@@ -64,6 +64,8 @@ class StatsController < ApplicationController
   end
 
 
+
+  #here be stupidity. 
   def show
     @from, @to = [Date.new(0), Date.new(2999)]
     @sessions_within_timeframe = UserSession.time_between(@from, @to)
@@ -77,7 +79,12 @@ class StatsController < ApplicationController
       @total_time = 0
       @ranking = 0
       @average_time = 0
-
+      @year_ranking = 0
+      @from1, @to1 = get_study_year get_current_study_year_index
+      @sessions_within_timeframe_year = UserSession.includes(:user).time_between(@from1, @to1)
+      if @sessions_within_timeframe_year.each_with_index do |session, index|
+         @year_ranking = index + 1
+      end 
       @sessions_within_timeframe.each_with_index do |session, index|
           if @user == session.user
               @total_time = session.total_time
@@ -86,15 +93,18 @@ class StatsController < ApplicationController
               @average_time = @percent_total * 3600 * 24
               break
           end
-      end
+        
+      
+        end
     else
       @last_session_duration = 0
       @total_time = 0
       @ranking = 0
     end
   end
+end
 
-  
+
 
   private
     def set_user
