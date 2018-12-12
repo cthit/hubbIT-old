@@ -108,17 +108,19 @@
       color: white;
     }
   }
-  tr#styrit {
-    background: image-url("styritsvagn.jpg");
-    th {
-      color: white;
-      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    }
-  }
   tr#drawit {
     background: image-url("drawit.png");
     th {
       color: white;
     }
+  } 
+  tr#valberedningen {
+    background: image-url("valleb.png");
+    th {
+      //padding: 1px;
+      text-align: end;
+      color: white;
+    }
   }
+
 }
