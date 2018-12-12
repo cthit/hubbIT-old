@@ -6,6 +6,7 @@ module SessionsHelper
 
     users.each do |user|
       user.groups.each do |name|
+        name = name.to_sym
         groups[name].present? ? groups[name] << user : groups[name] = [user]
       end
     end
