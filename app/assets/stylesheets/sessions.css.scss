@@ -121,4 +121,11 @@
       color: white;
     }
   }
+  tr#valberedningen {
+    background: image-url("valleb.png");
+    th {
+      color: white;
+      text-align: end;
+    }
+  }
 }
