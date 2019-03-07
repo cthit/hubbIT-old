@@ -83,8 +83,10 @@ class StatsController < ApplicationController
       @from1, @to1 = get_study_year get_current_study_year_index
       @sessions_within_timeframe_year = UserSession.time_between(@from1, @to1)
       if @sessions_within_timeframe_year.each_with_index do |session, index|
-         @year_ranking = index + 1
-      end 
+        if @user == session.user
+          @year_ranking = index + 1
+        end
+      end
       @sessions_within_timeframe.each_with_index do |session, index|
           if @user == session.user
               @total_time = session.total_time
