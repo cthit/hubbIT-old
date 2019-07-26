@@ -5,7 +5,7 @@ module OmniAuth
 
       option :client_options, {
         site: Rails.configuration.account_ip,
-        authorize_path: '/oauth/authorize'
+        authorize_url: '/api/oauth/authorize'
       }
 
       uid do
