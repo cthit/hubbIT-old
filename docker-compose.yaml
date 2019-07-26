@@ -12,12 +12,8 @@ services:
       context: .
       dockerfile: dev.Dockerfile
     command: bash -c 'rm -f tmp/pids/server.pid && sh wait_for_db.sh && sh start.sh'
-    environment:
-      OAUTH_ID: oauth_id
-      OAUTH_SECRET: oauth_secret
-      CLIENT_CREDENTIALS: oauth_client_credentials
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - db
     volumes: 
