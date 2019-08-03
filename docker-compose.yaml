@@ -1,23 +1,46 @@
 version: '3'
 services:
-   db:
+  db:
     image: mariadb
     environment:
       MYSQL_DATABASE: hubbit_dev
       MYSQL_USER: hubbit
       MYSQL_PASSWORD: iamapassword
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    ports:
-      - 3306:3306
-   web:
+  web:
     build:
       context: .
       dockerfile: dev.Dockerfile
     command: bash -c 'rm -f tmp/pids/server.pid && sh wait_for_db.sh && sh start.sh'
     ports:
-      - "3001:3000"
+      - 3001:3000
     depends_on:
       - db
     volumes:
       - .:/app
-    network_mode: host
+  gamma_backend:
+    image: cthit/gamma-backend
+    environment:
+      DB_HOST: gamma_db
+      SERVER_PORT: 8081
+      FRONTEND_CLIENT_ID: 7hAdUEtMo4MgFnA7ZoZ41ohTe1NNRoJmjL67Gf0NIrrBnauyhc
+      FRONTEND_CLIENT_SECRET: secret
+    ports:
+      - 8081:8081
+    depends_on:
+      - gamma_db
+  gamma_frontend:
+    image: cthit/gamma-frontend:development
+    environment:
+      REACT_APP_BACKEND_URL: http://localhost:8081/api
+      REACT_APP_FRONTEND_URL: http://localhost:3000
+    ports:
+      - 3000:3000
+  gamma_db:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    restart: always
+
