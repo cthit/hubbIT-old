@@ -1,6 +1,7 @@
 class User < ActiveResource::Base
   extend ActiveModel::Naming
   self.site = Rails.configuration.account_ip
+  self.prefix = "/api/"
   ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :fikit, :dpo, :kandidatmiddagen ]
 
   def devices
@@ -24,7 +25,7 @@ class User < ActiveResource::Base
   end
 
   def self.headers
-    { 'authorization' => "Bearer #{Rails.application.secrets.client_credentials}" }
+    { 'authorization' => "pre-shared #{Rails.application.secrets.client_credentials}" }
   end
 
   def destroy
