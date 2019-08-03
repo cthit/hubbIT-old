@@ -43,5 +43,5 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  config.account_ip = 'https://beta-account.chalmers.it'
+  config.account_ip = ENV["ACCOUNT_ADDRESS"] == nil ? "http://localhost:8081" : ENV["ACCOUNT_ADDRESS"]
 end

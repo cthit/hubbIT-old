@@ -60,5 +60,5 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  config.account_ip = 'http://0.0.0.0:8081'
+  config.account_ip = ENV["ACCOUNT_ADDRESS"] == nil ? "http://localhost:8081" : ENV["ACCOUNT_ADDRESS"]
 end
