@@ -15,9 +15,9 @@
           </tr>
         </thead>
         <% @sessions.each do |session| %>
-            <tr class="<%= "me" if current_user.id == session.user.id %>" data-cid="<%= session.user.id %>">
+            <tr class="<%= "me" if current_user.cid == session.user.cid %>" data-cid="<%= session.user.cid %>">
           <td class="user-row">
-            <%= link_to session.user.nickname, stats_path(session.user.id) %>
+            <%= link_to session.user.nick, stats_path(session.user.cid) %>
           </td>
           <td class="time-cell">
               <%= "Since " + session.start_time.strftime('%H:%M') %>

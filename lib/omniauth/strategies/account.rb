@@ -12,11 +12,11 @@ module OmniAuth
       }
 
       uid do
-        raw_info['uid']
+        raw_info['cid']
       end
 
       info do
-        { name: raw_info["display_name"] }
+        { name: raw_info["nick"] }
       end
 
       def build_access_token

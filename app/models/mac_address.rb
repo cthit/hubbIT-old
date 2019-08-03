@@ -13,7 +13,7 @@ class MacAddress < ActiveRecord::Base
 
   def user=(user)
     @user = user
-    self.update_attribute(:user_id, user.id)
+    self.update_attribute(:user_id, user.cid)
   end
 
   private

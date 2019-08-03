@@ -18,7 +18,7 @@
 </ul>
 <% end %>
 
-<%= link_to 'Find me!', "##{current_user.id}" %>
+<%= link_to 'Find me!', "##{current_user.cid}" %>
 <table class="mdl-data-table mdl-shadow--2dp">
 <thead>
   <tr class="header-row">
@@ -38,13 +38,13 @@
 </thead>
 <% @sessions_within_timeframe.each_with_index do |session, index| %>
   <% user = session.user %>
-  <%= content_tag :tr, id: session.user.id, class: row_classes(user) do %>
+  <%= content_tag :tr, id: session.user.cid, class: row_classes(user) do %>
     <td>
-      <span class='arrow'><%= display_arrow user.id %></span>
+      <span class='arrow'><%= display_arrow user.cid %></span>
       <span><%= index+1 %></span>
     </td>
     <td class="user-row">
-        <%= link_to user.nickname, stats_path(user.id) %>
+        <%= link_to user.nick, stats_path(user.cid) %>
     </td>
     <td>
         <%= seconds_to_units(session.total_time) %>
