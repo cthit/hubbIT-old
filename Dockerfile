@@ -25,8 +25,6 @@ RUN bundle install
 RUN mkdir /home/ruby
 RUN chown -R ruby /home/ruby
 
-USER ruby
-
 # Database defaults Replace these in Rancher.
 ENV DATABASE_NAME name
 ENV DATABASE_HOST db
@@ -49,7 +47,8 @@ EXPOSE 3000
 #Upload source
 COPY . /app
 RUN useradd ruby
-RUN chown -R ruby /app
+RUN chown -R ruby /ap
+USER ruby
 
 RUN rails assets:precompile
 
