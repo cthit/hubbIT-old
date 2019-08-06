@@ -21,16 +21,11 @@ WORKDIR /app
 COPY Gemfile* /app/
 RUN bundle install
 
-#Upload source
-COPY . /app
-RUN useradd ruby
-RUN chown -R ruby /app
 # Needed for yarn to work
 RUN mkdir /home/ruby
 RUN chown -R ruby /home/ruby
 
 USER ruby
-
 
 # Database defaults Replace these in Rancher.
 ENV DATABASE_NAME name
@@ -50,6 +45,11 @@ ENV RACK_ENV production
 ENV SECRET_KEY_BASE secret
 ENV PORT 3000
 EXPOSE 3000
+
+#Upload source
+COPY . /app
+RUN useradd ruby
+RUN chown -R ruby /app
 
 RUN rails assets:precompile
 
