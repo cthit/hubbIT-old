@@ -23,7 +23,6 @@ RUN bundle install
 
 # Needed for yarn to work
 RUN mkdir /home/ruby
-RUN chown -R ruby /home/ruby
 
 # Database defaults Replace these in Rancher.
 ENV DATABASE_NAME name
@@ -36,6 +35,7 @@ ENV OAUTH_ID oauth_id
 ENV OAUTH_SECRET oauth_secret
 ENV CLIENT_CREDENTIALS oauth_client_credentials
 ENV ACCOUNT_ADDRESS https://gamma.chalmers.it
+ENV API_KEY
 
 # Start server
 ENV RAILS_ENV production
@@ -47,7 +47,9 @@ EXPOSE 3000
 #Upload source
 COPY . /app
 RUN useradd ruby
-RUN chown -R ruby /ap
+RUN chown -R ruby /app
+
+RUN chown -R ruby /home/ruby
 USER ruby
 
 RUN rails assets:precompile
