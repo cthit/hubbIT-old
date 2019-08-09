@@ -7,15 +7,18 @@ services:
       MYSQL_USER: hubbit
       MYSQL_PASSWORD: iamapassword
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - 3306:3306
   web:
     build:
       context: .
       dockerfile: dev.Dockerfile
     command: bash -c 'rm -f tmp/pids/server.pid && sh wait_for_db.sh && sh start.sh'
     ports:
-      - 3001:3000
+      - 3001:3001
     depends_on:
       - db
+    network_mode: host
     volumes:
       - .:/app
   gamma_backend:
@@ -25,6 +28,8 @@ services:
       SERVER_PORT: 8081
       FRONTEND_CLIENT_ID: 7hAdUEtMo4MgFnA7ZoZ41ohTe1NNRoJmjL67Gf0NIrrBnauyhc
       FRONTEND_CLIENT_SECRET: secret
+      FRONTEND_REDIRECT_URI: http://localhost:3000/login
+      SUCCESSFUL_LOGIN: http://localhost:3000
     ports:
       - 8081:8081
     depends_on:
@@ -43,4 +48,8 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
     restart: always
+  adminer:
+    image: adminer
+    ports: 
+      - 8082:8080
 

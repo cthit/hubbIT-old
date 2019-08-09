@@ -7,7 +7,6 @@ module OmniAuth
       option :client_options, {
         site: Rails.configuration.account_ip,
         authorize_url: '/api/oauth/authorize',
-        # TODO Find a better way to do this
         token_url: "/api/oauth/token"
       }
 
