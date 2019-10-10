@@ -13,12 +13,18 @@ services:
     build:
       context: .
       dockerfile: dev.Dockerfile
-    command: bash -c 'rm -f tmp/pids/server.pid && sh wait_for_db.sh && sh start.sh'
+    command: bash -c 'rm -f tmp/pids/server.pid && sleep 10 && sh start.sh'
     ports:
       - 3001:3001
     depends_on:
       - db
     network_mode: host
+    environment:
+      OAUTH_ID: id
+      OAUTH_SECRET: secret
+      CLIENT_CREDENTIALS: key
+      ACCOUNT_ADDRESS: http://localhost:8081
+      API_KEY: key
     volumes:
       - .:/app
   gamma_backend:
@@ -30,6 +36,11 @@ services:
       FRONTEND_CLIENT_SECRET: secret
       FRONTEND_REDIRECT_URI: http://localhost:3000/login
       SUCCESSFUL_LOGIN: http://localhost:3000
+      DEFAULT_CLIENT_NAME: name
+      DEFAULT_CLIENT_ID: id
+      DEFAULT_CLIENT_SECRET: secret
+      DEFAULT_REDIRECT_URI: http://localhost:3001/auth/account/callback
+      DEFAULT_API_KEY: key
     ports:
       - 8081:8081
     depends_on:
