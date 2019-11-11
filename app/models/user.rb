@@ -7,6 +7,13 @@ class User < ActiveResource::Base
     @devices ||= MacAddress.where user_id: self.id
   end
 
+  def self.find(id)
+    return nil unless id.present?
+    Rails.cache.fetch("users/#{id}.json", expires_in: 2.hours) do
+      super id
+    end
+  end
+
   def devices=(input)
     @devices = input
   end
