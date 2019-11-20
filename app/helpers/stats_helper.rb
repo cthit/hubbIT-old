@@ -45,11 +45,9 @@ module StatsHelper
     ]
 
     def get_current_study_year_index()
-      print "go here"
         @@study_years.each_with_index do |study_year, index|
             if study_year[0].beginning_of_day <= Time.now && Time.now <= study_year[1].end_of_day
-              puts(index)
-                return index
+              return index
             end
         end
     end
