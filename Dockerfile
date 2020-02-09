@@ -35,8 +35,7 @@ ENV OAUTH_ID oauth_id
 ENV OAUTH_SECRET oauth_secret
 ENV CLIENT_CREDENTIALS oauth_client_credentials
 ENV ACCOUNT_ADDRESS https://gamma.chalmers.it
-ENV API_KEY
-
+ENV API_KEY key
 # Start server
 ENV RAILS_ENV production
 ENV RACK_ENV production
