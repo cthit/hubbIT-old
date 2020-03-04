@@ -157,7 +157,7 @@ GEM
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (3.12.4)
     rack (2.0.5)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
