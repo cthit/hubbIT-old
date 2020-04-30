@@ -5,7 +5,7 @@ class User < ActiveResource::Base
   ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :fikit, :dpo, :kandidatmiddagen ]
 
   def devices
-    @devices ||= MacAddress.where user_id: self.id
+    @devices ||= MacAddress.where user_id: self.cid
   end
 
   def devices=(input)
@@ -13,15 +13,15 @@ class User < ActiveResource::Base
   end
 
   def sessions
-    @sessions ||= Session.where user_id: self.id
+    @sessions ||= Session.where user_id: self.cid
   end
 
   def user_sessions
-    @usessions ||= UserSession.where user_id: self.id
+    @usessions ||= UserSession.where user_id: self.cid
   end
 
   def hour_entries
-    @hentries ||= HourEntry.where cid: self.id
+    @hentries ||= HourEntry.where cid: self.cid
   end
 
   def self.headers

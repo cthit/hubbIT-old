@@ -1,7 +1,7 @@
 <nav>
     <ul class="menu">
         <% if current_user %>
-            <li class="<%= 'active' if current_page?(current_user) %>">
+            <li class="<%= 'active' if current_page?(current_user.cid) %>">
                 <%= link_to_unless_current 'Me', current_user %>
             </li>
         <% end %>
@@ -12,8 +12,8 @@
                 <%= link_to_unless_current 'Stats', all_stats_path %>
             </li>
         <% if current_user %>
-            <li class="<%= 'active' if current_page?(stats_path(current_user)) %>">
-                <%= link_to_unless_current 'My stats', stats_path(current_user) %>
+            <li class="<%= 'active' if current_page?(stats_path(current_user.cid)) %>">
+                <%= link_to_unless_current 'My stats', stats_path(current_user.cid) %>
             </li>
         <% end %>
     </ul>

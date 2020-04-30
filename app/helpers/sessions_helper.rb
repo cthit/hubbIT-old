@@ -6,7 +6,7 @@ module SessionsHelper
 
     users.each do |user|
       user.groups.each do |group|
-        if group.isActive
+        if group.active
           name = group.name.gsub(/\(*[0-9]/, '').to_sym
           print(name)
           groups[name].present? ? groups[name] << user : groups[name] = [user]
