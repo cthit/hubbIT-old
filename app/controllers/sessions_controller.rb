@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
           s.user = mac.user
           s.start_time = now
 
-          logger.info("Creating session for #{mac.user.id} (#{mac.address})")
+          logger.info("Creating session for #{mac.user.cid} (#{mac.address})")
         end
         session.end_time = new_time
 

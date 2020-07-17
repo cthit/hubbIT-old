@@ -1,24 +1,66 @@
 version: '3'
 services:
-   db:
+  db:
     image: mariadb
     environment:
       MYSQL_DATABASE: hubbit_dev
       MYSQL_USER: hubbit
       MYSQL_PASSWORD: iamapassword
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-   web:
+    ports:
+      - 3306:3306
+  web:
     build:
       context: .
       dockerfile: dev.Dockerfile
-    command: bash -c 'rm -f tmp/pids/server.pid && sh wait_for_db.sh && sh start.sh'
-    environment:
-      OAUTH_ID: oauth_id
-      OAUTH_SECRET: oauth_secret
-      CLIENT_CREDENTIALS: oauth_client_credentials
+    command: bash -c 'rm -f tmp/pids/server.pid && sleep 10 && sh start.sh'
     ports:
-      - "3000:3000"
+      - 3001:3001
     depends_on:
       - db
-    volumes: 
+    network_mode: host
+    environment:
+      OAUTH_ID: id
+      OAUTH_SECRET: secret
+      CLIENT_CREDENTIALS: key
+      ACCOUNT_ADDRESS: http://localhost:8081
+      API_KEY: key
+    volumes:
       - .:/app
+  gamma_backend:
+    image: cthit/gamma-backend
+    environment:
+      DB_HOST: gamma_db
+      SERVER_PORT: 8081
+      FRONTEND_CLIENT_ID: 7hAdUEtMo4MgFnA7ZoZ41ohTe1NNRoJmjL67Gf0NIrrBnauyhc
+      FRONTEND_CLIENT_SECRET: secret
+      FRONTEND_REDIRECT_URI: http://localhost:3000/login
+      SUCCESSFUL_LOGIN: http://localhost:3000
+      DEFAULT_CLIENT_NAME: name
+      DEFAULT_CLIENT_ID: id
+      DEFAULT_CLIENT_SECRET: secret
+      DEFAULT_REDIRECT_URI: http://localhost:3001/auth/account/callback
+      DEFAULT_API_KEY: key
+    ports:
+      - 8081:8081
+    depends_on:
+      - gamma_db
+  gamma_frontend:
+    image: cthit/gamma-frontend:development
+    environment:
+      REACT_APP_BACKEND_URL: http://localhost:8081/api
+      REACT_APP_FRONTEND_URL: http://localhost:3000
+    ports:
+      - 3000:3000
+  gamma_db:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    restart: always
+  adminer:
+    image: adminer
+    ports: 
+      - 8082:8080
+

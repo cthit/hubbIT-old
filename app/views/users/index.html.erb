@@ -3,7 +3,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr class="user">
-        <td class="user-row"><%= link_to user.nickname, stats_path(user.cid) %></td>
+        <td class="user-row"><%= link_to user.nick, stats_path(user.cid) %></td>
       </tr>
     <% end %>
   </tbody>

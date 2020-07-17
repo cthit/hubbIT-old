@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
     def map_to_mac_adresses(devices) 
       devices.map do |device| 
-        MacAddress.where(address: device[:address], user_id: @user.id).first_or_create do |m|
+        MacAddress.where(address: device[:address], user_id: @user.cid).first_or_create do |m|
           m.device_name = device[:device_name]
         end
       end

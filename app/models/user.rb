@@ -1,10 +1,11 @@
 class User < ActiveResource::Base
   extend ActiveModel::Naming
   self.site = Rails.configuration.account_ip
+  self.prefix = "/api/"
   ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :fikit, :dpo, :kandidatmiddagen ]
 
   def devices
-    @devices ||= MacAddress.where user_id: self.id
+    @devices ||= MacAddress.where user_id: self.cid
   end
 
   def self.find(id)
@@ -19,19 +20,19 @@ class User < ActiveResource::Base
   end
 
   def sessions
-    @sessions ||= Session.where user_id: self.id
+    @sessions ||= Session.where user_id: self.cid
   end
 
   def user_sessions
-    @usessions ||= UserSession.where user_id: self.id
+    @usessions ||= UserSession.where user_id: self.cid
   end
 
   def hour_entries
-    @hentries ||= HourEntry.where cid: self.id
+    @hentries ||= HourEntry.where cid: self.cid
   end
 
   def self.headers
-    { 'authorization' => "Bearer #{Rails.application.secrets.client_credentials}" }
+    { 'authorization' => "pre-shared #{Rails.application.secrets.client_credentials}" }
   end
 
   def destroy

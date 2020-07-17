@@ -1,5 +1,5 @@
 class Session < ActiveRecord::Base
-  scope :with_user, -> (user) { where(user_id: user.id) }
+  scope :with_user, -> (user) { where(user_id: user.cid) }
   scope :with_mac, -> (mac) { where(mac_address: mac) }
   scope :active, -> { where("end_time > ?", DateTime.now) }
   belongs_to :device, class_name: 'MacAddress', foreign_key: :mac_address
@@ -10,6 +10,6 @@ class Session < ActiveRecord::Base
 
   def user=(user)
     @user = user
-    self.user_id = user.id
+    self.user_id = user.cid
   end
 end

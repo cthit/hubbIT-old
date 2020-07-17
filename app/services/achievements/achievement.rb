@@ -20,7 +20,7 @@ class Achievement
 
 	def unlock user
 		puts "Unlocking #{@name} for #{user.cid}"
-		AchievementApiService.unlock_achievement user.id, @code
+		AchievementApiService.unlock_achievement user.cid, @code
 	end
 
 	def achieved? user

@@ -91,5 +91,5 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.account_ip = 'https://beta-account.chalmers.it'
+  config.account_ip = ENV["ACCOUNT_ADDRESS"] == nil ? "https://gamma.chalmers.it" : ENV["ACCOUNT_ADDRESS"]
 end

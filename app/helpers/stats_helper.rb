@@ -134,7 +134,7 @@ module StatsHelper
     end
 
     def time_for_group(group)
-        users_in_group = @sessions_within_timeframe.select { |s| s.user.groups.include? group}
+        users_in_group = @sessions_within_timeframe.select { |s| s.user.groups.name.include? group}
         users_in_group.map { |s| s.total_time }.sum
     end
 
@@ -162,7 +162,7 @@ module StatsHelper
     def row_classes user
       classes = []
       classes << 'active' if user_active?(user)
-      classes << 'me' if user.id == current_user.id
+      classes << 'me' if user.cid == current_user.cid
       classes.join ' '
     end
 
@@ -210,9 +210,9 @@ module StatsHelper
         return nil
       end
 
-      index = @sessions_within_timeframe.find_index { |s| s.user.id == user }
+      index = @sessions_within_timeframe.find_index { |s| s.user.cid == user }
       old_index = if @old_sessions_within_timeframe.present?
-        @old_sessions_within_timeframe.find_index { |s| s.user.id == user } || 9999
+        @old_sessions_within_timeframe.find_index { |s| s.user.cid == user } || 9999
       else
         no_session_number
       end

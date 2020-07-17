@@ -1,5 +1,5 @@
 class UserSession < ActiveRecord::Base
-  scope :with_user, -> (user) { where(user_id: user.id) }
+  scope :with_user, -> (user) { where(user_id: user.cid) }
   scope :active, -> { where("end_time > ?", DateTime.now) }
   scope :time_between, -> (from='2010-01-01', to='2099-01-01') {
     
