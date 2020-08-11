@@ -6,6 +6,7 @@ module StatsHelper
         [Time.new(2017,8,16), Time.new(2018,8,15)],
         [Time.new(2018,8,16), Time.new(2019,8,15)],
         [Time.new(2019,8,16), Time.new(2020,8,15)],
+        [Time.new(2020,8,16), Time.new(2021,8,15)],
     ]
 
     @@study_period = [
@@ -41,6 +42,13 @@ module StatsHelper
         [Time.new(2019,11,5), Time.new(2020,1,20)], #LP2
         [Time.new(2020,1,21), Time.new(2020,3,24)], #LP3
         [Time.new(2020,3,25), Time.new(2020,6,8)], #LP4
+        
+        [Time.new(2020,6,9), Time.new(2020,8,30)], # Summer break
+
+        [Time.new(2020,8,31), Time.new(2020,11,1)], #LP1
+        [Time.new(2020,11,2), Time.new(2021,1,17)], #LP2
+        [Time.new(2021,1,18), Time.new(2021,3,21)], #LP3
+        [Time.new(2021,3,22), Time.new(2021,6,6)], #LP4
 
     ]
 
