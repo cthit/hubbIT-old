@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2015_09_15_161752) do
 
-  create_table "api_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "api_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "access_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "comment"
   end
 
-  create_table "hour_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "hour_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "cid"
     t.date "date"
     t.integer "hour"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2015_09_15_161752) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "mac_addresses", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "mac_addresses", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "address"
     t.string "user_id"
     t.datetime "created_at", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2015_09_15_161752) do
     t.index ["user_id"], name: "index_mac_addresses_on_user_id"
   end
 
-  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.timestamp "start_time"
     t.timestamp "end_time"
     t.string "mac_address"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2015_09_15_161752) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "user_sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "user_sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "user_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2015_09_15_161752) do
     t.index ["user_id"], name: "index_user_sessions_on_user_id"
   end
 
-  create_table "users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "cid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
