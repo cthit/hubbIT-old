@@ -102,6 +102,13 @@
     }
   }
 
+  tr#sexit {
+    background: image-url("sexit.png");
+    th {
+      opacity: 0;
+    }
+  }
+
   tr#digit {
     background: image-url("digit.png");
     th {
