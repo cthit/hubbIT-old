@@ -7,6 +7,7 @@ module StatsHelper
         [Time.new(2018,8,16), Time.new(2019,8,15)],
         [Time.new(2019,8,16), Time.new(2020,8,15)],
         [Time.new(2020,8,16), Time.new(2021,8,15)],
+        [Time.new(2021,8,16), Time.new(2022,8,15)],
     ]
 
     @@study_period = [
