@@ -49,7 +49,13 @@ module StatsHelper
         [Time.new(2020,11,2), Time.new(2021,1,17)], #LP2
         [Time.new(2021,1,18), Time.new(2021,3,21)], #LP3
         [Time.new(2021,3,22), Time.new(2021,6,6)], #LP4
-
+        
+        [Time.new(2021,6,7), Time.new(2021,8,29)], # Summer break
+        
+        [Time.new(2021,8,30), Time.new(2021,01,15)], #LP1
+        [Time.new(2021,11,1), Time.new(2022,1,16)],  #LP2
+        [Time.new(2022,1,17), Time.new(2022,3,20)],  #LP3
+        [Time.new(2022,3,21), Time.new(2022,6,5)],   #LP4
     ]
 
     def get_current_study_year_index()
