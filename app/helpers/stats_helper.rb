@@ -53,7 +53,7 @@ module StatsHelper
         
         [Time.new(2021,6,7), Time.new(2021,8,29)], # Summer break
         
-        [Time.new(2021,8,30), Time.new(2021,01,15)], #LP1
+        [Time.new(2021,8,30), Time.new(2021,10,31)], #LP1
         [Time.new(2021,11,1), Time.new(2022,1,16)],  #LP2
         [Time.new(2022,1,17), Time.new(2022,3,20)],  #LP3
         [Time.new(2022,3,21), Time.new(2022,6,5)],   #LP4
