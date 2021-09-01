@@ -147,4 +147,11 @@
       text-align: end;
     }
   }
+
+  tr#talpersonht, #talpersonvt {
+    background: image-url("vidde.png");
+    th {
+     color: white;
+    }    
+  }
 }
