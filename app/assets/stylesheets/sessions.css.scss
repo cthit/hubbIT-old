@@ -148,11 +148,10 @@
     }
   }
 
-  tr#talperson {
+  tr#talpersonht, #talpersonvt {
     background: image-url("vidde.png");
     th {
-     backgroundImage: repeating-linear-gradient(30deg, yellow, yellow 13px, #666 15px, #666 43px, yellow 45px, yellow 60px);
-     color: black;
+     color: white;
     }    
   }
 }
