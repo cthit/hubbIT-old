@@ -2,7 +2,7 @@ class User < ActiveResource::Base
   extend ActiveModel::Naming
   self.site = Rails.configuration.account_ip
   self.prefix = "/api/"
-  ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :'8bit', :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :fikit, :dpo, :kandidatmiddagen, :equalit, :talpersonht, :talpersonvt ]
+  ALLOWED_GROUPS = [:styrit, :snit, :sexit, :prit, :nollkit, :armit, :digit, :fanbarerit, :fritid, :8bit, :drawit, :flashit, :hookit, :revisorer, :valberedningen, :laggit, :fikit, :dpo, :kandidatmiddagen, :equalit, :talpersonht, :talpersonvt ]
 
   def devices
     @devices ||= MacAddress.where user_id: self.cid
@@ -50,7 +50,7 @@ class Symbol
         self.to_s.gsub /it/, 'IT'
       when :drawit, :armit, :hookit, :flashit, :laggit, :fikit, :equalit
         self.to_s.titleize.gsub /it/, 'IT'
-      when :'8bit'
+      when :8bit
         '8-bIT'
       when :nollkit
         'NollKIT'
